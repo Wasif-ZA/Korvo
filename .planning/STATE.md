@@ -3,14 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
+<<<<<<< HEAD
 stopped_at: Completed 01-foundation-01-PLAN.md
 last_updated: "2026-04-01T12:33:47.231Z"
+=======
+stopped_at: Completed 01-foundation-01-02-PLAN.md
+last_updated: "2026-04-01T12:35:57.400Z"
+>>>>>>> worktree-agent-a3fbb471
 last_activity: 2026-04-01 — Roadmap created, 59 v1 requirements mapped to 6 phases
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 0
+  completed_plans: 1
   percent: 0
 ---
 
@@ -52,7 +57,11 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: —
 
 *Updated after each plan completion*
+<<<<<<< HEAD
 | Phase 01-foundation P01 | 10 | 3 tasks | 19 files |
+=======
+| Phase 01-foundation P02 | 9min | 2 tasks | 5 files |
+>>>>>>> worktree-agent-a3fbb471
 
 ## Accumulated Context
 
@@ -66,9 +75,14 @@ Recent decisions affecting current work:
 - Roadmap: Gmail OAuth is a separate flow from Supabase Google OAuth (two different grants, same provider)
 - Roadmap: Redis must use maxmemory-policy noeviction + maxRetriesPerRequest: null on worker connections
 - Roadmap: RLS gating via profiles table only — never JWT user_metadata (bypassable)
+<<<<<<< HEAD
 - [Phase 01-foundation]: Used proxy.ts (not middleware.ts) per Next.js 16 pattern — auth guard stub in place for Plan 03
 - [Phase 01-foundation]: Vitest 4 with node env globally, @vitest-environment jsdom per-file for React component tests
 - [Phase 01-foundation]: Modal.tsx is a client component (use client) due to useEffect for body scroll lock
+=======
+- [Phase 01-foundation]: Prisma 7 dual-connection: DATABASE_URL (pooler 6543) + DIRECT_DATABASE_URL (direct 5432) in prisma.config.ts (not schema.prisma)
+- [Phase 01-foundation]: RLS policies use auth.uid()::text cast (not auth.uid()) because Prisma generates TEXT columns, not UUID
+>>>>>>> worktree-agent-a3fbb471
 
 ### Pending Todos
 
@@ -81,6 +95,11 @@ None yet.
 
 ## Session Continuity
 
+<<<<<<< HEAD
 Last session: 2026-04-01T12:33:47.227Z
 Stopped at: Completed 01-foundation-01-PLAN.md
+=======
+Last session: 2026-04-01T12:35:57.396Z
+Stopped at: Completed 01-foundation-01-02-PLAN.md
+>>>>>>> worktree-agent-a3fbb471
 Resume file: None
