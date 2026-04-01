@@ -1,10 +1,46 @@
-import { NextRequest, NextResponse } from "next/server";
+// Auth guard for protected PAGE routes only (/settings, /dashboard)
+// NOTE: This does NOT guard API routes — they independently call supabase.auth.getUser()
+// Uses @supabase/ssr createServerClient directly (not lib/supabase/server) — proxy runs in edge context
+import { NextResponse, type NextRequest } from 'next/server'
+import { createServerClient } from '@supabase/ssr'
 
-// Auth guard logic will be added in Plan 03
+// Protected page routes that require authentication
+const PROTECTED_ROUTES = ['/settings', '/dashboard']
 
 export async function proxy(request: NextRequest): Promise<NextResponse> {
-  // Pass through all requests - auth checking added in Plan 03
-  return NextResponse.next();
+  let supabaseResponse = NextResponse.next({ request })
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll()
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+          supabaseResponse = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
+
+  // IMPORTANT: getUser() refreshes the session if expired — must be called on every request
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const { pathname } = request.nextUrl
+
+  // Guard protected PAGE routes only — redirect unauthenticated users to landing page
+  const isProtectedRoute = PROTECTED_ROUTES.some((route) => pathname.startsWith(route))
+  if (!user && isProtectedRoute) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  return supabaseResponse
 }
 
 export const config = {
@@ -14,8 +50,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - public folder
+     * - api/stripe/webhooks (webhook handler must not require auth)
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    '/((?!_next/static|_next/image|favicon.ico|api/stripe/webhooks).*)',
   ],
-};
+}
