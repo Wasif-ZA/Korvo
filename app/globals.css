@@ -5,6 +5,7 @@
   --color-warm-muted: #F4F3F0;
   --color-border: #E5E4E0;
   --color-text-primary: #1C1C1A;
+  --color-accent: #0D9488;
 }
 
 @theme inline {
@@ -12,12 +13,15 @@
   --color-warm-muted: var(--color-warm-muted);
   --color-border: var(--color-border);
   --color-text-primary: var(--color-text-primary);
+  --color-accent: var(--color-accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: #FAFAF8;
-  color: #1C1C1A;
+  background: var(--color-warm-white);
+  color: var(--color-text-primary);
   font-family: var(--font-geist-sans, system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
