@@ -12,7 +12,7 @@ Korvo is built in six phases that move from infrastructure inward to product out
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Project setup, database schema, auth, and Stripe — the non-negotiable base everything else depends on
+- [x] **Phase 1: Foundation** - Project setup, database schema, auth, and Stripe — the non-negotiable base everything else depends on (completed 2026-04-01)
 - [ ] **Phase 2: Queue Infrastructure** - BullMQ + Redis workers on Railway with correct config for long-running AI jobs
 - [ ] **Phase 3: Agent Pipeline** - Four specialized agents, scoring engine, email templates — the core product intelligence
 - [ ] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product
@@ -39,7 +39,7 @@ Plans:
 - [x] 01-03-PLAN.md — Supabase SSR auth clients, proxy.ts guard, OAuth callback with guest adoption
 - [x] 01-04-PLAN.md — Landing page (hero, search bar, how-it-works, pricing), /pricing page
 - [x] 01-05-PLAN.md — Stripe Checkout, webhook handler, Customer Portal endpoints
-- [ ] 01-06-PLAN.md — Rate limiting, auth modals, settings page, auth-aware NavBar, E2E verify
+- [x] 01-06-PLAN.md — Rate limiting, auth modals, settings page, auth-aware NavBar, E2E verify
 
 **UI hint**: yes
 
@@ -109,7 +109,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 5/6 | In Progress|  |
+| 1. Foundation | 6/6 | Complete   | 2026-04-01 |
 | 2. Queue Infrastructure | 0/TBD | Not started | - |
 | 3. Agent Pipeline | 0/TBD | Not started | - |
 | 4. UI & Dashboard | 0/TBD | Not started | - |

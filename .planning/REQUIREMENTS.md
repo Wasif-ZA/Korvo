@@ -21,7 +21,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **AUTH-02**: Google OAuth signup via Supabase Auth prompted after first search
 - [x] **AUTH-03**: User session persists across browser refresh via Supabase SSR (`@supabase/ssr`)
 - [x] **AUTH-04**: Auth middleware on all API routes checking session validity
-- [ ] **AUTH-05**: Free tier: 5 searches/month, 5 email drafts/month enforced server-side
+- [x] **AUTH-05**: Free tier: 5 searches/month, 5 email drafts/month enforced server-side
 
 ### Agent Pipeline
 
@@ -188,7 +188,7 @@ Deferred to after V2. Tracked for future planning.
 | AUTH-02 | Phase 1 | Complete |
 | AUTH-03 | Phase 1 | Complete |
 | AUTH-04 | Phase 1 | Complete |
-| AUTH-05 | Phase 1 | Pending |
+| AUTH-05 | Phase 1 | Complete |
 | PAY-01 | Phase 1 | Complete |
 | PAY-02 | Phase 1 | Complete |
 | PAY-03 | Phase 1 | Complete |
