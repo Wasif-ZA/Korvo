@@ -34,9 +34,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 6 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Scaffold Next.js 16 project, design system components, Vitest setup
+- [x] 01-01-PLAN.md — Scaffold Next.js 16 project, design system components, Vitest setup
 - [x] 01-02-PLAN.md — Prisma schema with all core tables, RLS policies, dual-connection config
-- [ ] 01-03-PLAN.md — Supabase SSR auth clients, proxy.ts guard, OAuth callback with guest adoption
+- [x] 01-03-PLAN.md — Supabase SSR auth clients, proxy.ts guard, OAuth callback with guest adoption
 - [ ] 01-04-PLAN.md — Landing page (hero, search bar, how-it-works, pricing), /pricing page
 - [ ] 01-05-PLAN.md — Stripe Checkout, webhook handler, Customer Portal endpoints
 - [ ] 01-06-PLAN.md — Rate limiting, auth modals, settings page, auth-aware NavBar, E2E verify
@@ -110,7 +110,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 <<<<<<< HEAD
-| 1. Foundation | 0/6 | Planned    |  |
+| 1. Foundation | 3/6 | In Progress|  |
 =======
 | 1. Foundation | 1/6 | In Progress|  |
 >>>>>>> worktree-agent-a3fbb471
