@@ -12,18 +12,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          "bg-teal-600 text-white hover:bg-teal-700",
+        primary: "bg-teal-600 text-white hover:bg-teal-700",
         secondary:
           "bg-[#F4F3F0] text-[#1C1C1A] border border-[#E5E4E0] hover:bg-[#E9E8E4]",
-        ghost:
-          "bg-transparent text-[#1C1C1A] hover:bg-[#F4F3F0]",
-        destructive:
-          "bg-red-600 text-white hover:bg-red-700",
+        ghost: "bg-transparent text-[#1C1C1A] hover:bg-[#F4F3F0]",
+        destructive: "bg-red-600 text-white hover:bg-red-700",
       },
       size: {
         default: "h-11 px-4 text-sm",
-        lg: "h-12 px-6 text-base",
+        lg: "h-[54px] px-8 text-base",
       },
     },
     defaultVariants: {

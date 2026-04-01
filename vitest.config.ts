@@ -5,11 +5,12 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    exclude: ["node_modules/**", ".next/**", ".claude/worktrees/**"],
     setupFiles: ["./tests/setup.ts"],
     coverage: {
       provider: "v8",
       reporter: ["text", "lcov"],
-      exclude: ["node_modules/", ".next/", "tests/"],
+      exclude: ["node_modules/", ".next/", "tests/", ".claude/worktrees/**"],
     },
   },
   resolve: {
