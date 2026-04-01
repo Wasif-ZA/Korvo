@@ -248,10 +248,10 @@ Deferred to after V2. Tracked for future planning.
 | LEGAL-04 | Phase 6 | Pending |
 
 **Coverage:**
-- v1 requirements: 59 total
-- Mapped to phases: 59
+- v1 requirements: 67 total
+- Mapped to phases: 67
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-01*
-*Last updated: 2026-04-01 after initial definition*
+*Last updated: 2026-04-01 after roadmap creation (corrected count: 67 v1 requirements)*
