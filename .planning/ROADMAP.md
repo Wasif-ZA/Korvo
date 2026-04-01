@@ -38,7 +38,7 @@ Plans:
 - [x] 01-02-PLAN.md — Prisma schema with all core tables, RLS policies, dual-connection config
 - [x] 01-03-PLAN.md — Supabase SSR auth clients, proxy.ts guard, OAuth callback with guest adoption
 - [x] 01-04-PLAN.md — Landing page (hero, search bar, how-it-works, pricing), /pricing page
-- [ ] 01-05-PLAN.md — Stripe Checkout, webhook handler, Customer Portal endpoints
+- [x] 01-05-PLAN.md — Stripe Checkout, webhook handler, Customer Portal endpoints
 - [ ] 01-06-PLAN.md — Rate limiting, auth modals, settings page, auth-aware NavBar, E2E verify
 
 **UI hint**: yes
@@ -109,7 +109,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 4/6 | In Progress|  |
+| 1. Foundation | 5/6 | In Progress|  |
 | 2. Queue Infrastructure | 0/TBD | Not started | - |
 | 3. Agent Pipeline | 0/TBD | Not started | - |
 | 4. UI & Dashboard | 0/TBD | Not started | - |
