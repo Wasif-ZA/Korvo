@@ -84,7 +84,6 @@ export function PricingPageClient() {
               features={FREE_FEATURES}
               ctaText="Get started for free"
               ctaAction={handleFreeCheckout}
-              ctaVariant="secondary"
             />
             <PricingCard
               planName="Pro"

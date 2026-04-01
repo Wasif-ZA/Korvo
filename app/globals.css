@@ -1,27 +1,69 @@
 @import "tailwindcss";
 
+/*
+  KORVO DESIGN SYSTEM — Warm Light Theme
+  Per UI-SPEC: warm off-white dominant, teal accent, approachable aesthetic
+*/
+
 :root {
+  /* Backgrounds — warm off-white, not pure white */
   --color-warm-white: #FAFAF8;
   --color-warm-muted: #F4F3F0;
-  --color-border: #E5E4E0;
-  --color-text-primary: #1C1C1A;
+  --color-warm-elevated: #FFFFFF;
+
+  /* Accent — teal */
   --color-accent: #0D9488;
+  --color-accent-hover: #0F766E;
+
+  /* Text */
+  --color-text-primary: #1C1C1A;
+  --color-text-secondary: #6B6B68;
+  --color-text-tertiary: #9B9B98;
+
+  /* Borders */
+  --color-border: #E5E4E0;
+  --color-border-hover: #D5D4D0;
+
+  /* Destructive */
+  --color-destructive: #DC2626;
+
+  /* Status (reserved for Phase 4 confidence badges) */
+  --color-green: #16A34A;
+  --color-yellow: #CA8A04;
+  --color-red: #DC2626;
 }
 
 @theme inline {
   --color-warm-white: var(--color-warm-white);
   --color-warm-muted: var(--color-warm-muted);
-  --color-border: var(--color-border);
-  --color-text-primary: var(--color-text-primary);
+  --color-warm-elevated: var(--color-warm-elevated);
+
   --color-accent: var(--color-accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent-hover: var(--color-accent-hover);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+
+  --color-border: var(--color-border);
+  --color-border-hover: var(--color-border-hover);
+
+  --color-destructive: var(--color-destructive);
+
+  --color-green: var(--color-green);
+  --color-yellow: var(--color-yellow);
+  --color-red: var(--color-red);
 }
 
+/* Base */
 body {
-  background: var(--color-warm-white);
-  color: var(--color-text-primary);
-  font-family: var(--font-geist-sans, system-ui, sans-serif);
+  background: #FAFAF8;
+  color: #1C1C1A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
