@@ -31,7 +31,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A user can subscribe to Pro via Stripe Checkout, and the subscription state is reflected immediately in their profile
   4. A Pro user can manage or cancel their subscription via the Stripe Customer Portal without contacting support
   5. Free tier limits (5 searches/month, 5 drafts/month) are enforced server-side and cannot be bypassed client-side
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold Next.js 16 project, design system components, Vitest setup
+- [ ] 01-02-PLAN.md — Prisma schema with all core tables, RLS policies, dual-connection config
+- [ ] 01-03-PLAN.md — Supabase SSR auth clients, proxy.ts guard, OAuth callback with guest adoption
+- [ ] 01-04-PLAN.md — Landing page (hero, search bar, how-it-works, pricing), /pricing page
+- [ ] 01-05-PLAN.md — Stripe Checkout, webhook handler, Customer Portal endpoints
+- [ ] 01-06-PLAN.md — Rate limiting, auth modals, settings page, auth-aware NavBar, E2E verify
+
 **UI hint**: yes
 
 ### Phase 2: Queue Infrastructure
@@ -100,7 +109,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/6 | Not started | - |
 | 2. Queue Infrastructure | 0/TBD | Not started | - |
 | 3. Agent Pipeline | 0/TBD | Not started | - |
 | 4. UI & Dashboard | 0/TBD | Not started | - |
