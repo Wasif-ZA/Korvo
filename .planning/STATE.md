@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-03-PLAN.md
-last_updated: "2026-04-01T12:47:54.303Z"
+stopped_at: Completed 01-foundation-01-05-PLAN.md
+last_updated: "2026-04-01T12:51:38Z"
 last_activity: 2026-04-01 — Roadmap created, 59 v1 requirements mapped to 6 phases
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 6
-  completed_plans: 3
+  completed_plans: 5
   percent: 0
 ---
 
@@ -26,8 +26,8 @@ See: .planning/PROJECT.md (updated 2026-04-01)
 ## Current Position
 
 Phase: 1 of 6 (Foundation)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
+Plan: 5 of 6 in current phase
+Status: In progress
 Last activity: 2026-04-01 — Roadmap created, 59 v1 requirements mapped to 6 phases
 
 Progress: [░░░░░░░░░░] 0%
@@ -52,12 +52,10 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: —
 
 *Updated after each plan completion*
-<<<<<<< HEAD
-| Phase 01-foundation P01 | 10 | 3 tasks | 19 files |
-=======
+| Phase 01-foundation P01 | 10min | 3 tasks | 19 files |
 | Phase 01-foundation P02 | 9min | 2 tasks | 5 files |
->>>>>>> worktree-agent-a3fbb471
-| Phase 01-foundation P03 | 12 | 3 tasks | 8 files |
+| Phase 01-foundation P03 | 12min | 3 tasks | 8 files |
+| Phase 01-foundation P04 | 15min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -72,21 +70,18 @@ Recent decisions affecting current work:
 - Roadmap: Redis must use maxmemory-policy noeviction + maxRetriesPerRequest: null on worker connections
 - Roadmap: RLS gating via profiles table only — never JWT user_metadata (bypassable)
 
-<<<<<<< HEAD
-
 - [Phase 01-foundation]: Used proxy.ts (not middleware.ts) per Next.js 16 pattern — auth guard stub in place for Plan 03
 - [Phase 01-foundation]: Vitest 4 with node env globally, @vitest-environment jsdom per-file for React component tests
 - [Phase 01-foundation]: Modal.tsx is a client component (use client) due to useEffect for body scroll lock
-
-=======
-
 - [Phase 01-foundation]: Prisma 7 dual-connection: DATABASE_URL (pooler 6543) + DIRECT_DATABASE_URL (direct 5432) in prisma.config.ts (not schema.prisma)
 - [Phase 01-foundation]: RLS policies use auth.uid()::text cast (not auth.uid()) because Prisma generates TEXT columns, not UUID
-
->>>>>>> worktree-agent-a3fbb471
-
 - [Phase 01-foundation]: proxy.ts guards /settings and /dashboard PAGE routes only — API routes independently call supabase.auth.getUser()
 - [Phase 01-foundation]: Guest session localStorage UUID passed via OAuth redirectTo as guest_session param — survives redirect, no server-side storage needed
+- [Phase 01-foundation]: Server/client component split on /pricing page: server page.tsx exports metadata, PricingPageClient.tsx holds useState for toggle — required by Next.js App Router
+- [Phase 01-foundation]: NavBar CTA uses Link with Tailwind button classes — Button component lacks asChild/Slot support, avoids invalid HTML nesting
+- [Phase 01-foundation]: Stripe webhook uses req.text() (not req.json()) for raw body signature verification — Pitfall 2
+- [Phase 01-foundation]: Stripe apiVersion set to 2026-03-25.dahlia (matches installed stripe@21.0.1)
+- [Phase 01-foundation]: Stripe checkout.session.completed retrieves full session via stripe.checkout.sessions.retrieve() with expand — Pitfall 7 prevention
 
 ### Pending Todos
 
@@ -99,11 +94,6 @@ None yet.
 
 ## Session Continuity
 
-<<<<<<< HEAD
-Last session: 2026-04-01T12:47:54.299Z
-Stopped at: Completed 01-foundation-03-PLAN.md
-=======
-Last session: 2026-04-01T12:35:57.396Z
-Stopped at: Completed 01-foundation-01-02-PLAN.md
->>>>>>> worktree-agent-a3fbb471
+Last session: 2026-04-01T12:51:38Z
+Stopped at: Completed 01-foundation-01-05-PLAN.md
 Resume file: None

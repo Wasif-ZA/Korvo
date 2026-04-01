@@ -9,19 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Foundation
 
-<<<<<<< HEAD
 - [x] **FOUND-01**: Next.js 16 project with App Router, TailwindCSS 4, TypeScript
-- [ ] **FOUND-02**: Supabase project with PostgreSQL database and RLS enabled on all tables
-- [ ] **FOUND-03**: Database schema: profiles, searches, contacts, outreach tables with all fields and constraints
-- [ ] **FOUND-04**: Row Level Security policies: all tables scoped via `auth.uid() = user_id`, plan gating via profiles table (never JWT user_metadata)
-- [ ] **FOUND-05**: Supabase connection pooler configured (port 6543, not direct connection)
-=======
-- [ ] **FOUND-01**: Next.js 16 project with App Router, TailwindCSS 4, TypeScript
 - [x] **FOUND-02**: Supabase project with PostgreSQL database and RLS enabled on all tables
 - [x] **FOUND-03**: Database schema: profiles, searches, contacts, outreach tables with all fields and constraints
 - [x] **FOUND-04**: Row Level Security policies: all tables scoped via `auth.uid() = user_id`, plan gating via profiles table (never JWT user_metadata)
 - [x] **FOUND-05**: Supabase connection pooler configured (port 6543, not direct connection)
->>>>>>> worktree-agent-a3fbb471
 
 ### Authentication
 
@@ -89,11 +81,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Payments
 
-- [ ] **PAY-01**: Stripe Checkout Sessions for Pro tier ($19/month)
-- [ ] **PAY-02**: Stripe webhooks (checkout.session.completed, customer.subscription.deleted) with raw body parsing
-- [ ] **PAY-03**: Customer Portal for self-service subscription management
-- [ ] **PAY-04**: Plan stored in profiles table, updated by server-side webhook handler (never client-side)
-- [ ] **PAY-05**: Pro tier: 50 searches/month, unlimited drafts, Gmail API send, coffee chat prep (V2)
+- [x] **PAY-01**: Stripe Checkout Sessions for Pro tier ($19/month)
+- [x] **PAY-02**: Stripe webhooks (checkout.session.completed, customer.subscription.deleted) with raw body parsing
+- [x] **PAY-03**: Customer Portal for self-service subscription management
+- [x] **PAY-04**: Plan stored in profiles table, updated by server-side webhook handler (never client-side)
+- [x] **PAY-05**: Pro tier: 50 searches/month, unlimited drafts, Gmail API send, coffee chat prep (V2)
 
 ### Email Sending & Deliverability
 
@@ -187,29 +179,21 @@ Deferred to after V2. Tracked for future planning.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-<<<<<<< HEAD
 | FOUND-01 | Phase 1 | Complete |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
-| FOUND-05 | Phase 1 | Pending |
-=======
-| FOUND-01 | Phase 1 | Pending |
 | FOUND-02 | Phase 1 | Complete |
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Complete |
 | FOUND-05 | Phase 1 | Complete |
->>>>>>> worktree-agent-a3fbb471
 | AUTH-01 | Phase 1 | Complete |
 | AUTH-02 | Phase 1 | Complete |
 | AUTH-03 | Phase 1 | Complete |
 | AUTH-04 | Phase 1 | Complete |
 | AUTH-05 | Phase 1 | Pending |
-| PAY-01 | Phase 1 | Pending |
-| PAY-02 | Phase 1 | Pending |
-| PAY-03 | Phase 1 | Pending |
-| PAY-04 | Phase 1 | Pending |
-| PAY-05 | Phase 1 | Pending |
+| PAY-01 | Phase 1 | Complete |
+| PAY-02 | Phase 1 | Complete |
+| PAY-03 | Phase 1 | Complete |
+| PAY-04 | Phase 1 | Complete |
+| PAY-05 | Phase 1 | Complete |
 | ORCH-01 | Phase 2 | Pending |
 | ORCH-02 | Phase 2 | Pending |
 | ORCH-03 | Phase 2 | Pending |
@@ -270,4 +254,4 @@ Deferred to after V2. Tracked for future planning.
 
 ---
 *Requirements defined: 2026-04-01*
-*Last updated: 2026-04-01 after roadmap creation (corrected count: 67 v1 requirements)*
+*Last updated: 2026-04-01 after 01-05-PLAN execution (PAY-01 through PAY-04 complete)*
