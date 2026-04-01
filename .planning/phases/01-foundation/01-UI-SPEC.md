@@ -56,13 +56,13 @@ All sizes in pixels. TailwindCSS 4 utility classes noted for executor reference.
 | Role | Size | Weight | Line Height | Tailwind Class Reference |
 |------|------|--------|-------------|--------------------------|
 | Body | 16px | 400 (regular) | 1.5 | `text-base font-normal leading-relaxed` |
-| Label | 14px | 500 (medium) | 1.4 | `text-sm font-medium leading-snug` |
+| Label | 14px | 600 (semibold) | 1.4 | `text-sm font-semibold leading-snug` |
 | Heading | 24px | 600 (semibold) | 1.3 | `text-2xl font-semibold leading-tight` |
-| Display | 48px | 700 (bold) | 1.15 | `text-5xl font-bold leading-none` (desktop) / `text-4xl font-bold` (mobile, ≤375px) |
+| Display | 48px | 600 (semibold) | 1.15 | `text-5xl font-semibold leading-none` (desktop) / `text-4xl font-semibold` (mobile, ≤375px) |
 
-Font weight palette: exactly 2 declared weights — **400 (regular)** for body text and **600 (semibold)** for all headings, labels, and interactive elements. 700 bold used only for the hero display line (1 instance per page).
+Font weight palette: exactly 2 declared weights — **400 (regular)** for body text and secondary copy, and **600 (semibold)** for all headings, labels, CTAs, and the hero display line. Size alone (48px) provides sufficient dominance for the display role without a third weight. Pricing plan feature lists and footnotes use 14px / weight 400 / `text-gray-500` — color and size provide sufficient visual distinction.
 
-Sub-label copy (pricing plan feature lists, footnotes): 13px / weight 400 / line-height 1.4 — `text-[13px] font-normal leading-snug`. This is the only exception to the 4-size rule and is used sparingly.
+**Visual anchor:** Primary visual anchor is the hero headline (48px display). Eye path: headline → subheadline → search bar → primary CTA ("Start for free").
 
 ---
 
