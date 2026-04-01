@@ -3,13 +3,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { Card } from "@/components/ui/Card";
 import { PricingCard } from "@/components/pricing/PricingCard";
 import { PricingToggle } from "@/components/pricing/PricingToggle";
 import { GuestLimitModal } from "@/components/auth/GuestLimitModal";
 import { MonthlyLimitModal } from "@/components/auth/MonthlyLimitModal";
 import { getOrCreateGuestSessionId } from "@/lib/guest";
-import { Search, Mail, Layout, ArrowRight, ShieldCheck, Zap, Terminal } from "lucide-react";
+import { Search, ArrowRight, Github } from "lucide-react";
 
 const FREE_FEATURES = [
   "5 searches per month",
@@ -21,9 +20,8 @@ const FREE_FEATURES = [
 const PRO_FEATURES = [
   "50 searches per month",
   "Unlimited email drafts",
-  "Send via Gmail from Korvo",
-  "Pipeline tracker",
-  "Priority support",
+  "Direct Gmail send",
+  "Priority search queue",
   "Coffee chat prep (V2)",
 ];
 
@@ -89,55 +87,58 @@ export default function LandingPage() {
     document.getElementById("search-bar")?.scrollIntoView({ behavior: "smooth" });
   }
 
-  const proPrice = interval === "annually" ? "AUD $149" : "AUD $19";
+  const proPrice = interval === "annually" ? "$149" : "$19";
   const proInterval = interval === "annually" ? "/year" : "/month";
   const proSavings = interval === "annually" ? "Save 35%" : undefined;
 
   return (
-    <div className="min-h-screen bg-bg-primary selection:bg-accent/30 selection:text-accent">
-      {/* ── Background Grid ── */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-      <div className="fixed inset-0 bg-radial-at-t from-accent-muted/20 via-transparent to-transparent pointer-events-none" />
+    <div className="min-h-screen bg-bg-base text-text-1">
+      {/* ── Nav ── */}
+      <nav className="max-w-[1200px] mx-auto px-6 py-8 flex items-center justify-between border-b border-white/[0.04]">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center font-bold text-primary-text text-lg tracking-tighter shadow-xl shadow-primary/10">K</div>
+          <span className="font-display font-bold text-xl tracking-tight">Korvo</span>
+        </div>
+        <div className="flex items-center gap-8">
+          <a href="/pricing" className="text-[15px] font-medium text-text-2 hover:text-text-1 transition-colors">Pricing</a>
+          <Button variant="secondary" size="default" onClick={() => window.location.href = "/auth"}>Sign in</Button>
+        </div>
+      </nav>
 
-      <main className="relative z-10">
+      <main>
         {/* ── Hero ── */}
-        <section className="relative pt-24 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-accent-muted border border-border-accent mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <Zap className="h-3 w-3 text-accent fill-accent" />
-              <span className="text-[10px] font-mono font-bold text-accent uppercase tracking-[0.1em]">Build v1.0.4</span>
-            </div>
-            
-            <h1 className="text-5xl lg:text-[5.5rem] font-bold tracking-[-0.03em] text-text-primary mb-8 leading-[0.95] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-100">
+        <section className="max-w-[1200px] mx-auto px-6 pt-24 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-7">
+            <h1 className="text-6xl lg:text-[72px] leading-[1.05] font-bold tracking-tight text-text-1 mb-8">
               Land interviews with one search.
             </h1>
             
-            <p className="text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto mb-14 leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-              The AI-powered pipeline for the modern job hunter. Type a company, 
-              get 3 verified contacts, and ready-to-send personalized emails.
+            <p className="text-xl text-text-2 max-w-lg mb-12 leading-relaxed">
+              Find the right people. Get their verified emails. <br />
+              Receive a custom outreach draft in seconds.
             </p>
 
-            {/* Search bar container */}
-            <div className="max-w-4xl mx-auto p-1.5 rounded-xl bg-bg-secondary border border-white/[0.06] shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+            {/* Search bar */}
+            <div className="p-1.5 rounded-xl bg-bg-raised border border-white/[0.04] shadow-2xl">
               <form
                 id="search-bar"
                 onSubmit={handleSearch}
-                className="flex flex-col md:flex-row gap-1.5"
+                className="flex flex-col md:flex-row gap-2"
                 noValidate
               >
-                <div className="flex-1 flex flex-col md:flex-row gap-1.5">
+                <div className="flex-1 flex flex-col md:flex-row gap-2">
                   <Input
                     heroVariant
-                    placeholder="Company (e.g. Atlassian)"
+                    placeholder="Atlassian"
                     className="border-none bg-transparent focus:ring-0"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     required
                   />
-                  <div className="hidden md:block w-px h-6 self-center bg-white/[0.06]" />
+                  <div className="hidden md:block w-px h-6 self-center bg-white/[0.08]" />
                   <Input
                     heroVariant
-                    placeholder="Role (e.g. Software Engineer)"
+                    placeholder="Software Engineer"
                     className="border-none bg-transparent focus:ring-0"
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
@@ -147,163 +148,137 @@ export default function LandingPage() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="md:w-auto w-full px-8 gap-2 font-bold tracking-tight"
+                  className="px-8 gap-2 font-bold"
                   isLoading={isSearching}
                 >
-                  <Search className="h-4 w-4 stroke-[2.5px]" />
-                  Search
+                  <Search className="h-4 w-4 stroke-[3px]" />
+                  Get contacts
                 </Button>
               </form>
             </div>
-
-            <div className="mt-12 flex items-center justify-center gap-10">
-              <span className="text-[10px] font-mono font-medium tracking-[0.2em] text-text-tertiary">DEPLOYED AT</span>
-              <div className="flex gap-8 text-sm font-bold text-text-tertiary/60 tracking-tighter">
-                <span className="hover:text-text-primary transition-colors cursor-default">UTS_SYS</span>
-                <span className="hover:text-text-primary transition-colors cursor-default">USYD_NET</span>
-                <span className="hover:text-text-primary transition-colors cursor-default">UNSW_ENG</span>
+            
+            <div className="mt-12 flex items-center gap-6">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-bg-base bg-bg-raised" />
+                ))}
               </div>
+              <p className="text-sm text-text-3 font-medium italic">
+                Joined by 400+ graduates this week
+              </p>
+            </div>
+          </div>
+
+          <div className="hidden lg:block lg:col-span-5 relative">
+            <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-bg-raised to-bg-base border border-white/[0.04] p-8 shadow-inner overflow-hidden">
+               {/* Real UI Preview Mockup */}
+               <div className="space-y-6 opacity-40">
+                  <div className="h-4 w-24 bg-text-3/20 rounded" />
+                  <div className="space-y-3">
+                    <div className="h-12 w-full bg-bg-hover rounded-lg border border-white/[0.04]" />
+                    <div className="h-12 w-full bg-bg-hover rounded-lg border border-white/[0.04]" />
+                    <div className="h-12 w-full bg-bg-hover rounded-lg border border-white/[0.04]" />
+                  </div>
+                  <div className="pt-6 space-y-4">
+                    <div className="h-4 w-32 bg-text-3/20 rounded" />
+                    <div className="h-32 w-full bg-bg-hover rounded-xl border border-white/[0.04]" />
+                  </div>
+               </div>
+               {/* Floating Data Card */}
+               <div className="absolute top-1/2 left-[-10%] right-[-10%] translate-y-[-50%] bg-bg-elevated border border-primary/20 rounded-xl p-6 shadow-2xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="h-4 w-32 bg-primary/20 rounded" />
+                    <span className="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">HIGH_CONFIDENCE</span>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="h-2 w-full bg-text-3/10 rounded" />
+                    <div className="h-2 w-full bg-text-3/10 rounded" />
+                    <div className="h-2 w-2/3 bg-text-3/10 rounded" />
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-white/[0.04] flex justify-end">
+                    <div className="h-8 w-24 bg-primary rounded-lg" />
+                  </div>
+               </div>
             </div>
           </div>
         </section>
 
         {/* ── How it works ── */}
-        <section id="how-it-works" className="py-24 relative">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-4 mb-16">
-              <div className="h-px flex-1 bg-white/[0.06]" />
-              <h2 className="text-xs font-mono font-bold text-text-tertiary uppercase tracking-[0.3em]">Execution Flow</h2>
-              <div className="h-px flex-1 bg-white/[0.06]" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  icon: Terminal,
-                  title: "Target Discovery",
-                  description: "Our agents scan public datasets to identify high-probability contacts for your specific role.",
-                },
-                {
-                  icon: ShieldCheck,
-                  title: "Pattern Detection",
-                  description: "We verify email formats using multi-layer validation and assign cryptographic confidence scores.",
-                },
-                {
-                  icon: Zap,
-                  title: "Intelligence Layer",
-                  description: "Generate deep-research hooks and personalized cold emails tailored to their background.",
-                },
-              ].map(({ icon: Icon, title, description }, i) => (
-                <Card key={title} className="group hover:bg-bg-hover transition-colors">
-                  <div className="w-10 h-10 rounded-md bg-bg-tertiary border border-white/[0.06] flex items-center justify-center mb-6 group-hover:border-accent/30 transition-colors">
-                    <Icon className="h-5 w-5 text-accent" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-3 tracking-tight">{title}</h3>
-                  <p className="text-text-secondary leading-relaxed text-sm">
-                    {description}
-                  </p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Features Preview ── */}
-        <section className="py-24 border-y border-white/[0.06] bg-bg-secondary/30">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div>
-                <div className="inline-block px-2 py-0.5 rounded bg-violet-muted border border-violet/20 mb-6">
-                  <span className="text-[10px] font-mono font-bold text-violet uppercase tracking-wider">System Components</span>
-                </div>
-                <h2 className="text-4xl font-bold text-text-primary mb-8 tracking-[-0.02em] leading-tight">
-                  A complete command center <br />for your job search.
-                </h2>
-                <div className="space-y-8">
-                  {[
-                    { icon: Layout, title: "Pipeline Board", desc: "Drag-and-drop Kanban interface to track every interaction." },
-                    { icon: Zap, title: "Response Scoring", desc: "0-100 probability scores driven by seniority and activity match." },
-                    { icon: Mail, title: "Gmail Integration", desc: "Send secure, tracked emails directly via Google OAuth (Pro)." },
-                  ].map(({ icon: Icon, title, desc }) => (
-                    <div key={title} className="flex gap-4">
-                      <div className="flex-shrink-0 w-5 h-5 mt-1">
-                        <Icon className="h-full w-full text-accent/80" strokeWidth={2} />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-text-primary text-sm tracking-tight">{title}</h4>
-                        <p className="text-text-tertiary text-sm leading-relaxed mt-1">{desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+        <section className="bg-bg-raised/30 border-y border-white/[0.04] section-spacer">
+          <div className="max-w-[1200px] mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+              <div className="lg:col-span-4">
+                <h2 className="text-3xl font-bold text-text-1 mb-6">Built for depth, <br />not just volume.</h2>
+                <p className="text-text-2 leading-relaxed">
+                  Most tools give you a list of 1,000 names you'll never email. We give you the 3 that actually matter.
+                </p>
               </div>
-              <div className="relative">
-                <div className="absolute inset-0 bg-accent/5 rounded-[2rem] blur-[100px]" />
-                <div className="relative rounded-xl border border-white/[0.06] bg-bg-primary p-1 shadow-2xl overflow-hidden aspect-[4/3]">
-                  <div className="bg-bg-secondary rounded-lg h-full border border-white/[0.06] p-4 font-mono text-[10px] text-text-tertiary overflow-hidden">
-                    <div className="flex items-center justify-between border-b border-white/[0.06] pb-3 mb-4">
-                      <div className="flex gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-white/[0.06]" />
-                        <div className="w-2 h-2 rounded-full bg-white/[0.06]" />
-                        <div className="w-2 h-2 rounded-full bg-white/[0.06]" />
-                      </div>
-                      <span className="uppercase tracking-widest text-accent/50">Pipeline_Service v1.0</span>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="h-4 w-1/2 bg-white/[0.03] rounded" />
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="h-20 bg-accent-muted rounded border border-accent/10 p-2">
-                          <div className="h-2 w-3/4 bg-accent/20 rounded mb-2" />
-                          <div className="h-2 w-1/2 bg-accent/10 rounded" />
-                        </div>
-                        <div className="h-20 bg-white/[0.02] rounded border border-white/[0.06] p-2">
-                          <div className="h-2 w-3/4 bg-white/[0.06] rounded mb-2" />
-                          <div className="h-2 w-1/2 bg-white/[0.03] rounded" />
-                        </div>
-                      </div>
-                      <div className="h-32 bg-white/[0.01] rounded border border-white/[0.03] p-4 space-y-2">
-                        <div className="h-2 w-full bg-white/[0.04] rounded" />
-                        <div className="h-2 w-full bg-white/[0.04] rounded" />
-                        <div className="h-2 w-2/3 bg-white/[0.04] rounded" />
-                      </div>
-                    </div>
+              
+              <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                {[
+                  {
+                    num: "01",
+                    title: "Precision Search",
+                    desc: "Our agents don't just scrape; they research. We find contacts based on seniority and relevance to your target role."
+                  },
+                  {
+                    num: "02",
+                    title: "Verified Channels",
+                    desc: "Multi-layer verification ensures your email actually hits the inbox. No bounces, no blacklists."
+                  },
+                  {
+                    num: "03",
+                    title: "Human Context",
+                    desc: "We research their public activity to find a genuine hook. No more 'I'm a big fan of your work' generic openings."
+                  },
+                  {
+                    num: "04",
+                    title: "Native Sending",
+                    desc: "Pro users send directly from Korvo via Gmail. We handle the deliverability ramp and jitter so you stay out of spam."
+                  }
+                ].map((step) => (
+                  <div key={step.num}>
+                    <span className="text-5xl font-bold text-text-3/20 block mb-6 leading-none">{step.num}</span>
+                    <h3 className="text-xl font-bold text-text-1 mb-4">{step.title}</h3>
+                    <p className="text-[15px] text-text-2 leading-relaxed">{step.desc}</p>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* ── Pricing ── */}
-        <section className="py-32">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-text-primary tracking-tight mb-4">Transparent Tiers</h2>
-              <p className="text-text-secondary mb-10">Choose the capacity that matches your search intensity.</p>
+        <section className="section-spacer">
+          <div className="max-w-[1200px] mx-auto px-6">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+              <div className="max-w-xl">
+                <h2 className="text-4xl font-bold text-text-1 mb-4">Pricing</h2>
+                <p className="text-text-2 text-lg">Two plans. Built for every stage of the hunt.</p>
+              </div>
               <PricingToggle interval={interval} onToggle={setInterval} />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl">
               <PricingCard
                 planName="Free"
-                tagline="Initial testing and basic outreach."
-                price="AUD $0"
+                tagline="Perfect for testing the waters."
+                price="$0"
                 interval="/month"
                 features={FREE_FEATURES}
-                ctaText="Deploy Free"
+                ctaText="Get started"
                 ctaAction={handleFreeCheckout}
-                ctaVariant="secondary"
               />
               <PricingCard
                 planName="Pro"
-                tagline="Full pipeline capacity for active job seekers."
+                tagline="Everything you need to land the role."
                 price={proPrice}
                 interval={proInterval}
                 features={PRO_FEATURES}
-                ctaText="Unlock Pro Access"
+                ctaText="Start Pro"
                 ctaAction={handleProCheckout}
                 highlighted
-                badge="Recommended"
+                badge="Popular"
                 savingsBadge={proSavings}
               />
             </div>
@@ -311,44 +286,46 @@ export default function LandingPage() {
         </section>
 
         {/* ── Final CTA ── */}
-        <section className="py-40 relative overflow-hidden">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 className="text-5xl font-bold text-text-primary mb-10 tracking-tight leading-tight">
-              Ready to automate <br />your networking?
+        <section className="section-spacer border-t border-white/[0.04]">
+          <div className="max-w-[1200px] mx-auto px-6 text-center">
+            <h2 className="text-5xl font-bold text-text-1 mb-10 tracking-tight leading-tight">
+              Ready to land your <br />next interview?
             </h2>
-            <Button
-              size="lg"
-              className="px-10 gap-2.5 font-bold"
-              onClick={() => document.getElementById("search-bar")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Get Started for Free
-              <ArrowRight className="h-4 w-4 stroke-[2.5px]" />
-            </Button>
-            <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.2em] text-text-tertiary">
-              Built by engineers for engineers.
-            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button size="lg" className="px-12 gap-2 font-bold" onClick={() => document.getElementById("search-bar")?.scrollIntoView({ behavior: "smooth" })}>
+                Get started for free
+                <ArrowRight className="h-4 w-4 stroke-[3.5px]" />
+              </Button>
+              <Button variant="secondary" size="lg" className="px-10 gap-2">
+                <Github className="h-4 w-4" />
+                View source
+              </Button>
+            </div>
           </div>
         </section>
 
         {/* ── Footer ── */}
-        <footer className="py-16 border-t border-white/[0.06] bg-bg-secondary/20">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-10">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded bg-accent flex items-center justify-center font-bold text-text-inverse tracking-tighter">K</div>
-                <span className="font-bold text-text-primary tracking-tight text-lg">KORVO</span>
-              </div>
-              <nav className="flex items-center gap-10">
-                <a href="/pricing" className="text-sm font-medium text-text-tertiary hover:text-text-primary transition-colors">Pricing</a>
-                <a href="/settings" className="text-sm font-medium text-text-tertiary hover:text-text-primary transition-colors">Settings</a>
-                <a href="#" className="text-sm font-medium text-text-tertiary hover:text-text-primary transition-colors">Documentation</a>
-                <a href="#" className="text-sm font-medium text-text-tertiary hover:text-text-primary transition-colors">Privacy</a>
-              </nav>
-              <p className="text-sm font-mono text-text-tertiary">&copy; 2026 KORVO_OUTREACH_SYS</p>
-            </div>
+        <footer className="max-w-[1200px] mx-auto px-6 py-16 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex items-center gap-2 text-text-3 font-medium">
+             &copy; 2026 Korvo — Built by Wasif
           </div>
+          <nav className="flex items-center gap-8">
+             <a href="#" className="text-sm text-text-3 hover:text-text-2 transition-colors">Privacy</a>
+             <a href="#" className="text-sm text-text-3 hover:text-text-2 transition-colors">Terms</a>
+             <a href="#" className="text-sm text-text-3 hover:text-text-2 transition-colors">Twitter</a>
+          </nav>
         </footer>
       </main>
+
+      {/* Auth modals */}
+      <GuestLimitModal
+        open={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
+      <MonthlyLimitModal
+        open={showMonthlyModal}
+        onClose={() => setShowMonthlyModal(false)}
+      />
     </div>
   );
 }
