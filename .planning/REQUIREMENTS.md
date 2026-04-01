@@ -9,7 +9,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Foundation
 
-- [ ] **FOUND-01**: Next.js 16 project with App Router, TailwindCSS 4, TypeScript
+- [x] **FOUND-01**: Next.js 16 project with App Router, TailwindCSS 4, TypeScript
 - [ ] **FOUND-02**: Supabase project with PostgreSQL database and RLS enabled on all tables
 - [ ] **FOUND-03**: Database schema: profiles, searches, contacts, outreach tables with all fields and constraints
 - [ ] **FOUND-04**: Row Level Security policies: all tables scoped via `auth.uid() = user_id`, plan gating via profiles table (never JWT user_metadata)
@@ -179,7 +179,7 @@ Deferred to after V2. Tracked for future planning.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
+| FOUND-01 | Phase 1 | Complete |
 | FOUND-02 | Phase 1 | Pending |
 | FOUND-03 | Phase 1 | Pending |
 | FOUND-04 | Phase 1 | Pending |
