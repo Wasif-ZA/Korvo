@@ -5,7 +5,7 @@ import { createSupabaseServerClient } from '@/lib/supabase/server'
 import type Stripe from 'stripe'
 
 const checkoutBodySchema = z.object({
-  priceId: z.string().startsWith('price_'),
+  priceId: z.enum(['monthly', 'annual']),
   promoCode: z.string().optional(),
 })
 
@@ -28,6 +28,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   const { priceId, promoCode } = parsed.data
 
+  // Resolve plan name to Stripe price ID server-side — price IDs never leave the server
+  const priceIdMap: Record<string, string | undefined> = {
+    monthly: process.env.STRIPE_PRO_MONTHLY_PRICE_ID,
+    annual: process.env.STRIPE_PRO_ANNUAL_PRICE_ID,
+  }
+  const resolvedPriceId = priceIdMap[priceId]
+  if (!resolvedPriceId) {
+    return NextResponse.json({ error: 'Price not configured' }, { status: 500 })
+  }
+
   // Authenticate user
   const supabase = await createSupabaseServerClient()
   const {
@@ -42,7 +52,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const sessionParams: Stripe.Checkout.SessionCreateParams = {
     mode: 'subscription',
     payment_method_types: ['card'],
-    line_items: [{ price: priceId, quantity: 1 }],
+    line_items: [{ price: resolvedPriceId, quantity: 1 }],
     success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/settings?upgraded=1`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing`,
     customer_email: user.email,
