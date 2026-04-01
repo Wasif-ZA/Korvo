@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
 import { PricingCard } from "@/components/pricing/PricingCard";
 import { PricingToggle } from "@/components/pricing/PricingToggle";
+import { GuestLimitModal } from "@/components/auth/GuestLimitModal";
+import { MonthlyLimitModal } from "@/components/auth/MonthlyLimitModal";
 
 const FREE_FEATURES = [
   "5 searches per month",
@@ -28,10 +30,39 @@ export default function LandingPage() {
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
+  const [showGuestModal, setShowGuestModal] = useState(false);
+  const [showMonthlyModal, setShowMonthlyModal] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
-  function handleSearch(e: React.FormEvent) {
+  async function handleSearch(e: React.FormEvent) {
     e.preventDefault();
-    // Search API wired in Plan 06
+    if (!company.trim() || !role.trim()) return;
+
+    setIsSearching(true);
+    try {
+      const res = await fetch("/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ company: company.trim(), role: role.trim(), location: location.trim() || undefined }),
+      });
+      const data = (await res.json()) as {
+        limitReached?: boolean;
+        limitType?: string;
+        searchId?: string | null;
+        error?: string;
+      };
+
+      if (data.limitReached && data.limitType === "guest") {
+        setShowGuestModal(true);
+      } else if (data.limitReached && data.limitType === "monthly") {
+        setShowMonthlyModal(true);
+      }
+      // If !limitReached: search accepted — results UI comes in Phase 3
+    } catch {
+      // Network error — silently fail for now, Phase 3 adds error toasts
+    } finally {
+      setIsSearching(false);
+    }
   }
 
   function scrollToHowItWorks() {
@@ -110,6 +141,7 @@ export default function LandingPage() {
                 variant="primary"
                 size="lg"
                 className="h-[52px] shrink-0"
+                isLoading={isSearching}
               >
                 Start for free
               </Button>
@@ -262,6 +294,16 @@ export default function LandingPage() {
           </nav>
         </div>
       </footer>
+
+      {/* Auth modals */}
+      <GuestLimitModal
+        open={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
+      <MonthlyLimitModal
+        open={showMonthlyModal}
+        onClose={() => setShowMonthlyModal(false)}
+      />
     </main>
   );
 }

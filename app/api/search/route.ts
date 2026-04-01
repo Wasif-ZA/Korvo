@@ -1,0 +1,103 @@
+// /api/search — Search stub that validates inputs and checks rate limits
+// Phase 2 will add actual agent pipeline execution
+// Per D-01: guest IP limit (3/day), free tier limit (5/month), pro limit (50/month)
+// Per D-06: hard block on limit reached, returns limitReached signal to client
+
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+import {
+  checkAndIncrementSearchLimit,
+  checkGuestIpLimit,
+} from "@/lib/limits";
+
+const searchRequestSchema = z.object({
+  company: z.string().min(1, "Company is required").max(200),
+  role: z.string().min(1, "Role is required").max(200),
+  location: z.string().max(200).optional(),
+});
+
+export async function POST(req: NextRequest) {
+  // Parse and validate request body
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { error: "Invalid JSON body" },
+      { status: 400 }
+    );
+  }
+
+  const parsed = searchRequestSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: "Invalid request", details: parsed.error.flatten() },
+      { status: 400 }
+    );
+  }
+
+  // Check auth independently (per D-14: API routes call supabase.auth.getUser() directly)
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    // Authenticated user path — check monthly search limit
+    let limitResult;
+    try {
+      limitResult = await checkAndIncrementSearchLimit(user.id);
+    } catch (err: unknown) {
+      if (err instanceof Error && err.message === "Profile not found") {
+        return NextResponse.json(
+          { error: "User profile not found" },
+          { status: 404 }
+        );
+      }
+      return NextResponse.json(
+        { error: "Failed to check search limit" },
+        { status: 500 }
+      );
+    }
+
+    if (!limitResult.allowed) {
+      return NextResponse.json({
+        limitReached: true,
+        limitType: "monthly",
+        used: limitResult.used,
+        limit: limitResult.limit,
+        plan: limitResult.plan,
+      });
+    }
+
+    // Allowed — actual search pipeline deferred to Phase 2
+    return NextResponse.json({
+      limitReached: false,
+      searchId: null,
+    });
+  }
+
+  // Guest path — check IP-based daily limit
+  const forwarded = req.headers.get("x-forwarded-for");
+  const ipAddress = forwarded
+    ? forwarded.split(",")[0].trim()
+    : "127.0.0.1";
+
+  const guestResult = await checkGuestIpLimit(ipAddress);
+
+  if (!guestResult.allowed) {
+    return NextResponse.json({
+      limitReached: true,
+      limitType: "guest",
+      used: guestResult.used,
+      limit: guestResult.limit,
+    });
+  }
+
+  // Allowed guest search — actual search pipeline deferred to Phase 2
+  return NextResponse.json({
+    limitReached: false,
+    searchId: null,
+  });
+}
