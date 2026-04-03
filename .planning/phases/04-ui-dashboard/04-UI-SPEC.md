@@ -57,15 +57,22 @@ Exceptions:
 
 ## Typography
 
-| Role    | Font           | Size               | Weight         | Line Height | Usage                                                                      |
-| ------- | -------------- | ------------------ | -------------- | ----------- | -------------------------------------------------------------------------- |
-| Display | Source Serif 4 | 36px (text-4xl)    | 600 (semibold) | 1.2         | Page H1 — search results title, company name                               |
-| Heading | Source Serif 4 | 20px (text-xl)     | 600 (semibold) | 1.2         | Card headings, contact names, section headings                             |
-| Body    | DM Sans        | 16px (text-base)   | 400 (regular)  | 1.5         | Paragraphs, email body text, hook quote text                               |
-| Label   | DM Sans        | 14px (text-sm)     | 600 (semibold) | 1.4         | Buttons, badges, metadata, supporting text                                 |
-| Caption | JetBrains Mono | 11px (text-[11px]) | 700 (bold)     | 1.3         | Stage labels, status tags, section dividers, `// identifier \\` decorators |
+Scale: exactly 4 sizes. The mono identifier style is a sub-style of the Label size, not a separate scale step.
 
-Weights in use: regular (400) and semibold (600). Bold (700) used only in JetBrains Mono captions — treated as part of the mono style, not an additional weight for sans.
+| Role    | Font           | Size             | Weight         | Line Height | Usage                                          |
+| ------- | -------------- | ---------------- | -------------- | ----------- | ---------------------------------------------- |
+| Display | Source Serif 4 | 36px (text-4xl)  | 600 (semibold) | 1.2         | Page H1 — search results title, company name   |
+| Heading | Source Serif 4 | 20px (text-xl)   | 600 (semibold) | 1.2         | Card headings, contact names, section headings |
+| Body    | DM Sans        | 16px (text-base) | 400 (regular)  | 1.5         | Paragraphs, email body text, hook quote text   |
+| Label   | DM Sans        | 14px (text-sm)   | 600 (semibold) | 1.4         | Buttons, badges, metadata, supporting text     |
+
+**Mono identifier sub-style** (not a separate scale step — implemented within the Label size slot):
+
+| Sub-style       | Font           | Size               | Weight         | Line Height | Usage                                                                      |
+| --------------- | -------------- | ------------------ | -------------- | ----------- | -------------------------------------------------------------------------- |
+| Mono identifier | JetBrains Mono | 11px (text-[11px]) | 600 (semibold) | 1.3         | Stage labels, status tags, section dividers, `// identifier \\` decorators |
+
+Weights in use across the full system: **regular (400)** and **semibold (600)** — exactly 2 weights. The mono identifier sub-style uses semibold (600) to stay within the 2-weight constraint while remaining visually distinct at 11px.
 
 > Source: `app/globals.css` (h1-h6 font-family + weight-600 global rule), `lib/fonts.ts`, existing component patterns.
 
@@ -99,6 +106,12 @@ Weights in use: regular (400) and semibold (600). Bold (700) used only in JetBra
 
 ---
 
+## Visual Focal Point
+
+**Primary focal point:** the search form compound input at page center — the Company + Role + Location fields grouped inside `SearchForm.tsx`. All page whitespace, typography scale, and spacing converge toward this element. No competing focal elements are permitted on the `/search` page while the form is visible.
+
+---
+
 ## Copywriting Contract
 
 ### Search Form
@@ -128,21 +141,21 @@ Weights in use: regular (400) and semibold (600). Bold (700) used only in JetBra
 
 ### Search Results Page
 
-| Element                   | Copy                                                        |
-| ------------------------- | ----------------------------------------------------------- |
-| Breadcrumb                | `Dashboard / {Company}`                                     |
-| Results H1                | `{Company} · {Role}` (role in italic orange accent)         |
-| Contacts count            | `{N} contacts found`                                        |
-| Status badge — complete   | `COMPLETE`                                                  |
-| Status badge — running    | `RUNNING`                                                   |
-| Status badge — failed     | `FAILED`                                                    |
-| Draft toggle — closed     | `View Email Draft →`                                        |
-| Draft toggle — open       | `Close Email Draft`                                         |
-| Copy email address action | `Copy Email`                                                |
-| More options              | (icon only — `MoreVertical`)                                |
-| Share action              | `Share`                                                     |
-| Footer CTA                | `Back to New Search`                                        |
-| Footer subtext            | `Not finding what you need? Refine your search parameters.` |
+| Element                   | Copy                                                         |
+| ------------------------- | ------------------------------------------------------------ |
+| Breadcrumb                | `Dashboard / {Company}`                                      |
+| Results H1                | `{Company} · {Role}` (role in italic orange accent)          |
+| Contacts count            | `{N} contacts found`                                         |
+| Status badge — complete   | `COMPLETE`                                                   |
+| Status badge — running    | `RUNNING`                                                    |
+| Status badge — failed     | `FAILED`                                                     |
+| Draft toggle — closed     | `View Email Draft →`                                         |
+| Draft toggle — open       | `Close Email Draft`                                          |
+| Copy email address action | `Copy Email`                                                 |
+| More options              | (icon only — `MoreVertical`, `aria-label="Contact options"`) |
+| Share action              | `Share`                                                      |
+| Footer CTA                | `Back to New Search`                                         |
+| Footer subtext            | `Not finding what you need? Refine your search parameters.`  |
 
 ### Email Draft Panel
 
@@ -199,10 +212,10 @@ Weights in use: regular (400) and semibold (600). Bold (700) used only in JetBra
 
 ### Destructive Actions
 
-| Action                         | Confirmation Approach                                                                                                                                                                                      |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Delete contact from pipeline" | Inline confirm prompt below the contact card: `Remove {name} from your pipeline? This cannot be undone.` with `Remove` (destructive button) and `Cancel` (ghost button). No modal — inline expansion only. |
-| "Clear search history entry"   | Optimistic delete on click with `Undo` toast (5-second window)                                                                                                                                             |
+| Action                         | Confirmation Approach                                                                                                                                                                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| "Delete contact from pipeline" | Inline confirm prompt below the contact card: `Remove {name} from your pipeline? This cannot be undone.` with `Remove {name}` (destructive button) and `Keep {name}` (ghost button). No modal — inline expansion only. |
+| "Clear search history entry"   | Optimistic delete on click with `Undo` toast (5-second window)                                                                                                                                                         |
 
 > Source: `04-CONTEXT.md`, existing component copy patterns, `REQUIREMENTS.md` UI-01 through UI-09 and DASH-01 through DASH-05.
 
