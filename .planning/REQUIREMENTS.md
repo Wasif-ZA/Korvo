@@ -37,8 +37,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Orchestration
 
-- [ ] **ORCH-01**: BullMQ v5.71+ with FlowProducer for agent DAG: Contact Finder (parent) → Email Guesser + Research Agent (parallel children) → Email Drafter (grandparent)
-- [ ] **ORCH-02**: BullMQ workers run as separate Railway service (NOT Vercel serverless — Vercel kills after request completion)
+- [x] **ORCH-01**: BullMQ v5.71+ with FlowProducer for agent DAG: Contact Finder (parent) → Email Guesser + Research Agent (parallel children) → Email Drafter (grandparent)
+- [x] **ORCH-02**: BullMQ workers run as separate Railway service (NOT Vercel serverless — Vercel kills after request completion)
 - [x] **ORCH-03**: Redis configured with `maxmemory-policy noeviction` and `maxRetriesPerRequest: null` on worker connections
 - [ ] **ORCH-04**: Per-user rate budgets enforced in Redis
 - [x] **ORCH-05**: Two separate BullMQ queues: `pipeline-queue` (2-minute AI pipeline) and `gmail-send-queue` (time-sensitive sends)
@@ -194,8 +194,8 @@ Deferred to after V2. Tracked for future planning.
 | PAY-03      | Phase 1 | Complete |
 | PAY-04      | Phase 1 | Complete |
 | PAY-05      | Phase 1 | Complete |
-| ORCH-01     | Phase 2 | Pending  |
-| ORCH-02     | Phase 2 | Pending  |
+| ORCH-01     | Phase 2 | Complete |
+| ORCH-02     | Phase 2 | Complete |
 | ORCH-03     | Phase 2 | Complete |
 | ORCH-04     | Phase 2 | Pending  |
 | ORCH-05     | Phase 2 | Complete |

@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-04-03T12:14:33.479Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-04-03T12:23:38.417Z"
 last_activity: 2026-04-03
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 11
-  completed_plans: 9
+  completed_plans: 10
   percent: 17
 ---
 
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-04-01)
 ## Current Position
 
 Phase: 02 (queue-infrastructure) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
 Last activity: 2026-04-03
 
@@ -61,6 +61,7 @@ _Updated after each plan completion_
 | Phase 01-foundation P06 | 7 | 3 tasks | 10 files |
 | Phase 01-foundation P07 | 8min | 1 tasks | 2 files |
 | Phase 02-queue-infrastructure P01 | 8min | 2 tasks | 10 files |
+| Phase 02-queue-infrastructure P02 | 5min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,8 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Checkout route uses z.enum(['monthly', 'annual']) — callers send semantic names, server resolves to price IDs via STRIPE_PRO_MONTHLY_PRICE_ID/STRIPE_PRO_ANNUAL_PRICE_ID env vars
 - [Phase 02-queue-infrastructure]: Two separate ioredis instances required for BullMQ: queue connection (fail-fast) and worker connection (null retries for BRPOP)
 - [Phase 02-queue-infrastructure]: removeOnComplete count:100 and removeOnFail count:500 prevent Redis memory bloat per ORCH-06
+- [Phase 02-queue-infrastructure]: Worker mocks require constructor functions (regular function with this binding), not arrow functions — arrow functions cannot be called as constructors with new
+- [Phase 02-queue-infrastructure]: Mock @/worker/lib/redis directly (returning plain objects) rather than ioredis to avoid constructor issues in worker unit tests
 
 ### Pending Todos
 
@@ -106,6 +109,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-03T12:14:33.473Z
-Stopped at: Completed 02-01-PLAN.md
+Last session: 2026-04-03T12:23:38.410Z
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
