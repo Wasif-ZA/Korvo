@@ -63,12 +63,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **UI-01**: Landing page with search bar (company + role + location), hero section, how-it-works, pricing
 - [x] **UI-02**: One-click seamless flow: search → all results (contacts + research cards + email drafts) load together, no extra clicks
-- [ ] **UI-03**: Contact cards: name, title, email + ConfidenceBadge (green/yellow/red), score (0-100), personalization hook, source URL
-- [ ] **UI-04**: Research card per contact: Background | Ask This | Mention This (structured, not paragraph)
-- [ ] **UI-05**: Email draft inline/modal: editable subject + body, copy button with animation, mailto link, regenerate, "Mark as Sent"
-- [ ] **UI-06**: Loading skeleton during search (pipeline takes 60-120 seconds)
+- [x] **UI-03**: Contact cards: name, title, email + ConfidenceBadge (green/yellow/red), score (0-100), personalization hook, source URL
+- [x] **UI-04**: Research card per contact: Background | Ask This | Mention This (structured, not paragraph)
+- [x] **UI-05**: Email draft inline/modal: editable subject + body, copy button with animation, mailto link, regenerate, "Mark as Sent"
+- [x] **UI-06**: Loading skeleton during search (pipeline takes 60-120 seconds)
 - [ ] **UI-07**: Real-time progress updates via Supabase Broadcast (stage: contacts_found, emails_guessed, research_done, drafts_ready)
-- [ ] **UI-08**: Warm, friendly, approachable design (Notion/Teal aesthetic, not dev-tool)
+- [x] **UI-08**: Warm, friendly, approachable design (Notion/Teal aesthetic, not dev-tool)
 - [ ] **UI-09**: Mobile-responsive, tested iPhone SE through desktop
 
 ### UI — Dashboard & Pipeline
@@ -220,12 +220,12 @@ Deferred to after V2. Tracked for future planning.
 | EMAIL-05    | Phase 3 | Complete |
 | UI-01       | Phase 4 | Pending  |
 | UI-02       | Phase 4 | Complete |
-| UI-03       | Phase 4 | Pending  |
-| UI-04       | Phase 4 | Pending  |
-| UI-05       | Phase 4 | Pending  |
-| UI-06       | Phase 4 | Pending  |
+| UI-03       | Phase 4 | Complete |
+| UI-04       | Phase 4 | Complete |
+| UI-05       | Phase 4 | Complete |
+| UI-06       | Phase 4 | Complete |
 | UI-07       | Phase 4 | Pending  |
-| UI-08       | Phase 4 | Pending  |
+| UI-08       | Phase 4 | Complete |
 | UI-09       | Phase 4 | Pending  |
 | DASH-01     | Phase 4 | Pending  |
 | DASH-02     | Phase 4 | Pending  |
