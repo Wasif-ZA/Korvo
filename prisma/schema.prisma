@@ -3,14 +3,11 @@
 // See: .planning/phases/01-foundation/01-RESEARCH.md Pattern 1
 
 datasource db {
-  provider = "postgresql"
-  // Connection URLs configured in prisma.config.ts (Prisma 7 pattern)
-  // url     = pooler port 6543 (runtime queries via Vercel serverless)
-  // directUrl = direct port 5432 (migrations only)
+  provider  = "postgresql"
 }
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -77,6 +74,7 @@ model Contact {
   email                 String?
   emailConfidence       String?   @map("email_confidence") // "high" | "medium" | "low"
   score                 Int?                               // 0-100 response probability
+  scoreBreakdown        Json?     @map("score_breakdown")
   researchBackground    String?   @map("research_background")
   researchAskThis       String?   @map("research_ask_this")
   researchMentionThis   String?   @map("research_mention_this")
@@ -130,3 +128,19 @@ model GuestIpLimit {
   @@unique([ipAddress, date])
   @@map("guest_ip_limits")
 }
+
+// ============================================
+// COMPANY ENRICHMENT
+// Caches Firecrawl/Claude Haiku research on a domain
+// Re-used across different users searching the same company
+// ============================================
+model CompanyEnrichment {
+  id        String   @id @default(uuid())
+  domain    String   @unique
+  data      Json
+  cachedAt  DateTime @map("cached_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("company_enrichments")
+}
+

@@ -13,7 +13,9 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "env:check": "tsx scripts/check-env.ts",
+    "env:check": "tsx scripts/check-env.ts --mode=runtime",
+    "env:check:build": "tsx scripts/check-env.ts --mode=build",
+    "env:check:dev": "tsx scripts/check-env.ts --mode=dev",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -24,8 +26,9 @@
     "queue:dev": "tsx src/workers/index.ts || tsx worker/index.ts",
     "dev:worker": "tsx watch worker/index.ts",
     "start:worker": "tsx worker/index.ts",
-    "predev": "npm run env:check",
-    "prebuild": "npm run env:check && prisma generate"
+    "predev": "npm run env:check:dev",
+    "prebuild": "npm run env:check:build && prisma generate",
+    "build:analyze": "ANALYZE=true next build"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -37,6 +40,8 @@
     ]
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "@mendable/firecrawl-js": "^4.18.1",
     "@prisma/client": "^7.6.0",
     "@supabase/ssr": "^0.10.0",
     "@supabase/supabase-js": "^2.101.1",
@@ -46,6 +51,8 @@
     "ioredis": "^5.10.1",
     "lucide-react": "^1.7.0",
     "next": "16.2.2",
+    "opossum": "^9.0.0",
+    "p-retry": "^8.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hot-toast": "^2.6.0",
@@ -56,13 +63,15 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
+    "@next/bundle-analyzer": "^16.2.2",
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^20",
+    "@types/opossum": "^8.1.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.1.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
