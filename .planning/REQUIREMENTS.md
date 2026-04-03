@@ -27,8 +27,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **AGENT-01**: Contact Finder agent — finds 3 relevant people at target company via Claude Haiku 4.5 + web search tool, returns structured JSON
 - [x] **AGENT-02**: Email Guesser agent — detects company email pattern (Hunter.io public, job listings, blog bios), guesses addresses with confidence level (high/medium/low)
-- [ ] **AGENT-03**: Research Agent — finds personalization hooks per contact, outputs structured research card: Background, Ask This, Mention This
-- [ ] **AGENT-04**: Email Drafter agent — drafts 4-sentence cold email using tone mapping from scoring engine, uses correct template type
+- [x] **AGENT-03**: Research Agent — finds personalization hooks per contact, outputs structured research card: Background, Ask This, Mention This
+- [x] **AGENT-04**: Email Drafter agent — drafts 4-sentence cold email using tone mapping from scoring engine, uses correct template type
 - [x] **AGENT-05**: All agents use `@anthropic-ai/sdk` v0.81.0 directly with manual tool-use loops (NOT Agent SDK)
 - [x] **AGENT-06**: Prompt caching enabled on all agent system prompts (dynamic content in user message turn only, never in system prompt after cache_control breakpoint)
 - [x] **AGENT-07**: 4-layer data access waterfall: L1 (Claude web search) → L2 (email pattern detection) → L3 (ATS APIs: Greenhouse, Lever, Workable) → L4 (third-party enrichment, V2)
@@ -55,7 +55,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **EMAIL-01**: Template types: referral_ask, hiring_inquiry, value_offer
 - [x] **EMAIL-02**: Follow-up templates: followup_1 (3 days), followup_2 (7 days)
-- [ ] **EMAIL-03**: All emails max 4 sentences, casual/direct tone, no em dashes, no corporate speak
+- [x] **EMAIL-03**: All emails max 4 sentences, casual/direct tone, no em dashes, no corporate speak
 - [ ] **EMAIL-04**: Editable subject line + body before send
 - [ ] **EMAIL-05**: Regenerate button with different tone/template option
 
@@ -202,8 +202,8 @@ Deferred to after V2. Tracked for future planning.
 | ORCH-06     | Phase 2 | Complete |
 | AGENT-01    | Phase 3 | Complete |
 | AGENT-02    | Phase 3 | Complete |
-| AGENT-03    | Phase 3 | Pending  |
-| AGENT-04    | Phase 3 | Pending  |
+| AGENT-03    | Phase 3 | Complete |
+| AGENT-04    | Phase 3 | Complete |
 | AGENT-05    | Phase 3 | Complete |
 | AGENT-06    | Phase 3 | Complete |
 | AGENT-07    | Phase 3 | Complete |
@@ -215,7 +215,7 @@ Deferred to after V2. Tracked for future planning.
 | SCORE-04    | Phase 3 | Pending  |
 | EMAIL-01    | Phase 3 | Complete |
 | EMAIL-02    | Phase 3 | Complete |
-| EMAIL-03    | Phase 3 | Pending  |
+| EMAIL-03    | Phase 3 | Complete |
 | EMAIL-04    | Phase 3 | Pending  |
 | EMAIL-05    | Phase 3 | Pending  |
 | UI-01       | Phase 4 | Pending  |

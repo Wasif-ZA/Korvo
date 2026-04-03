@@ -88,7 +88,7 @@ Plans:
 - [x] 03-04-PLAN.md — Contact Finder agent: Claude Haiku 4.5 web search, 3 contacts
 - [x] 03-05-PLAN.md — Email Guesser agent: pattern detection, confidence levels
 - [x] 03-06-PLAN.md — Research Agent + Firecrawl enrichment with caching
-- [ ] 03-07-PLAN.md — Email Drafter agent: tone-mapped cold emails, template types
+- [x] 03-07-PLAN.md — Email Drafter agent: tone-mapped cold emails, template types
 - [ ] 03-08-PLAN.md — Pipeline integration: wire agents, PipelineResponse assembly, GET endpoint
 
 ### Phase 4: UI & Dashboard
@@ -142,7 +142,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | -------------------------------- | -------------- | ----------- | ---------- |
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
-| 3. Agent Pipeline                | 6/8            | In Progress |            |
+| 3. Agent Pipeline                | 7/8            | In Progress |            |
 | 4. UI & Dashboard                | 0/TBD          | Not started | -          |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
