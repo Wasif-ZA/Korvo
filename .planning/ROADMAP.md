@@ -110,7 +110,7 @@ Plans:
 - [x] 04-01-PLAN.md — Backend contracts: real IDs in PipelineResponse, regenerate endpoint, reminder endpoint
 - [x] 04-02-PLAN.md — ContactCard score badge, research toggle, ScoreBreakdown field fix
 - [ ] 04-03-PLAN.md — Dashboard optimistic updates, FollowUpReminder wiring, regenerate in SlideOver
-- [ ] 04-04-PLAN.md — Results page real IDs, empty state copywriting, full visual verification
+- [x] 04-04-PLAN.md — Results page real IDs, empty state copywriting, full visual verification
 
 **UI hint**: yes
 
@@ -151,6 +151,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
-| 4. UI & Dashboard                | 2/4            | In Progress |            |
+| 4. UI & Dashboard                | 3/4            | In Progress |            |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
