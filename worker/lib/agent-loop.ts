@@ -83,7 +83,12 @@ export async function runAgentLoop(options: AgentLoopOptions): Promise<string> {
           content: result,
         });
       }
-      messages.push({ role: "user", content: toolResults });
+      // Only push tool results if there are custom tool calls to respond to.
+      // Server tools (server_tool_use) are handled by the API and don't need
+      // tool_result messages from us.
+      if (toolResults.length > 0) {
+        messages.push({ role: "user", content: toolResults });
+      }
       steps++;
       continue;
     }

@@ -206,4 +206,51 @@ describe("runAgentLoop", () => {
     const result = await runAgentLoop(BASE_OPTIONS);
     expect(result).toBe("");
   });
+
+  it("does not call executeTool for server_tool_use blocks and does not push empty tool results", async () => {
+    // Simulate a response with ONLY server_tool_use blocks (no custom tool_use)
+    // This happens when Claude uses built-in server tools like web_search_20250305
+    mockCreate
+      .mockResolvedValueOnce({
+        stop_reason: "tool_use",
+        content: [
+          {
+            type: "server_tool_use",
+            id: "srvtool_abc",
+            name: "web_search",
+            input: { query: "Atlassian engineering team" },
+          },
+          {
+            type: "text",
+            text: "Searching for contacts...",
+          },
+        ],
+      })
+      .mockResolvedValueOnce({
+        stop_reason: "end_turn",
+        content: [{ type: "text", text: "Found contacts via server tool" }],
+      });
+
+    const executeToolSpy = vi.fn().mockResolvedValue("should not be called");
+
+    const result = await runAgentLoop({
+      ...BASE_OPTIONS,
+      executeTool: executeToolSpy,
+    });
+
+    // executeTool must NOT be called for server_tool_use blocks
+    expect(executeToolSpy).not.toHaveBeenCalled();
+
+    // The second API call should NOT have an empty tool_result user message
+    const secondCall = mockCreate.mock.calls[1][0];
+    const messages = secondCall.messages as Array<{
+      role: string;
+      content: unknown;
+    }>;
+    // The last message should be the assistant message (server_tool_use blocks), not an empty user message
+    const lastMsg = messages[messages.length - 1];
+    expect(lastMsg.role).toBe("assistant");
+
+    expect(result).toBe("Found contacts via server tool");
+  });
 });
