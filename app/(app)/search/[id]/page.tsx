@@ -34,7 +34,7 @@ export default function SearchResultsPage() {
     null,
   );
 
-  const { data, error, isLoading } = useSWR<{
+  const { data, error, isLoading, mutate } = useSWR<{
     success: boolean;
     data: PipelineResponse;
   }>(id ? `/api/search/${id}` : null, fetcher, {
@@ -79,9 +79,9 @@ export default function SearchResultsPage() {
   const results = data?.data;
   if (!results) return null;
 
-  const selectedContactData = results.contacts.find(
-    (c, idx) => (c.id || `c-${idx}`) === selectedContactId,
-  );
+  const selectedContactData =
+    results.contacts.find((c) => c.id === selectedContactId) ||
+    results.contacts.find((c, idx) => `c-${idx}` === selectedContactId);
   const selectedDraft = selectedContactData
     ? results.drafts.find((d) => d.contact_name === selectedContactData.name)
     : null;
@@ -95,9 +95,33 @@ export default function SearchResultsPage() {
       });
       if (!res.ok) throw new Error("Failed");
       toast.success("Marked as sent");
+      mutate();
     } catch {
       toast.error("Couldn't update status. Please try again.");
     }
+  };
+
+  const handleRegenerate = async (draftId: string) => {
+    try {
+      const res = await fetch(`/api/drafts/${draftId}/regenerate`, {
+        method: "POST",
+      });
+      if (!res.ok) throw new Error("Failed");
+      toast.success("Draft regenerated");
+      mutate();
+    } catch {
+      toast.error("Couldn't regenerate draft. Please try again.");
+    }
+  };
+
+  const handleUpdateDraft = (
+    _draftId: string,
+    _subject: string,
+    _body: string,
+  ) => {
+    // EmailDraft auto-save handles the PATCH call internally
+    // This callback refreshes the SWR cache after save
+    mutate();
   };
 
   return (
@@ -153,13 +177,15 @@ export default function SearchResultsPage() {
                 <div className="bg-surface border border-border-card rounded-2xl overflow-hidden shadow-sm">
                   <EmailDraft
                     draft={{
-                      id: `d-${selectedContactId}`,
+                      id: selectedDraft.id,
                       subject: selectedDraft.subject,
                       body: selectedDraft.body,
                       hook_used: selectedDraft.hook_used,
                     }}
                     email={selectedContactData.email}
                     onClose={() => setSelectedContactId(null)}
+                    onRegenerate={() => handleRegenerate(selectedDraft.id)}
+                    onSave={() => mutate()}
                   />
                 </div>
               </section>
@@ -261,8 +287,9 @@ export default function SearchResultsPage() {
             <ContactCard
               key={idx}
               contact={mappedContact}
-              onUpdateDraft={() => {}}
+              onUpdateDraft={handleUpdateDraft}
               onViewDetails={() => setSelectedContactId(contactId)}
+              onRegenerateDraft={(draftId) => handleRegenerate(draftId)}
               onMarkAsSent={handleMarkAsSent}
             />
           );
