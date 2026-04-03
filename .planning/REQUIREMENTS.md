@@ -39,10 +39,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [ ] **ORCH-01**: BullMQ v5.71+ with FlowProducer for agent DAG: Contact Finder (parent) → Email Guesser + Research Agent (parallel children) → Email Drafter (grandparent)
 - [ ] **ORCH-02**: BullMQ workers run as separate Railway service (NOT Vercel serverless — Vercel kills after request completion)
-- [ ] **ORCH-03**: Redis configured with `maxmemory-policy noeviction` and `maxRetriesPerRequest: null` on worker connections
+- [x] **ORCH-03**: Redis configured with `maxmemory-policy noeviction` and `maxRetriesPerRequest: null` on worker connections
 - [ ] **ORCH-04**: Per-user rate budgets enforced in Redis
-- [ ] **ORCH-05**: Two separate BullMQ queues: `pipeline-queue` (2-minute AI pipeline) and `gmail-send-queue` (time-sensitive sends)
-- [ ] **ORCH-06**: `removeOnComplete` configured to prevent Redis memory bloat
+- [x] **ORCH-05**: Two separate BullMQ queues: `pipeline-queue` (2-minute AI pipeline) and `gmail-send-queue` (time-sensitive sends)
+- [x] **ORCH-06**: `removeOnComplete` configured to prevent Redis memory bloat
 
 ### Scoring Engine
 
@@ -162,96 +162,98 @@ Deferred to after V2. Tracked for future planning.
 
 ## Out of Scope
 
-| Feature | Reason |
-|---------|--------|
-| Auto-sending emails | CAN-SPAM/Spam Act violations, Gmail deliverability damage, irreversible sender reputation harm |
-| Bulk campaign sequences (1,000+) | Wrong use case — students need depth not breadth, increases spam risk |
-| LinkedIn API / scraping | LinkedIn actively litigates (Proxycurl precedent), legal risk too high |
-| CRM integrations | Target user (uni grad) doesn't use Salesforce; dilutes product focus |
-| Multi-seat / team features | V4 territory — validate single-user product first |
-| Mobile native app | Web-first, mobile-responsive sufficient; native costs 3x |
-| Cover letter generator | Saturated market, dilutes positioning as outreach tool |
-| Open rate tracking pixels | Blocked by Apple MPP, increases spam filter scores, hurts deliverability |
-| Multi-channel outreach | Email is the correct channel for cold job outreach; LinkedIn/WhatsApp/phone fragments UX |
-| White-label / agency | V4 B2B territory, builds wrong mental model in codebase |
+| Feature                          | Reason                                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Auto-sending emails              | CAN-SPAM/Spam Act violations, Gmail deliverability damage, irreversible sender reputation harm |
+| Bulk campaign sequences (1,000+) | Wrong use case — students need depth not breadth, increases spam risk                          |
+| LinkedIn API / scraping          | LinkedIn actively litigates (Proxycurl precedent), legal risk too high                         |
+| CRM integrations                 | Target user (uni grad) doesn't use Salesforce; dilutes product focus                           |
+| Multi-seat / team features       | V4 territory — validate single-user product first                                              |
+| Mobile native app                | Web-first, mobile-responsive sufficient; native costs 3x                                       |
+| Cover letter generator           | Saturated market, dilutes positioning as outreach tool                                         |
+| Open rate tracking pixels        | Blocked by Apple MPP, increases spam filter scores, hurts deliverability                       |
+| Multi-channel outreach           | Email is the correct channel for cold job outreach; LinkedIn/WhatsApp/phone fragments UX       |
+| White-label / agency             | V4 B2B territory, builds wrong mental model in codebase                                        |
 
 ## Traceability
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| FOUND-01 | Phase 1 | Complete |
-| FOUND-02 | Phase 1 | Complete |
-| FOUND-03 | Phase 1 | Complete |
-| FOUND-04 | Phase 1 | Complete |
-| FOUND-05 | Phase 1 | Complete |
-| AUTH-01 | Phase 1 | Complete |
-| AUTH-02 | Phase 1 | Complete |
-| AUTH-03 | Phase 1 | Complete |
-| AUTH-04 | Phase 1 | Complete |
-| AUTH-05 | Phase 1 | Complete |
-| PAY-01 | Phase 1 | Complete |
-| PAY-02 | Phase 1 | Complete |
-| PAY-03 | Phase 1 | Complete |
-| PAY-04 | Phase 1 | Complete |
-| PAY-05 | Phase 1 | Complete |
-| ORCH-01 | Phase 2 | Pending |
-| ORCH-02 | Phase 2 | Pending |
-| ORCH-03 | Phase 2 | Pending |
-| ORCH-04 | Phase 2 | Pending |
-| ORCH-05 | Phase 2 | Pending |
-| ORCH-06 | Phase 2 | Pending |
-| AGENT-01 | Phase 3 | Pending |
-| AGENT-02 | Phase 3 | Pending |
-| AGENT-03 | Phase 3 | Pending |
-| AGENT-04 | Phase 3 | Pending |
-| AGENT-05 | Phase 3 | Pending |
-| AGENT-06 | Phase 3 | Pending |
-| AGENT-07 | Phase 3 | Pending |
-| AGENT-08 | Phase 3 | Pending |
-| AGENT-09 | Phase 3 | Pending |
-| SCORE-01 | Phase 3 | Pending |
-| SCORE-02 | Phase 3 | Pending |
-| SCORE-03 | Phase 3 | Pending |
-| SCORE-04 | Phase 3 | Pending |
-| EMAIL-01 | Phase 3 | Pending |
-| EMAIL-02 | Phase 3 | Pending |
-| EMAIL-03 | Phase 3 | Pending |
-| EMAIL-04 | Phase 3 | Pending |
-| EMAIL-05 | Phase 3 | Pending |
-| UI-01 | Phase 4 | Pending |
-| UI-02 | Phase 4 | Pending |
-| UI-03 | Phase 4 | Pending |
-| UI-04 | Phase 4 | Pending |
-| UI-05 | Phase 4 | Pending |
-| UI-06 | Phase 4 | Pending |
-| UI-07 | Phase 4 | Pending |
-| UI-08 | Phase 4 | Pending |
-| UI-09 | Phase 4 | Pending |
-| DASH-01 | Phase 4 | Pending |
-| DASH-02 | Phase 4 | Pending |
-| DASH-03 | Phase 4 | Pending |
-| DASH-04 | Phase 4 | Pending |
-| DASH-05 | Phase 4 | Pending |
-| SEND-01 | Phase 5 | Pending |
-| SEND-02 | Phase 5 | Pending |
-| SEND-03 | Phase 5 | Pending |
-| SEND-04 | Phase 5 | Pending |
-| SEND-05 | Phase 5 | Pending |
-| SEND-06 | Phase 5 | Pending |
-| SEND-07 | Phase 5 | Pending |
-| MON-01 | Phase 6 | Pending |
-| MON-02 | Phase 6 | Pending |
-| MON-03 | Phase 6 | Pending |
-| LEGAL-01 | Phase 6 | Pending |
-| LEGAL-02 | Phase 6 | Pending |
-| LEGAL-03 | Phase 6 | Pending |
-| LEGAL-04 | Phase 6 | Pending |
+| Requirement | Phase   | Status   |
+| ----------- | ------- | -------- |
+| FOUND-01    | Phase 1 | Complete |
+| FOUND-02    | Phase 1 | Complete |
+| FOUND-03    | Phase 1 | Complete |
+| FOUND-04    | Phase 1 | Complete |
+| FOUND-05    | Phase 1 | Complete |
+| AUTH-01     | Phase 1 | Complete |
+| AUTH-02     | Phase 1 | Complete |
+| AUTH-03     | Phase 1 | Complete |
+| AUTH-04     | Phase 1 | Complete |
+| AUTH-05     | Phase 1 | Complete |
+| PAY-01      | Phase 1 | Complete |
+| PAY-02      | Phase 1 | Complete |
+| PAY-03      | Phase 1 | Complete |
+| PAY-04      | Phase 1 | Complete |
+| PAY-05      | Phase 1 | Complete |
+| ORCH-01     | Phase 2 | Pending  |
+| ORCH-02     | Phase 2 | Pending  |
+| ORCH-03     | Phase 2 | Complete |
+| ORCH-04     | Phase 2 | Pending  |
+| ORCH-05     | Phase 2 | Complete |
+| ORCH-06     | Phase 2 | Complete |
+| AGENT-01    | Phase 3 | Pending  |
+| AGENT-02    | Phase 3 | Pending  |
+| AGENT-03    | Phase 3 | Pending  |
+| AGENT-04    | Phase 3 | Pending  |
+| AGENT-05    | Phase 3 | Pending  |
+| AGENT-06    | Phase 3 | Pending  |
+| AGENT-07    | Phase 3 | Pending  |
+| AGENT-08    | Phase 3 | Pending  |
+| AGENT-09    | Phase 3 | Pending  |
+| SCORE-01    | Phase 3 | Pending  |
+| SCORE-02    | Phase 3 | Pending  |
+| SCORE-03    | Phase 3 | Pending  |
+| SCORE-04    | Phase 3 | Pending  |
+| EMAIL-01    | Phase 3 | Pending  |
+| EMAIL-02    | Phase 3 | Pending  |
+| EMAIL-03    | Phase 3 | Pending  |
+| EMAIL-04    | Phase 3 | Pending  |
+| EMAIL-05    | Phase 3 | Pending  |
+| UI-01       | Phase 4 | Pending  |
+| UI-02       | Phase 4 | Pending  |
+| UI-03       | Phase 4 | Pending  |
+| UI-04       | Phase 4 | Pending  |
+| UI-05       | Phase 4 | Pending  |
+| UI-06       | Phase 4 | Pending  |
+| UI-07       | Phase 4 | Pending  |
+| UI-08       | Phase 4 | Pending  |
+| UI-09       | Phase 4 | Pending  |
+| DASH-01     | Phase 4 | Pending  |
+| DASH-02     | Phase 4 | Pending  |
+| DASH-03     | Phase 4 | Pending  |
+| DASH-04     | Phase 4 | Pending  |
+| DASH-05     | Phase 4 | Pending  |
+| SEND-01     | Phase 5 | Pending  |
+| SEND-02     | Phase 5 | Pending  |
+| SEND-03     | Phase 5 | Pending  |
+| SEND-04     | Phase 5 | Pending  |
+| SEND-05     | Phase 5 | Pending  |
+| SEND-06     | Phase 5 | Pending  |
+| SEND-07     | Phase 5 | Pending  |
+| MON-01      | Phase 6 | Pending  |
+| MON-02      | Phase 6 | Pending  |
+| MON-03      | Phase 6 | Pending  |
+| LEGAL-01    | Phase 6 | Pending  |
+| LEGAL-02    | Phase 6 | Pending  |
+| LEGAL-03    | Phase 6 | Pending  |
+| LEGAL-04    | Phase 6 | Pending  |
 
 **Coverage:**
+
 - v1 requirements: 67 total
 - Mapped to phases: 67
 - Unmapped: 0
 
 ---
-*Requirements defined: 2026-04-01*
-*Last updated: 2026-04-01 after 01-05-PLAN execution (PAY-01 through PAY-04 complete)*
+
+_Requirements defined: 2026-04-01_
+_Last updated: 2026-04-01 after 01-05-PLAN execution (PAY-01 through PAY-04 complete)_
