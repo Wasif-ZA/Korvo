@@ -76,6 +76,8 @@ export interface PipelineResponse {
     title: string;
     email: string;
     confidence: number; // 0-1
+    score: number; // 0-100 response probability
+    scoreBreakdown: ScoringSignals | null;
     hooks: string[];
   }[];
   steps: {

@@ -31,6 +31,10 @@ export async function assemblePipelineResponse(
       title: c.title,
       email: c.email ?? "",
       confidence: mapConfidence(c.emailConfidence),
+      score: c.score ?? 0,
+      scoreBreakdown:
+        (c.scoreBreakdown as PipelineResponse["contacts"][0]["scoreBreakdown"]) ??
+        null,
       hooks: [c.researchMentionThis, c.researchAskThis].filter(
         Boolean,
       ) as string[],
