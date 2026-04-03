@@ -29,10 +29,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **AGENT-02**: Email Guesser agent — detects company email pattern (Hunter.io public, job listings, blog bios), guesses addresses with confidence level (high/medium/low)
 - [ ] **AGENT-03**: Research Agent — finds personalization hooks per contact, outputs structured research card: Background, Ask This, Mention This
 - [ ] **AGENT-04**: Email Drafter agent — drafts 4-sentence cold email using tone mapping from scoring engine, uses correct template type
-- [ ] **AGENT-05**: All agents use `@anthropic-ai/sdk` v0.81.0 directly with manual tool-use loops (NOT Agent SDK)
+- [x] **AGENT-05**: All agents use `@anthropic-ai/sdk` v0.81.0 directly with manual tool-use loops (NOT Agent SDK)
 - [ ] **AGENT-06**: Prompt caching enabled on all agent system prompts (dynamic content in user message turn only, never in system prompt after cache_control breakpoint)
 - [ ] **AGENT-07**: 4-layer data access waterfall: L1 (Claude web search) → L2 (email pattern detection) → L3 (ATS APIs: Greenhouse, Lever, Workable) → L4 (third-party enrichment, V2)
-- [ ] **AGENT-08**: Circuit breakers per data source (opossum library) with fallback to next layer
+- [x] **AGENT-08**: Circuit breakers per data source (opossum library) with fallback to next layer
 - [ ] **AGENT-09**: LinkedIn domain blocklist — agents must never access LinkedIn directly, only Google-indexed public profile data
 
 ### Orchestration
@@ -40,21 +40,21 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **ORCH-01**: BullMQ v5.71+ with FlowProducer for agent DAG: Contact Finder (parent) → Email Guesser + Research Agent (parallel children) → Email Drafter (grandparent)
 - [x] **ORCH-02**: BullMQ workers run as separate Railway service (NOT Vercel serverless — Vercel kills after request completion)
 - [x] **ORCH-03**: Redis configured with `maxmemory-policy noeviction` and `maxRetriesPerRequest: null` on worker connections
-- [ ] **ORCH-04**: Per-user rate budgets enforced in Redis
+- [x] **ORCH-04**: Per-user rate budgets enforced in Redis
 - [x] **ORCH-05**: Two separate BullMQ queues: `pipeline-queue` (2-minute AI pipeline) and `gmail-send-queue` (time-sensitive sends)
 - [x] **ORCH-06**: `removeOnComplete` configured to prevent Redis memory bloat
 
 ### Scoring Engine
 
 - [ ] **SCORE-01**: Response probability scoring (0-100) per contact with weighted signals (title match, seniority, recency, public activity, email confidence)
-- [ ] **SCORE-02**: Explainable score breakdown panel showing each signal's contribution
+- [x] **SCORE-02**: Explainable score breakdown panel showing each signal's contribution
 - [ ] **SCORE-03**: Tone mapping from score: 75-100 = direct, 45-74 = curious, 0-44 = value-driven
 - [ ] **SCORE-04**: Tone drives email template selection and drafter prompt variation
 
 ### Email Templates
 
-- [ ] **EMAIL-01**: Template types: referral_ask, hiring_inquiry, value_offer
-- [ ] **EMAIL-02**: Follow-up templates: followup_1 (3 days), followup_2 (7 days)
+- [x] **EMAIL-01**: Template types: referral_ask, hiring_inquiry, value_offer
+- [x] **EMAIL-02**: Follow-up templates: followup_1 (3 days), followup_2 (7 days)
 - [ ] **EMAIL-03**: All emails max 4 sentences, casual/direct tone, no em dashes, no corporate speak
 - [ ] **EMAIL-04**: Editable subject line + body before send
 - [ ] **EMAIL-05**: Regenerate button with different tone/template option
@@ -197,24 +197,24 @@ Deferred to after V2. Tracked for future planning.
 | ORCH-01     | Phase 2 | Complete |
 | ORCH-02     | Phase 2 | Complete |
 | ORCH-03     | Phase 2 | Complete |
-| ORCH-04     | Phase 2 | Pending  |
+| ORCH-04     | Phase 2 | Complete |
 | ORCH-05     | Phase 2 | Complete |
 | ORCH-06     | Phase 2 | Complete |
 | AGENT-01    | Phase 3 | Pending  |
 | AGENT-02    | Phase 3 | Pending  |
 | AGENT-03    | Phase 3 | Pending  |
 | AGENT-04    | Phase 3 | Pending  |
-| AGENT-05    | Phase 3 | Pending  |
+| AGENT-05    | Phase 3 | Complete |
 | AGENT-06    | Phase 3 | Pending  |
 | AGENT-07    | Phase 3 | Pending  |
-| AGENT-08    | Phase 3 | Pending  |
+| AGENT-08    | Phase 3 | Complete |
 | AGENT-09    | Phase 3 | Pending  |
 | SCORE-01    | Phase 3 | Pending  |
-| SCORE-02    | Phase 3 | Pending  |
+| SCORE-02    | Phase 3 | Complete |
 | SCORE-03    | Phase 3 | Pending  |
 | SCORE-04    | Phase 3 | Pending  |
-| EMAIL-01    | Phase 3 | Pending  |
-| EMAIL-02    | Phase 3 | Pending  |
+| EMAIL-01    | Phase 3 | Complete |
+| EMAIL-02    | Phase 3 | Complete |
 | EMAIL-03    | Phase 3 | Pending  |
 | EMAIL-04    | Phase 3 | Pending  |
 | EMAIL-05    | Phase 3 | Pending  |

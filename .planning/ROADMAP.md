@@ -82,7 +82,7 @@ Plans:
 
 Plans:
 
-- [ ] 03-01-PLAN.md — Install packages, Prisma schema updates, shared agent type contracts
+- [x] 03-01-PLAN.md — Install packages, Prisma schema updates, shared agent type contracts
 - [ ] 03-02-PLAN.md — LinkedIn blocklist, circuit breaker, Claude client, agent tool-use loop
 - [ ] 03-03-PLAN.md — Scoring engine (TDD): weighted signals, tone mapping, score breakdown
 - [ ] 03-04-PLAN.md — Contact Finder agent: Claude Haiku 4.5 web search, 3 contacts
@@ -142,7 +142,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | -------------------------------- | -------------- | ----------- | ---------- |
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
-| 3. Agent Pipeline                | 0/8            | Not started | -          |
+| 3. Agent Pipeline                | 1/8            | In Progress |            |
 | 4. UI & Dashboard                | 0/TBD          | Not started | -          |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
