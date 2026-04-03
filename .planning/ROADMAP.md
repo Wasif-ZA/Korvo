@@ -52,7 +52,12 @@ Plans:
   2. Redis memory does not grow unboundedly after job completion (removeOnComplete configured, noeviction policy set)
   3. Per-user rate budgets are enforced — a user cannot exceed their tier's search limit by submitting concurrent jobs
   4. The gmail-send-queue is separate from the pipeline-queue and processes independently
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Install BullMQ/ioredis, shared types, queue definitions, Redis connections, docker-compose
+- [ ] 02-02-PLAN.md — Worker entry point, pipeline orchestrator skeleton, gmail-send stub, worker tests
+- [ ] 02-03-PLAN.md — API route integration (concurrent check + enqueue), queue config tests
 
 ### Phase 3: Agent Pipeline
 **Goal**: Given a company + role + location, the system returns 3 contacts with guessed emails, research cards, response probability scores, and ready-to-send cold email drafts
@@ -110,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 8/8 | Complete   | 2026-04-01 |
-| 2. Queue Infrastructure | 0/TBD | Not started | - |
+| 2. Queue Infrastructure | 0/3 | Planning complete | - |
 | 3. Agent Pipeline | 0/TBD | Not started | - |
 | 4. UI & Dashboard | 0/TBD | Not started | - |
 | 5. Gmail Send & Deliverability | 0/TBD | Not started | - |
