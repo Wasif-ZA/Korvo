@@ -27,6 +27,7 @@ export async function assemblePipelineResponse(
     role: search.role,
     pipeline_status: mapStatus(search.status),
     contacts: search.contacts.map((c) => ({
+      id: c.id,
       name: c.name,
       title: c.title,
       email: c.email ?? "",
@@ -38,10 +39,14 @@ export async function assemblePipelineResponse(
       hooks: [c.researchMentionThis, c.researchAskThis].filter(
         Boolean,
       ) as string[],
+      researchBackground: c.researchBackground ?? null,
+      researchAskThis: c.researchAskThis ?? null,
+      researchMentionThis: c.researchMentionThis ?? null,
     })),
     steps: buildSteps(search.status),
     drafts: search.contacts.flatMap((c) =>
       c.outreach.map((o) => ({
+        id: o.id,
         contact_name: c.name,
         subject: o.subject,
         body: o.body,

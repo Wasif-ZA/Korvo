@@ -72,6 +72,7 @@ export interface PipelineResponse {
   role: string;
   pipeline_status: "running" | "complete" | "failed";
   contacts: {
+    id: string;
     name: string;
     title: string;
     email: string;
@@ -79,6 +80,9 @@ export interface PipelineResponse {
     score: number; // 0-100 response probability
     scoreBreakdown: ScoringSignals | null;
     hooks: string[];
+    researchBackground: string | null;
+    researchAskThis: string | null;
+    researchMentionThis: string | null;
   }[];
   steps: {
     id: "contacts" | "emails" | "hooks" | "drafts";
@@ -87,6 +91,7 @@ export interface PipelineResponse {
     detail: string;
   }[];
   drafts: {
+    id: string;
     contact_name: string;
     subject: string;
     body: string;
