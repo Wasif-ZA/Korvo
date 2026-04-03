@@ -25,3 +25,5 @@ export interface ProgressEvent {
   stage: ProgressStage;
   timestamp: string;
 }
+
+export type { PipelineResponse } from "./agents";
