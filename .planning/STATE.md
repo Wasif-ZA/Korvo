@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Search & Results pages wired to real backend APIs. Supabase Realtime progress tracking implemented.
-stopped_at: Phase 4 context gathered
-last_updated: "2026-04-03T15:43:03.561Z"
-last_activity: 2026-04-04
+status: executing
+stopped_at: Completed 04-01-PLAN.md - regenerate and reminder endpoints
+last_updated: "2026-04-03T16:44:19.461Z"
+last_activity: 2026-04-03
 progress:
   total_phases: 6
   completed_phases: 3
-  total_plans: 19
-  completed_plans: 19
-  percent: 50
+  total_plans: 23
+  completed_plans: 20
+  percent: 90
 ---
 
 # Project State
@@ -21,42 +21,42 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-01)
 
 **Core value:** Enter a company name. Get 3 contacts with personalized cold emails ready to send. Land interviews.
-**Current focus:** Phase 04 — UI & Dashboard
+**Current focus:** Phase 04 — ui-dashboard
 
 ## Current Position
 
-Phase: 4
-Plan: 04-01 (In Progress)
-Status: Search & Results pages wired to real backend APIs. Supabase Realtime progress tracking implemented.
-Last activity: 2026-04-04
+Phase: 04 (ui-dashboard) — EXECUTING
+Plan: 2 of 4
+Status: Ready to execute
+Last activity: 2026-04-03
 
-Progress: [█████░░░░░] 50% (Phase 3 of 6 complete, Phase 4 in progress)
+Progress: [█████████░] 90% (Phase 3 of 6 complete, Phase 4 nearly complete)
 
 ## Performance Metrics
 
 **Phase 4 (UI & Dashboard) Velocity:**
 
 - Wiring (Search + Results): Complete
-- Wiring (Dashboard + Kanban): Pending
-- Interactivity (SlideOver + DND): Pending
+- Wiring (Dashboard + Kanban): Complete
+- Interactivity (SlideOver + DND): Complete
+- Backend Integration (Missing Endpoints): Complete
+- Polish & Final Verification: In Progress
 
 ## Accumulated Context
 
 ### Decisions (Phase 4)
 
-- **Realtime for stages**: Used Supabase Realtime Broadcast for "stage" updates to minimize latency during pipeline execution.
-- **SWR for results**: Used SWR for fetching final results to handle caching and revalidation.
-- **Debounced Draft Auto-save**: Implemented 800ms debounce for draft edits to optimize API calls.
+- **Root Dashboard**: Moved the dashboard from `/dashboard` to `/` to prioritize authenticated user value.
+- **Marketing at /welcome**: Reorganized the landing page to `/welcome` for unauthenticated traffic.
+- **Full Backend Linkage**: Implemented `GET /api/contacts`, `GET /api/dashboard/stats`, `GET /api/search` (history), `PATCH /api/contacts/[id]`, and `PATCH /api/drafts/[id]`.
 
 ### Pending Todos
 
-- [ ] Implement Dashboard wiring (`/api/contacts` and `/api/dashboard/stats`).
-- [ ] Implement Kanban board drag-and-drop using `@dnd-kit`.
-- [ ] Implement SlideOver for contact details.
-- [ ] Claude Code: Implement missing endpoints requested in `.planning/frontend-requests.md`.
+- [ ] Final visual polish pass across all authenticated pages.
+- [ ] Complete E2E verification of the full search-to-outreach flow.
 
 ## Session Continuity
 
-Last session: 2026-04-03T15:43:03.555Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-ui-dashboard/04-CONTEXT.md
+Last session: 2026-04-03T16:44:19.454Z
+Stopped at: Completed 04-01-PLAN.md - regenerate and reminder endpoints
+Resume file: None

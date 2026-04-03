@@ -57,12 +57,12 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **EMAIL-02**: Follow-up templates: followup_1 (3 days), followup_2 (7 days)
 - [x] **EMAIL-03**: All emails max 4 sentences, casual/direct tone, no em dashes, no corporate speak
 - [ ] **EMAIL-04**: Editable subject line + body before send
-- [ ] **EMAIL-05**: Regenerate button with different tone/template option
+- [x] **EMAIL-05**: Regenerate button with different tone/template option
 
 ### UI — Search & Results
 
 - [ ] **UI-01**: Landing page with search bar (company + role + location), hero section, how-it-works, pricing
-- [ ] **UI-02**: One-click seamless flow: search → all results (contacts + research cards + email drafts) load together, no extra clicks
+- [x] **UI-02**: One-click seamless flow: search → all results (contacts + research cards + email drafts) load together, no extra clicks
 - [ ] **UI-03**: Contact cards: name, title, email + ConfidenceBadge (green/yellow/red), score (0-100), personalization hook, source URL
 - [ ] **UI-04**: Research card per contact: Background | Ask This | Mention This (structured, not paragraph)
 - [ ] **UI-05**: Email draft inline/modal: editable subject + body, copy button with animation, mailto link, regenerate, "Mark as Sent"
@@ -77,7 +77,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **DASH-02**: Drag or click to move contacts between stages
 - [ ] **DASH-03**: Expand contact to see email draft, research card, score breakdown, notes
 - [ ] **DASH-04**: Search history sidebar with timestamps and company names
-- [ ] **DASH-05**: Basic follow-up reminder ("remind me in 7 days" per contact)
+- [x] **DASH-05**: Basic follow-up reminder ("remind me in 7 days" per contact)
 
 ### Payments
 
@@ -217,9 +217,9 @@ Deferred to after V2. Tracked for future planning.
 | EMAIL-02    | Phase 3 | Complete |
 | EMAIL-03    | Phase 3 | Complete |
 | EMAIL-04    | Phase 3 | Pending  |
-| EMAIL-05    | Phase 3 | Pending  |
+| EMAIL-05    | Phase 3 | Complete |
 | UI-01       | Phase 4 | Pending  |
-| UI-02       | Phase 4 | Pending  |
+| UI-02       | Phase 4 | Complete |
 | UI-03       | Phase 4 | Pending  |
 | UI-04       | Phase 4 | Pending  |
 | UI-05       | Phase 4 | Pending  |
@@ -231,7 +231,7 @@ Deferred to after V2. Tracked for future planning.
 | DASH-02     | Phase 4 | Pending  |
 | DASH-03     | Phase 4 | Pending  |
 | DASH-04     | Phase 4 | Pending  |
-| DASH-05     | Phase 4 | Pending  |
+| DASH-05     | Phase 4 | Complete |
 | SEND-01     | Phase 5 | Pending  |
 | SEND-02     | Phase 5 | Pending  |
 | SEND-03     | Phase 5 | Pending  |
