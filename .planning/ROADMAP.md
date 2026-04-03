@@ -103,8 +103,16 @@ Plans:
 3. A user can edit the subject and body of a draft email inline, copy it to clipboard, or click a mailto link — all without leaving the results view
 4. A user can view their full outreach history in a Kanban board and drag or click to move contacts between pipeline stages (Identified → Contacted → Responded → Chatted → Applied → Interviewing)
 5. The UI is warm and approachable (not dev-tool aesthetic), renders correctly on iPhone SE through desktop
-   **Plans**: TBD
-   **UI hint**: yes
+   **Plans**: 4 plans
+
+Plans:
+
+- [ ] 04-01-PLAN.md — Backend contracts: real IDs in PipelineResponse, regenerate endpoint, reminder endpoint
+- [ ] 04-02-PLAN.md — ContactCard score badge, research toggle, ScoreBreakdown field fix
+- [ ] 04-03-PLAN.md — Dashboard optimistic updates, FollowUpReminder wiring, regenerate in SlideOver
+- [ ] 04-04-PLAN.md — Results page real IDs, empty state copywriting, full visual verification
+
+**UI hint**: yes
 
 ### Phase 5: Gmail Send & Deliverability
 
@@ -143,6 +151,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
-| 4. UI & Dashboard                | 0/TBD          | Not started | -          |
+| 4. UI & Dashboard                | 0/4            | In progress | -          |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
