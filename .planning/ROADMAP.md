@@ -70,7 +70,7 @@ Plans:
 
 **Goal**: Given a company + role + location, the system returns 3 contacts with guessed emails, research cards, response probability scores, and ready-to-send cold email drafts
 **Depends on**: Phase 2
-**Requirements**: AGENT-01, AGENT-02, AGENT-03, AGENT-04, AGENT-05, AGENT-06, AGENT-07, AGENT-08, AGENT-09, SCORE-01, SCORE-02, SCORE-03, SCORE-04, EMAIL-01, EMAIL-02, EMAIL-03, EMAIL-04, EMAIL-05
+**Requirements**: AGENT-01, AGENT-02, AGENT-03, AGENT-04, AGENT-05, AGENT-06, AGENT-07, AGENT-08, AGENT-09, SCORE-01, SCORE-02, SCORE-03, SCORE-04, EMAIL-01, EMAIL-02, EMAIL-03
 **Success Criteria** (what must be TRUE):
 
 1. Searching "Atlassian, Software Engineer, Sydney" returns 3 contacts with names, titles, guessed emails with confidence level (high/medium/low), and a 0-100 response probability score
@@ -95,7 +95,7 @@ Plans:
 
 **Goal**: Users can search for contacts, see all results in one seamless load, edit and copy draft emails, and manage their outreach pipeline via a Kanban board
 **Depends on**: Phase 3
-**Requirements**: UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UI-07, UI-08, UI-09, DASH-01, DASH-02, DASH-03, DASH-04, DASH-05
+**Requirements**: UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UI-07, UI-08, UI-09, DASH-01, DASH-02, DASH-03, DASH-04, DASH-05, EMAIL-04, EMAIL-05
 **Success Criteria** (what must be TRUE):
 
 1. A user fills in the search form and sees a loading skeleton while the pipeline runs (60-120 seconds), with real-time stage updates (contacts_found → emails_guessed → research_done → drafts_ready)
