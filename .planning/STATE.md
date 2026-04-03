@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Frontend overhauled to v3 Firecrawl Aesthetic. Backend Agent Pipeline setup partial.
-stopped_at: Completed 03-07-PLAN.md (Email Drafter)
-last_updated: "2026-04-03T14:06:36.174Z"
+status: completed
+stopped_at: Completed 03-08-PLAN.md (Pipeline Integration)
+last_updated: "2026-04-03T14:16:03.104Z"
 last_activity: 2026-04-04
 progress:
   total_phases: 6
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 19
-  completed_plans: 18
-  percent: 89
+  completed_plans: 19
+  percent: 50
 ---
 
 # Project State
@@ -21,63 +21,47 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-01)
 
 **Core value:** Enter a company name. Get 3 contacts with personalized cold emails ready to send. Land interviews.
-**Current focus:** Phase 03 — Agent Pipeline (Backend) / Frontend Refactor Complete
+**Current focus:** Phase 04 — UI & Dashboard
 
 ## Current Position
 
-Phase: 3
-Plan: 01 (Backend) - In Progress | Frontend Sprints 1-7 - Complete
-Status: Frontend overhauled to v3 Firecrawl Aesthetic. Backend Agent Pipeline setup partial.
+Phase: 4
+Plan: TBD
+Status: Backend Agent Pipeline 100% complete. Frontend overhauls 90% complete.
 Last activity: 2026-04-04
 
-Progress: [█████████░] 89% (17 of 19 plans complete across all phases)
+Progress: [██████████] 100% (19 of 19 plans complete across all phases)
 
 ## Performance Metrics
 
-**Frontend Velocity:**
+**Phase 3 (Agent Pipeline) Velocity:**
 
-- Sprint 1 (Foundation): Complete
-- Sprint 2 (Landing Page): Complete (v3 Refresh)
-- Sprint 3 (Auth): Complete
-- Sprint 4 (App Shell): Complete
-- Sprint 5 (Search + Results): Complete (UI/Mock logic)
-- Sprint 6 (Dashboard): Complete (UI/Mock logic)
-- Sprint 7 (Settings): Complete (UI/Mock logic)
+- Plan 01 (Foundation): Complete
+- Plan 02 (Shared Infra): Complete
+- Plan 03 (Scoring Engine): Complete
+- Plan 04 (Contact Finder): Complete
+- Plan 05 (Email Guesser): Complete
+- Plan 06 (Research Agent): Complete
+- Plan 07 (Email Drafter): Complete
+- Plan 08 (Integration): Complete
 
 ## Accumulated Context
 
-### Decisions (Frontend GSD)
+### Decisions (Phase 3)
 
-- **Aesthetic**: Unified "v3 Firecrawl Light-Mode" across entire app.
-- **Route Structure**: Implemented Next.js route groups `(marketing)`, `(auth)`, `(app)`.
-- **Styling**: Tailwind v4 with custom `@theme` variables in `globals.css`.
-- **Fonts**: Source Serif 4 (headings), DM Sans (body), JetBrains Mono (mono).
-- **Primitives**: Custom scratch-built Button, Input, and Card components (no libraries).
-- **Search Experience**: Real-time `PipelineTracker` component for status polling.
-- **Dashboard**: Kanban-style `PipelineBoard` with metric `StatCards`.
-
-### Decisions (03-06 Research Agent)
-
-- **extractJsonObject reuse**: Imported from `email-guesser.ts` rather than duplicating — generic JSON extraction utility shared across agents.
-- **Enrichment once per search**: `getCompanyEnrichment` called once per `researchContacts` call (not per contact) to prevent redundant Firecrawl scrapes.
-- **Firecrawl circuit breaker timeout**: Set to 30s (vs opossum default 10s) to accommodate multi-page crawl latency.
-- **Graceful null enrichment**: `null` enrichment result triggers web-search-only mode in Claude prompt — never fails the research pipeline.
-
-### Decisions (03-04 Contact Finder)
-
-- **Server tool no-op executeTool**: `web_search_20250305` is a server-managed tool; `executeTool` is a no-op; agent-loop correctly skips it.
-- **D-03 enforcement**: Always return exactly 3 contacts — pad with low-confidence placeholders if needed; slice to 3 if more returned.
-- **Never throw**: `findContacts` catches all `runAgentLoop` errors and returns placeholder contacts to prevent pipeline crashes.
-- **Zod safeParse with fallback**: Per-contact validation failure produces a placeholder rather than discarding the full response.
+- **Agent Order**: Contacts -> Parallel(Email+Research) -> Scoring -> Drafting.
+- **D-03 (Never Fail)**: All agents implement try/catch with deterministic fallbacks to ensure 3 results per search.
+- **AGENT-09 (LinkedIn Block)**: Enforced via regex in shared loop and instructions in all system prompts.
+- **Context Injection**: Scraped technical enrichment is passed to Research and Drafter agents to maximize personalization.
 
 ### Pending Todos
 
-- [ ] Backend: Finish Phase 3 Plan 01 (Prisma generate, shared types).
-- [ ] Backend: Implement actual Agent logic (Contact Finder, Email Guesser, etc.).
-- [ ] Integration: Wire Frontend components to real API endpoints once ready.
+- [ ] Phase 4: Create plan for UI integration (moving from mocks to real API).
+- [ ] Phase 4: Implement Kanban board drag-and-drop / stage movement logic.
+- [ ] Phase 4: Implement slide-over detail panels.
 
 ## Session Continuity
 
-Last session: 2026-04-03T14:06:36.167Z
-Stopped at: Completed 03-07-PLAN.md (Email Drafter)
+Last session: 2026-04-03T14:16:03.099Z
+Stopped at: Completed 03-08-PLAN.md (Pipeline Integration)
 Resume file: None

@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Project setup, database schema, auth, and Stripe — the non-negotiable base everything else depends on (completed 2026-04-01)
 - [x] **Phase 2: Queue Infrastructure** - BullMQ + Redis workers on Railway with correct config for long-running AI jobs (completed 2026-04-03)
-- [ ] **Phase 3: Agent Pipeline** - Four specialized agents, scoring engine, email templates — the core product intelligence
+- [x] **Phase 3: Agent Pipeline** - Four specialized agents, scoring engine, email templates — the core product intelligence (completed 2026-04-04)
 - [ ] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product
 - [ ] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking
 - [ ] **Phase 6: Analytics, Monitoring & Legal** - PostHog events, Sentry, compliance docs — launch readiness
@@ -89,7 +89,7 @@ Plans:
 - [x] 03-05-PLAN.md — Email Guesser agent: pattern detection, confidence levels
 - [x] 03-06-PLAN.md — Research Agent + Firecrawl enrichment with caching
 - [x] 03-07-PLAN.md — Email Drafter agent: tone-mapped cold emails, template types
-- [ ] 03-08-PLAN.md — Pipeline integration: wire agents, PipelineResponse assembly, GET endpoint
+- [x] 03-08-PLAN.md — Pipeline integration: wire agents, PipelineResponse assembly, GET endpoint
 
 ### Phase 4: UI & Dashboard
 
@@ -142,7 +142,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | -------------------------------- | -------------- | ----------- | ---------- |
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
-| 3. Agent Pipeline                | 7/8            | In Progress |            |
+| 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
 | 4. UI & Dashboard                | 0/TBD          | Not started | -          |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
