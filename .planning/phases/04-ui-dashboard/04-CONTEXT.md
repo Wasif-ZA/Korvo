@@ -35,14 +35,14 @@ Wire the existing frontend components (search form, pipeline tracker, contact ca
 
 ### Data Fetching Strategy
 
-- **D-12:** TanStack Query v5 (@tanstack/react-query) for all API calls. Cache invalidation, optimistic updates for Kanban moves. Already in CLAUDE.md stack.
-- **D-13:** Supabase Realtime Broadcast for pipeline progress (4 coarse stages). When "drafts_ready" arrives, TanStack Query fetches full PipelineResponse via GET /api/search/[id]. No polling.
-- **D-14:** Search page already has Supabase Realtime subscription wired (app/(app)/search/page.tsx). Phase 4 enhances it with TanStack Query integration for the final fetch.
+- **D-12:** SWR for all API calls (already installed and wired throughout the codebase). Use `useSWR`, `mutate()` for cache invalidation, optimistic updates for Kanban moves. Original decision was TanStack Query but SWR is already in use — user confirmed keep SWR on 2026-04-03.
+- **D-13:** Supabase Realtime Broadcast for pipeline progress (4 coarse stages). When "drafts_ready" arrives, SWR fetches full PipelineResponse via GET /api/search/[id]. No polling.
+- **D-14:** Search page already has Supabase Realtime subscription wired (app/(app)/search/page.tsx). Phase 4 enhances it with SWR integration for the final fetch.
 
 ### Existing Frontend State
 
 - **D-15:** Route groups already exist: (app) for authenticated pages, (auth) for login/signup, (marketing) for landing page.
-- **D-16:** Dashboard page has mock data (MOCK_STATS, MOCK_CONTACTS, MOCK_HISTORY) — replace with TanStack Query calls to real endpoints.
+- **D-16:** Dashboard page has mock data (MOCK_STATS, MOCK_CONTACTS, MOCK_HISTORY) — replace with SWR calls to real endpoints.
 - **D-17:** Components already built: SearchForm, PipelineTracker, PipelineBoard, StatCard, EmptyState. Phase 4 wires them to real data and adds missing interactivity.
 
 ### Carried Forward
