@@ -13,7 +13,96 @@ vi.mock("@/worker/lib/prisma", () => ({
     search: {
       update: vi.fn().mockResolvedValue({}),
     },
+    contact: {
+      create: vi.fn().mockResolvedValue({ id: "contact-1" }),
+      update: vi.fn().mockResolvedValue({}),
+    },
+    outreach: {
+      create: vi.fn().mockResolvedValue({ id: "outreach-1" }),
+    },
   },
+}));
+
+// Mock all agent modules (Phase 3 imports)
+vi.mock("@/worker/agents/contact-finder", () => ({
+  findContacts: vi
+    .fn()
+    .mockResolvedValue([
+      {
+        name: "Test Person",
+        title: "Engineer",
+        confidence: "medium",
+        sourceUrl: "https://example.com",
+        linkedinUrl: null,
+      },
+    ]),
+}));
+vi.mock("@/worker/agents/email-guesser", () => ({
+  guessEmails: vi
+    .fn()
+    .mockResolvedValue([
+      {
+        email: "test@example.com",
+        confidence: "medium",
+        pattern: "first.last",
+      },
+    ]),
+}));
+vi.mock("@/worker/agents/research-agent", () => ({
+  researchContacts: vi
+    .fn()
+    .mockResolvedValue([
+      {
+        background: "Test bg",
+        askThis: "Test ask",
+        mentionThis: "Test mention",
+        hooks: ["hook1"],
+        sourceUrls: [],
+      },
+    ]),
+}));
+vi.mock("@/worker/agents/email-drafter", () => ({
+  draftEmails: vi
+    .fn()
+    .mockResolvedValue([
+      {
+        contactName: "Test Person",
+        subject: "Hello",
+        body: "Test body",
+        templateType: "hiring_inquiry",
+        hookUsed: "hook1",
+      },
+    ]),
+}));
+vi.mock("@/worker/scoring/scoring-engine", () => ({
+  extractSignals: vi.fn().mockReturnValue({
+    titleMatch: 20,
+    seniority: 15,
+    publicActivity: 10,
+    emailConfidence: 10,
+    hiringSignals: 10,
+  }),
+  scoreContact: vi.fn().mockReturnValue({
+    total: 65,
+    breakdown: {
+      titleMatch: 20,
+      seniority: 15,
+      publicActivity: 10,
+      emailConfidence: 10,
+      hiringSignals: 10,
+    },
+    tone: "curious",
+  }),
+}));
+vi.mock("@/worker/lib/firecrawl", () => ({
+  getCompanyEnrichment: vi.fn().mockResolvedValue({
+    techStack: ["TypeScript"],
+    recentNews: [],
+    companyValues: [],
+    hiringRoles: [],
+    teamSize: null,
+    personalizationHooks: [],
+  }),
 }));
 
 import { broadcastProgress } from "@/worker/lib/supabase";
