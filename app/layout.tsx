@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import { NavBar } from "@/components/nav/NavBar";
+import { sourceSerif, jetbrainsMono, dmSans } from "@/lib/fonts";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  weight: ["400", "600"],
-});
-
 export const metadata: Metadata = {
-  title: "Korvo — Land interviews with one search",
+  title: "Korvo — Job Outreach Engine",
   description:
-    "Type a company name. Get 3 contacts with personalized cold emails ready to send.",
+    "A technical outreach engine that finds the right people and drafts emails worth reading.",
 };
 
 export default function RootLayout({
@@ -22,10 +15,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <NavBar />
-        {children}
+    <html
+      lang="en"
+      className={`${sourceSerif.variable} ${jetbrainsMono.variable} ${dmSans.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-background text-text-primary">
+        {/* Animated Background Grid */}
+        <div className="fixed inset-0 grid-bg pointer-events-none z-0" />
+        
+        <div className="relative z-10 flex flex-col min-h-screen">
+          {children}
+        </div>
         <Toaster />
       </body>
     </html>

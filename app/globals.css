@@ -1,69 +1,119 @@
 @import "tailwindcss";
 
-/*
-  KORVO DESIGN SYSTEM — Warm Light Theme
-  Per UI-SPEC: warm off-white dominant, teal accent, approachable aesthetic
-*/
-
 :root {
-  /* Backgrounds — warm off-white, not pure white */
-  --color-warm-white: #FAFAF8;
-  --color-warm-muted: #F4F3F0;
-  --color-warm-elevated: #FFFFFF;
-
-  /* Accent — teal */
-  --color-accent: #0D9488;
-  --color-accent-hover: #0F766E;
+  /* v3 Firecrawl Aesthetic - Light Mode */
+  --bg-page:          #FAFAF8;    /* warm off-white — main background */
+  --bg-section-alt:   #F5F5F0;    /* slightly recessed sections */
+  --bg-card:          #FFFFFF;    /* white cards sitting on off-white */
+  --bg-code:          #1A1A1A;    /* dark code blocks */
+  --bg-code-header:   #2A2A2A;    /* code block header bar */
 
   /* Text */
-  --color-text-primary: #1C1C1A;
-  --color-text-secondary: #6B6B68;
-  --color-text-tertiary: #9B9B98;
+  --text-primary:     #1A1A1A;    /* headings, bold content */
+  --text-body:        #4A4A4A;    /* body paragraphs */
+  --text-muted:       #8A8A8A;    /* labels, hints */
+  --text-light:       #B0B0B0;    /* metadata, disabled */
+
+  /* Accent */
+  --accent:           #F97316;    /* orange — CTAs, highlights, active states */
+  --accent-hover:     #EA6A10;    /* darker on hover */
+  --accent-bg:        #FFF5EE;    /* soft orange tint for backgrounds */
 
   /* Borders */
-  --color-border: #E5E4E0;
-  --color-border-hover: #D5D4D0;
+  --border:           #E8E8E3;    /* subtle warm border */
+  --border-card:      #EBEBEB;    /* card borders */
 
-  /* Destructive */
-  --color-destructive: #DC2626;
+  /* Status */
+  --success:          #2D8A56;    /* completed, verified */
+  --success-bg:       #F0FDF4;
+  --warning:          #D97706;    /* pending, medium confidence */
+  --warning-bg:       #FFFBEB;
+  --error:            #DC2626;    /* failed, low confidence */
+  --error-bg:         #FEF2F2;
 
-  /* Status (reserved for Phase 4 confidence badges) */
-  --color-green: #16A34A;
-  --color-yellow: #CA8A04;
-  --color-red: #DC2626;
+  /* Code syntax highlighting */
+  --code-green:       #86EFAC;    /* strings */
+  --code-blue:        #93C5FD;    /* keys, URLs */
+  --code-orange:      #F97316;    /* class names */
+  --code-grey:        #6B7280;    /* line numbers */
+  --code-white:       #E5E5E5;    /* main text */
 }
 
 @theme inline {
-  --color-warm-white: var(--color-warm-white);
-  --color-warm-muted: var(--color-warm-muted);
-  --color-warm-elevated: var(--color-warm-elevated);
+  --color-background: var(--bg-page);
+  --color-surface: var(--bg-card);
+  --color-surface-alt: var(--bg-section-alt);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-light: var(--text-light);
 
-  --color-accent: var(--color-accent);
-  --color-accent-hover: var(--color-accent-hover);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-bg: var(--accent-bg);
 
-  --color-text-primary: var(--color-text-primary);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-text-tertiary: var(--color-text-tertiary);
+  --color-border: var(--border);
+  --color-border-card: var(--border-card);
 
-  --color-border: var(--color-border);
-  --color-border-hover: var(--color-border-hover);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-error: var(--error);
+  --color-error-bg: var(--error-bg);
 
-  --color-destructive: var(--color-destructive);
-
-  --color-green: var(--color-green);
-  --color-yellow: var(--color-yellow);
-  --color-red: var(--color-red);
+  --font-serif: var(--font-serif), serif;
+  --font-sans: var(--font-sans), sans-serif;
+  --font-mono: var(--font-mono), monospace;
 }
 
-/* Base */
 body {
-  background: #FAFAF8;
-  color: #1C1C1A;
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4 {
+/* --- Typography Overrides --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text-primary);
   font-weight: 600;
-  letter-spacing: -0.02em;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* --- v3 Firecrawl Specific Pattern --- */
+.italic-accent {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* --- Dot-matrix background texture --- */
+.dot-matrix {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+/* --- Reveal logic --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }

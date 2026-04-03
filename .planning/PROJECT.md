@@ -178,7 +178,7 @@ Orchestration: Contact Finder runs first → Email Guesser + Research Agent in p
 | Deliverability engine in V1 | Protects user sender reputation from day 1 | -- Pending |
 | Next.js 16 (not 14) | Latest version, best DX | -- Pending |
 | 4-layer data access with waterfall | Resilient, no single point of failure, defensible architecture | -- Pending |
-| Warm friendly design (not dev-tool aesthetic) | Target audience is students, not developers | -- Pending |
+| Warm friendly design (Dark theme per UI Spec) | Target audience is students, technical dark aesthetic | -- Pending |
 | V1+V2+V3 active scope, V4 deferred | Build complete product before B2B expansion | -- Pending |
 | Chrome extension in V3 | Web app must prove value first | -- Pending |
 

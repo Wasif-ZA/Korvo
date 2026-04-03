@@ -8,9 +8,10 @@ export function Card({ className, highlighted = false, children, ...props }: Car
   return (
     <div
       className={cn(
-        "bg-white border border-[#E5E4E0] rounded-xl p-8 transition-all duration-200",
-        "hover:translate-y-[-2px] hover:border-[#D5D4D0]",
-        highlighted && "border-teal-600/30 border-2",
+        "rounded-xl bg-surface border transition-all duration-150 p-6 md:p-8",
+        highlighted
+          ? "border-accent ring-1 ring-accent/20 shadow-md"
+          : "border-border-card shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:border-text-light",
         className
       )}
       {...props}

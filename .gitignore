@@ -31,3 +31,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI Agent Directories
+.claude/
+.gemini/
+.copilot/
+.antigravity/
+
+# Generated Code
+/generated/

@@ -1,26 +1,30 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils/cn";
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   [
-    "inline-flex items-center justify-center rounded-lg font-semibold",
-    "transition-colors duration-150 ease-in-out",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2",
-    "active:scale-[0.97]",
-    "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
+    "inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-150 ease-in-out h-11 px-4 active:scale-[0.98]",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
+    "disabled:opacity-50 disabled:cursor-not-allowed pointer-events-none",
+    "font-sans text-sm",
   ],
   {
     variants: {
       variant: {
-        primary: "bg-teal-600 text-white hover:bg-teal-700",
-        secondary:
-          "bg-[#F4F3F0] text-[#1C1C1A] border border-[#E5E4E0] hover:bg-[#E9E8E4]",
-        ghost: "bg-transparent text-[#1C1C1A] hover:bg-[#F4F3F0]",
-        destructive: "bg-red-600 text-white hover:bg-red-700",
+        primary:
+          "bg-accent text-white hover:bg-accent-hover shadow-sm",
+        outline:
+          "bg-transparent text-text-body border border-border hover:border-text-muted hover:bg-accent-bg",
+        ghost:
+          "bg-transparent text-text-muted hover:text-accent hover:bg-accent-bg",
+        destructive:
+          "bg-error text-white hover:bg-red-700 shadow-sm",
       },
       size: {
-        default: "h-11 px-4 text-sm",
-        lg: "h-[54px] px-8 text-base",
+        default: "h-11 px-6",
+        sm: "h-9 px-4 text-xs",
+        lg: "h-12 px-8 text-base",
+        icon: "h-11 w-11 p-0",
       },
     },
     defaultVariants: {

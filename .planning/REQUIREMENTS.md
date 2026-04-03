@@ -30,10 +30,10 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **AGENT-03**: Research Agent — finds personalization hooks per contact, outputs structured research card: Background, Ask This, Mention This
 - [ ] **AGENT-04**: Email Drafter agent — drafts 4-sentence cold email using tone mapping from scoring engine, uses correct template type
 - [x] **AGENT-05**: All agents use `@anthropic-ai/sdk` v0.81.0 directly with manual tool-use loops (NOT Agent SDK)
-- [ ] **AGENT-06**: Prompt caching enabled on all agent system prompts (dynamic content in user message turn only, never in system prompt after cache_control breakpoint)
+- [x] **AGENT-06**: Prompt caching enabled on all agent system prompts (dynamic content in user message turn only, never in system prompt after cache_control breakpoint)
 - [ ] **AGENT-07**: 4-layer data access waterfall: L1 (Claude web search) → L2 (email pattern detection) → L3 (ATS APIs: Greenhouse, Lever, Workable) → L4 (third-party enrichment, V2)
 - [x] **AGENT-08**: Circuit breakers per data source (opossum library) with fallback to next layer
-- [ ] **AGENT-09**: LinkedIn domain blocklist — agents must never access LinkedIn directly, only Google-indexed public profile data
+- [x] **AGENT-09**: LinkedIn domain blocklist — agents must never access LinkedIn directly, only Google-indexed public profile data
 
 ### Orchestration
 
@@ -205,10 +205,10 @@ Deferred to after V2. Tracked for future planning.
 | AGENT-03    | Phase 3 | Pending  |
 | AGENT-04    | Phase 3 | Pending  |
 | AGENT-05    | Phase 3 | Complete |
-| AGENT-06    | Phase 3 | Pending  |
+| AGENT-06    | Phase 3 | Complete |
 | AGENT-07    | Phase 3 | Pending  |
 | AGENT-08    | Phase 3 | Complete |
-| AGENT-09    | Phase 3 | Pending  |
+| AGENT-09    | Phase 3 | Complete |
 | SCORE-01    | Phase 3 | Pending  |
 | SCORE-02    | Phase 3 | Complete |
 | SCORE-03    | Phase 3 | Pending  |

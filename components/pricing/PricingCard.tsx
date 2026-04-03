@@ -27,37 +27,39 @@ export function PricingCard({
   savingsBadge,
 }: PricingCardProps) {
   return (
-    <Card highlighted={highlighted} className="relative flex flex-col h-full">
+    <Card highlighted={highlighted} className={highlighted ? "bg-white" : ""}>
       {/* Popular badge */}
       {badge && (
-        <span className="absolute -top-3 left-8 bg-teal-600 text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-sm">
-          {badge}
-        </span>
+        <div className="mb-4">
+          <span className="bg-accent text-white text-xs font-semibold px-2 py-1 rounded-full uppercase tracking-wider">
+            {badge}
+          </span>
+        </div>
       )}
 
       {/* Plan info */}
-      <div className="mb-8">
-        <h3 className="text-2xl font-semibold text-[#1C1C1A] tracking-tight mb-2">{planName}</h3>
-        <p className="text-sm text-[#6B6B68] leading-relaxed">{tagline}</p>
+      <div className="mb-4">
+        <h3 className="text-2xl font-semibold text-text-primary">{planName}</h3>
+        <p className="text-sm text-gray-500 mt-1">{tagline}</p>
       </div>
 
       {/* Price */}
-      <div className="flex items-baseline gap-2 mb-10">
-        <span className="text-5xl font-semibold text-[#1C1C1A] tracking-tight">{price}</span>
-        <span className="text-[#9B9B98] font-medium">{interval}</span>
+      <div className="flex items-baseline gap-1 mb-6">
+        <span className="text-4xl font-semibold text-text-primary">{price}</span>
+        <span className="text-sm text-gray-500">{interval}</span>
         {savingsBadge && (
-          <span className="ml-2 bg-teal-50 text-teal-700 text-[11px] font-semibold px-2 py-0.5 rounded-md border border-teal-200">
+          <span className="ml-2 bg-accent/10 text-accent text-xs font-semibold px-2 py-0.5 rounded-full">
             {savingsBadge}
           </span>
         )}
       </div>
 
-      {/* Features list */}
-      <ul className="flex flex-col gap-4 mb-12 flex-1">
+      {/* Feature list */}
+      <ul className="flex flex-col gap-3 mb-8 flex-1">
         {features.map((feature) => (
           <li key={feature} className="flex items-start gap-3">
-            <span className="text-teal-600 text-sm leading-none mt-1">&#10003;</span>
-            <span className="text-sm text-[#6B6B68] leading-snug">{feature}</span>
+            <span className="text-gray-500 text-lg leading-none mt-1">—</span>
+            <span className="text-base text-gray-500 font-normal">{feature}</span>
           </li>
         ))}
       </ul>
@@ -65,7 +67,6 @@ export function PricingCard({
       {/* CTA */}
       <Button
         variant={highlighted ? "primary" : "secondary"}
-        size="lg"
         className="w-full"
         onClick={ctaAction}
       >
