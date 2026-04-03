@@ -56,7 +56,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **EMAIL-01**: Template types: referral_ask, hiring_inquiry, value_offer
 - [x] **EMAIL-02**: Follow-up templates: followup_1 (3 days), followup_2 (7 days)
 - [x] **EMAIL-03**: All emails max 4 sentences, casual/direct tone, no em dashes, no corporate speak
-- [ ] **EMAIL-04**: Editable subject line + body before send
+- [x] **EMAIL-04**: Editable subject line + body before send
 - [x] **EMAIL-05**: Regenerate button with different tone/template option
 
 ### UI — Search & Results
@@ -67,16 +67,16 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **UI-04**: Research card per contact: Background | Ask This | Mention This (structured, not paragraph)
 - [x] **UI-05**: Email draft inline/modal: editable subject + body, copy button with animation, mailto link, regenerate, "Mark as Sent"
 - [x] **UI-06**: Loading skeleton during search (pipeline takes 60-120 seconds)
-- [ ] **UI-07**: Real-time progress updates via Supabase Broadcast (stage: contacts_found, emails_guessed, research_done, drafts_ready)
+- [x] **UI-07**: Real-time progress updates via Supabase Broadcast (stage: contacts_found, emails_guessed, research_done, drafts_ready)
 - [x] **UI-08**: Warm, friendly, approachable design (Notion/Teal aesthetic, not dev-tool)
-- [ ] **UI-09**: Mobile-responsive, tested iPhone SE through desktop
+- [x] **UI-09**: Mobile-responsive, tested iPhone SE through desktop
 
 ### UI — Dashboard & Pipeline
 
-- [ ] **DASH-01**: Pipeline Kanban board: Identified → Contacted → Responded → Chatted → Applied → Interviewing
-- [ ] **DASH-02**: Drag or click to move contacts between stages
-- [ ] **DASH-03**: Expand contact to see email draft, research card, score breakdown, notes
-- [ ] **DASH-04**: Search history sidebar with timestamps and company names
+- [x] **DASH-01**: Pipeline Kanban board: Identified → Contacted → Responded → Chatted → Applied → Interviewing
+- [x] **DASH-02**: Drag or click to move contacts between stages
+- [x] **DASH-03**: Expand contact to see email draft, research card, score breakdown, notes
+- [x] **DASH-04**: Search history sidebar with timestamps and company names
 - [x] **DASH-05**: Basic follow-up reminder ("remind me in 7 days" per contact)
 
 ### Payments
@@ -216,7 +216,7 @@ Deferred to after V2. Tracked for future planning.
 | EMAIL-01    | Phase 3 | Complete |
 | EMAIL-02    | Phase 3 | Complete |
 | EMAIL-03    | Phase 3 | Complete |
-| EMAIL-04    | Phase 3 | Pending  |
+| EMAIL-04    | Phase 3 | Complete |
 | EMAIL-05    | Phase 3 | Complete |
 | UI-01       | Phase 4 | Pending  |
 | UI-02       | Phase 4 | Complete |
@@ -224,13 +224,13 @@ Deferred to after V2. Tracked for future planning.
 | UI-04       | Phase 4 | Complete |
 | UI-05       | Phase 4 | Complete |
 | UI-06       | Phase 4 | Complete |
-| UI-07       | Phase 4 | Pending  |
+| UI-07       | Phase 4 | Complete |
 | UI-08       | Phase 4 | Complete |
-| UI-09       | Phase 4 | Pending  |
-| DASH-01     | Phase 4 | Pending  |
-| DASH-02     | Phase 4 | Pending  |
-| DASH-03     | Phase 4 | Pending  |
-| DASH-04     | Phase 4 | Pending  |
+| UI-09       | Phase 4 | Complete |
+| DASH-01     | Phase 4 | Complete |
+| DASH-02     | Phase 4 | Complete |
+| DASH-03     | Phase 4 | Complete |
+| DASH-04     | Phase 4 | Complete |
 | DASH-05     | Phase 4 | Complete |
 | SEND-01     | Phase 5 | Pending  |
 | SEND-02     | Phase 5 | Pending  |

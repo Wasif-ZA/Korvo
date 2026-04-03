@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Project setup, database schema, auth, and Stripe — the non-negotiable base everything else depends on (completed 2026-04-01)
 - [x] **Phase 2: Queue Infrastructure** - BullMQ + Redis workers on Railway with correct config for long-running AI jobs (completed 2026-04-03)
 - [x] **Phase 3: Agent Pipeline** - Four specialized agents, scoring engine, email templates — the core product intelligence (completed 2026-04-04)
-- [ ] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product
+- [x] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product (completed 2026-04-03)
 - [ ] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking
 - [ ] **Phase 6: Analytics, Monitoring & Legal** - PostHog events, Sentry, compliance docs — launch readiness
 
@@ -109,7 +109,7 @@ Plans:
 
 - [x] 04-01-PLAN.md — Backend contracts: real IDs in PipelineResponse, regenerate endpoint, reminder endpoint
 - [x] 04-02-PLAN.md — ContactCard score badge, research toggle, ScoreBreakdown field fix
-- [ ] 04-03-PLAN.md — Dashboard optimistic updates, FollowUpReminder wiring, regenerate in SlideOver
+- [x] 04-03-PLAN.md — Dashboard optimistic updates, FollowUpReminder wiring, regenerate in SlideOver
 - [x] 04-04-PLAN.md — Results page real IDs, empty state copywriting, full visual verification
 
 **UI hint**: yes
@@ -151,6 +151,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
-| 4. UI & Dashboard                | 3/4            | In Progress |            |
+| 4. UI & Dashboard                | 4/4            | Complete    | 2026-04-03 |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
