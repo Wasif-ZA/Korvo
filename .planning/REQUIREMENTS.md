@@ -46,10 +46,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Scoring Engine
 
-- [ ] **SCORE-01**: Response probability scoring (0-100) per contact with weighted signals (title match, seniority, recency, public activity, email confidence)
-- [ ] **SCORE-02**: Explainable score breakdown panel showing each signal's contribution
-- [ ] **SCORE-03**: Tone mapping from score: 75-100 = direct, 45-74 = curious, 0-44 = value-driven
-- [ ] **SCORE-04**: Tone drives email template selection and drafter prompt variation
+- [x] **SCORE-01**: Response probability scoring (0-100) per contact with weighted signals (title match, seniority, recency, public activity, email confidence)
+- [x] **SCORE-02**: Explainable score breakdown panel showing each signal's contribution
+- [x] **SCORE-03**: Tone mapping from score: 75-100 = direct, 45-74 = curious, 0-44 = value-driven
+- [x] **SCORE-04**: Tone drives email template selection and drafter prompt variation
 
 ### Email Templates
 
@@ -209,10 +209,10 @@ Deferred to after V2. Tracked for future planning.
 | AGENT-07    | Phase 3 | Pending  |
 | AGENT-08    | Phase 3 | Pending  |
 | AGENT-09    | Phase 3 | Pending  |
-| SCORE-01    | Phase 3 | Pending  |
-| SCORE-02    | Phase 3 | Pending  |
-| SCORE-03    | Phase 3 | Pending  |
-| SCORE-04    | Phase 3 | Pending  |
+| SCORE-01    | Phase 3 | Complete |
+| SCORE-02    | Phase 3 | Complete |
+| SCORE-03    | Phase 3 | Complete |
+| SCORE-04    | Phase 3 | Complete |
 | EMAIL-01    | Phase 3 | Pending  |
 | EMAIL-02    | Phase 3 | Pending  |
 | EMAIL-03    | Phase 3 | Pending  |

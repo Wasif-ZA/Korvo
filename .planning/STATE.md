@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Phase 3 context gathered
-last_updated: "2026-04-03T12:56:28.465Z"
-last_activity: 2026-04-03
+status: executing
+stopped_at: Completed 03-03-PLAN.md (scoring engine)
+last_updated: "2026-04-03T13:45:33Z"
+last_activity: 2026-04-03 -- Phase 03 plan 03-03 completed
 progress:
   total_phases: 6
   completed_phases: 2
-  total_plans: 11
-  completed_plans: 11
-  percent: 17
+  total_plans: 19
+  completed_plans: 12
+  percent: 19
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-01)
 
 **Core value:** Enter a company name. Get 3 contacts with personalized cold emails ready to send. Land interviews.
-**Current focus:** Phase 02 — queue-infrastructure
+**Current focus:** Phase 03 — agent-pipeline
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
-Status: Phase complete — ready for verification
-Last activity: 2026-04-03
+Phase: 03 (agent-pipeline) — EXECUTING
+Plan: 3 of 8 complete (03-03)
+Status: Executing Phase 03
+Last activity: 2026-04-03 -- Completed plan 03-03 (scoring engine)
 
-Progress: [█░░░░░░░░░] 17% (Phase 1 of 6 complete)
+Progress: [██░░░░░░░░] 19% (12/19 plans complete)
 
 ## Performance Metrics
 
@@ -101,6 +101,9 @@ Recent decisions affecting current work:
 - [Phase 02-queue-infrastructure]: Guest path does not enqueue pipeline jobs in Phase 2 — deferred to Phase 4 when search UI is built
 - [Phase 02-queue-infrastructure]: Concurrent check placed after monthly limit check but before search row creation — prevents phantom rows for blocked requests
 - [Phase 02-queue-infrastructure]: vitest class mock pattern required for ioredis and BullMQ Queue — arrow functions cannot be called with new
+- [Phase 03-agent-pipeline]: scoreTitleMatch uses 4-tier discrete overlap scoring (0/10/20/25/30) — predictable and tunable vs continuous
+- [Phase 03-agent-pipeline]: hiringSignalScore uses keyword overlap not exact match — 'Software Engineer' matches 'Senior Software Engineer' in hiringRoles
+- [Phase 03-agent-pipeline]: VP/C-suite regex runs before senior IC regex to prevent misclassification in scoreSeniority
 
 ### Pending Todos
 
@@ -113,6 +116,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-03T12:56:28.460Z
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-agent-pipeline/03-CONTEXT.md
+Last session: 2026-04-03T13:45:33Z
+Stopped at: Completed 03-03-PLAN.md (scoring engine)
+Resume file: .planning/phases/03-agent-pipeline/03-03-SUMMARY.md
