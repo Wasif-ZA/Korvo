@@ -1,36 +1,37 @@
 import { describe, it, expect, vi } from "vitest";
 
-// Mock ioredis using a regular function (not arrow) so it can be called as constructor
-// Per decision: arrow functions cannot be called with new
+// Mock BullMQ Queue constructor to capture constructor args
+// Must be a class mock since code uses `new Queue(name, opts)`
+vi.mock("bullmq", () => {
+  const MockQueue = vi.fn().mockImplementation(function (
+    this: Record<string, unknown>,
+    name: string,
+    opts: Record<string, unknown>,
+  ) {
+    this.name = name;
+    this.opts = opts;
+  });
+  return { Queue: MockQueue };
+});
+
+// Mock ioredis so Queue construction doesn't fail trying to connect
 vi.mock("ioredis", () => {
-  function MockIORedis(
+  const MockIORedis = vi.fn().mockImplementation(function (
     this: Record<string, unknown>,
     config: Record<string, unknown>,
   ) {
     Object.assign(this, config);
-  }
+  });
   return { default: MockIORedis };
 });
 
-// Mock BullMQ Queue constructor to capture constructor args
-vi.mock("bullmq", () => {
-  function MockQueue(
-    this: { name: string; opts: Record<string, unknown> },
-    name: string,
-    opts: Record<string, unknown>,
-  ) {
-    MockQueue.calls.push([name, opts]);
-    this.name = name;
-    this.opts = opts;
-  }
-  MockQueue.calls = [] as Array<[string, Record<string, unknown>]>;
-
-  return { Queue: MockQueue };
-});
-
 import { QUEUE_NAMES } from "@/shared/queues";
+import { Queue } from "bullmq";
 
-describe("QUEUE_NAMES constants (ORCH-05)", () => {
+// Import pipeline module after mocks are set — triggers Queue constructor call
+const { pipelineQueue } = await import("@/lib/queue/pipeline");
+
+describe("Queue names (ORCH-05)", () => {
   it("QUEUE_NAMES.PIPELINE is 'pipeline-queue'", () => {
     expect(QUEUE_NAMES.PIPELINE).toBe("pipeline-queue");
   });
@@ -40,45 +41,34 @@ describe("QUEUE_NAMES constants (ORCH-05)", () => {
   });
 });
 
-describe("pipelineQueue defaultJobOptions (ORCH-06)", () => {
-  it("pipeline queue has removeOnComplete: { count: 100 }", async () => {
-    const { Queue } = await import("bullmq");
-    const MockQueue = Queue as unknown as {
-      calls: Array<[string, Record<string, unknown>]>;
-    };
-
-    // Import pipelineQueue which triggers the Queue constructor call
-    await import("@/lib/queue/pipeline");
-
-    const pipelineCall = MockQueue.calls.find(
-      (call) => call[0] === QUEUE_NAMES.PIPELINE,
+describe("Pipeline queue config (ORCH-06)", () => {
+  it("Queue constructor was called with pipeline-queue name and removeOnComplete config", () => {
+    const mockQueue = Queue as unknown as ReturnType<typeof vi.fn>;
+    expect(mockQueue).toHaveBeenCalledWith(
+      "pipeline-queue",
+      expect.objectContaining({
+        defaultJobOptions: expect.objectContaining({
+          removeOnComplete: { count: 100 },
+        }),
+      }),
     );
-    expect(pipelineCall).toBeDefined();
-    const opts = pipelineCall![1] as {
-      defaultJobOptions?: {
-        removeOnComplete?: unknown;
-        removeOnFail?: unknown;
-      };
-    };
-    expect(opts.defaultJobOptions?.removeOnComplete).toEqual({ count: 100 });
   });
 
-  it("pipeline queue has removeOnFail: { count: 500 }", async () => {
-    const { Queue } = await import("bullmq");
-    const MockQueue = Queue as unknown as {
-      calls: Array<[string, Record<string, unknown>]>;
-    };
+  it("pipeline queue defaultJobOptions has removeOnComplete: { count: 100 }", () => {
+    const mockQueue = Queue as unknown as ReturnType<typeof vi.fn>;
+    const [, opts] = mockQueue.mock.calls[0] as [
+      string,
+      { defaultJobOptions: Record<string, unknown> },
+    ];
+    expect(opts.defaultJobOptions.removeOnComplete).toEqual({ count: 100 });
+  });
 
-    const pipelineCall = MockQueue.calls.find(
-      (call) => call[0] === QUEUE_NAMES.PIPELINE,
-    );
-    expect(pipelineCall).toBeDefined();
-    const opts = pipelineCall![1] as {
-      defaultJobOptions?: {
-        removeOnComplete?: unknown;
-        removeOnFail?: unknown;
-      };
-    };
-    expect(opts.defaultJobOptions?.removeOnFail).toEqual({ count: 500 });
+  it("pipeline queue defaultJobOptions has removeOnFail: { count: 500 }", () => {
+    const mockQueue = Queue as unknown as ReturnType<typeof vi.fn>;
+    const [, opts] = mockQueue.mock.calls[0] as [
+      string,
+      { defaultJobOptions: Record<string, unknown> },
+    ];
+    expect(opts.defaultJobOptions.removeOnFail).toEqual({ count: 500 });
   });
 });

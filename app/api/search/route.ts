@@ -1,8 +1,7 @@
-// /api/search — validates input, enforces limits, and persists search rows via Prisma
+// /api/search — validates input, enforces limits, checks concurrency, and enqueues pipeline jobs
 // Per D-01: guest IP limit (3/day), free tier limit (5/month), pro limit (50/month)
 // Per D-06: hard block on limit reached, returns limitReached signal to client
-// Per D-07/D-08: concurrent search check before enqueue — one search at a time per user
-// Per ORCH-04: enqueues pipeline job to BullMQ after search row creation
+// Per D-07/D-08: concurrent active search check before enqueue (one search at a time per user)
 
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
@@ -69,7 +68,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // D-08: One search at a time per user — check before creating new row
+    // D-08: One search at a time per user — check before creating a new search row
     const activeSearch = await prisma.search.findFirst({
       where: { userId: user.id, status: "processing" },
     });
@@ -81,6 +80,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // Create search row with pending status
     const search = await prisma.search.create({
       data: {
         userId: user.id,
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
       select: { id: true },
     });
 
-    // ORCH-04: Enqueue pipeline job to BullMQ
+    // Enqueue pipeline job (ORCH-04)
     const job = await pipelineQueue.add("pipeline", {
       searchId: search.id,
       userId: user.id,
@@ -123,6 +123,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  // Guest search — create row but do NOT enqueue (Phase 4 will add guest queueing)
   const search = await prisma.search.create({
     data: {
       sessionId: parsed.data.guestSessionId,
