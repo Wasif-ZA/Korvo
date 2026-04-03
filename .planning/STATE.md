@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Frontend GSD Master Plan Sprints 1-7 complete
-last_updated: "2026-04-04T00:45:00.000Z"
+status: Frontend overhauled to v3 Firecrawl Aesthetic. Backend Agent Pipeline setup partial.
+stopped_at: Completed 03-agent-pipeline 03-05-PLAN.md
+last_updated: "2026-04-03T13:57:34.610Z"
 last_activity: 2026-04-04
 progress:
   total_phases: 6
   completed_phases: 2
-  total_plans: 11
-  completed_plans: 11
-  percent: 33
+  total_plans: 19
+  completed_plans: 16
+  percent: 79
 ---
 
 # Project State
@@ -30,11 +30,12 @@ Plan: 01 (Backend) - In Progress | Frontend Sprints 1-7 - Complete
 Status: Frontend overhauled to v3 Firecrawl Aesthetic. Backend Agent Pipeline setup partial.
 Last activity: 2026-04-04
 
-Progress: [███░░░░░░░] 33% (Phase 2 of 6 complete, Frontend substantially ahead)
+Progress: [████████░░] 79% (16 of 19 plans complete across all phases)
 
 ## Performance Metrics
 
 **Frontend Velocity:**
+
 - Sprint 1 (Foundation): Complete
 - Sprint 2 (Landing Page): Complete (v3 Refresh)
 - Sprint 3 (Auth): Complete
@@ -46,6 +47,7 @@ Progress: [███░░░░░░░] 33% (Phase 2 of 6 complete, Frontend 
 ## Accumulated Context
 
 ### Decisions (Frontend GSD)
+
 - **Aesthetic**: Unified "v3 Firecrawl Light-Mode" across entire app.
 - **Route Structure**: Implemented Next.js route groups `(marketing)`, `(auth)`, `(app)`.
 - **Styling**: Tailwind v4 with custom `@theme` variables in `globals.css`.
@@ -54,13 +56,21 @@ Progress: [███░░░░░░░] 33% (Phase 2 of 6 complete, Frontend 
 - **Search Experience**: Real-time `PipelineTracker` component for status polling.
 - **Dashboard**: Kanban-style `PipelineBoard` with metric `StatCards`.
 
+### Decisions (03-04 Contact Finder)
+
+- **Server tool no-op executeTool**: `web_search_20250305` is a server-managed tool; `executeTool` is a no-op; agent-loop correctly skips it.
+- **D-03 enforcement**: Always return exactly 3 contacts — pad with low-confidence placeholders if needed; slice to 3 if more returned.
+- **Never throw**: `findContacts` catches all `runAgentLoop` errors and returns placeholder contacts to prevent pipeline crashes.
+- **Zod safeParse with fallback**: Per-contact validation failure produces a placeholder rather than discarding the full response.
+
 ### Pending Todos
+
 - [ ] Backend: Finish Phase 3 Plan 01 (Prisma generate, shared types).
 - [ ] Backend: Implement actual Agent logic (Contact Finder, Email Guesser, etc.).
 - [ ] Integration: Wire Frontend components to real API endpoints once ready.
 
 ## Session Continuity
 
-Last session: 2026-04-04T00:45:00.000Z
-Stopped at: Frontend GSD complete.
-Resume file: GEMINI_FRONTEND.md
+Last session: 2026-04-03T13:57:34.603Z
+Stopped at: Completed 03-agent-pipeline 03-05-PLAN.md
+Resume file: None

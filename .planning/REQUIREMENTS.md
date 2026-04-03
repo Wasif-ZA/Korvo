@@ -25,13 +25,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Agent Pipeline
 
-- [ ] **AGENT-01**: Contact Finder agent — finds 3 relevant people at target company via Claude Haiku 4.5 + web search tool, returns structured JSON
-- [ ] **AGENT-02**: Email Guesser agent — detects company email pattern (Hunter.io public, job listings, blog bios), guesses addresses with confidence level (high/medium/low)
+- [x] **AGENT-01**: Contact Finder agent — finds 3 relevant people at target company via Claude Haiku 4.5 + web search tool, returns structured JSON
+- [x] **AGENT-02**: Email Guesser agent — detects company email pattern (Hunter.io public, job listings, blog bios), guesses addresses with confidence level (high/medium/low)
 - [ ] **AGENT-03**: Research Agent — finds personalization hooks per contact, outputs structured research card: Background, Ask This, Mention This
 - [ ] **AGENT-04**: Email Drafter agent — drafts 4-sentence cold email using tone mapping from scoring engine, uses correct template type
 - [x] **AGENT-05**: All agents use `@anthropic-ai/sdk` v0.81.0 directly with manual tool-use loops (NOT Agent SDK)
 - [x] **AGENT-06**: Prompt caching enabled on all agent system prompts (dynamic content in user message turn only, never in system prompt after cache_control breakpoint)
-- [ ] **AGENT-07**: 4-layer data access waterfall: L1 (Claude web search) → L2 (email pattern detection) → L3 (ATS APIs: Greenhouse, Lever, Workable) → L4 (third-party enrichment, V2)
+- [x] **AGENT-07**: 4-layer data access waterfall: L1 (Claude web search) → L2 (email pattern detection) → L3 (ATS APIs: Greenhouse, Lever, Workable) → L4 (third-party enrichment, V2)
 - [x] **AGENT-08**: Circuit breakers per data source (opossum library) with fallback to next layer
 - [x] **AGENT-09**: LinkedIn domain blocklist — agents must never access LinkedIn directly, only Google-indexed public profile data
 
@@ -200,13 +200,13 @@ Deferred to after V2. Tracked for future planning.
 | ORCH-04     | Phase 2 | Complete |
 | ORCH-05     | Phase 2 | Complete |
 | ORCH-06     | Phase 2 | Complete |
-| AGENT-01    | Phase 3 | Pending  |
-| AGENT-02    | Phase 3 | Pending  |
+| AGENT-01    | Phase 3 | Complete |
+| AGENT-02    | Phase 3 | Complete |
 | AGENT-03    | Phase 3 | Pending  |
 | AGENT-04    | Phase 3 | Pending  |
 | AGENT-05    | Phase 3 | Complete |
 | AGENT-06    | Phase 3 | Complete |
-| AGENT-07    | Phase 3 | Pending  |
+| AGENT-07    | Phase 3 | Complete |
 | AGENT-08    | Phase 3 | Complete |
 | AGENT-09    | Phase 3 | Complete |
 | SCORE-01    | Phase 3 | Pending  |
