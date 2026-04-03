@@ -78,7 +78,18 @@ Plans:
 3. Each contact has a draft cold email that matches the tone implied by their score (direct for 75-100, curious for 45-74, value-driven for 0-44) and uses the correct template type
 4. All four agents use @anthropic-ai/sdk directly with prompt caching on system prompts — no LinkedIn URLs appear in any agent output
 5. If a data source fails (e.g., Hunter.io times out), the pipeline falls back to the next layer and completes without returning an error to the user
-   **Plans**: TBD
+   **Plans**: 8 plans
+
+Plans:
+
+- [ ] 03-01-PLAN.md — Install packages, Prisma schema updates, shared agent type contracts
+- [ ] 03-02-PLAN.md — LinkedIn blocklist, circuit breaker, Claude client, agent tool-use loop
+- [ ] 03-03-PLAN.md — Scoring engine (TDD): weighted signals, tone mapping, score breakdown
+- [ ] 03-04-PLAN.md — Contact Finder agent: Claude Haiku 4.5 web search, 3 contacts
+- [ ] 03-05-PLAN.md — Email Guesser agent: pattern detection, confidence levels
+- [ ] 03-06-PLAN.md — Research Agent + Firecrawl enrichment with caching
+- [ ] 03-07-PLAN.md — Email Drafter agent: tone-mapped cold emails, template types
+- [ ] 03-08-PLAN.md — Pipeline integration: wire agents, PipelineResponse assembly, GET endpoint
 
 ### Phase 4: UI & Dashboard
 
@@ -131,7 +142,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | -------------------------------- | -------------- | ----------- | ---------- |
 | 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
-| 3. Agent Pipeline                | 0/TBD          | Not started | -          |
+| 3. Agent Pipeline                | 0/8            | Not started | -          |
 | 4. UI & Dashboard                | 0/TBD          | Not started | -          |
 | 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
