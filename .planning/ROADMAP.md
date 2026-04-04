@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Queue Infrastructure** - BullMQ + Redis workers on Railway with correct config for long-running AI jobs (completed 2026-04-03)
 - [x] **Phase 3: Agent Pipeline** - Four specialized agents, scoring engine, email templates — the core product intelligence (completed 2026-04-04)
 - [x] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product (completed 2026-04-03)
-- [x] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking (completed 2026-04-04)
+- [ ] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking (gap closure in progress)
 - [ ] **Phase 6: Analytics, Monitoring & Legal** - PostHog events, Sentry, compliance docs — launch readiness
 
 ## Phase Details
@@ -126,13 +126,14 @@ Plans:
 3. The deliverability engine enforces the daily send limit (warm-up ramp: 5 → 10 → 20 per day), and attempting to exceed it displays a clear rate-limit message rather than silently failing
 4. Gmail refresh tokens are stored encrypted at rest; when the token limit is reached, the user sees a "Reconnect Gmail" prompt rather than an unexplained error
 5. Every email sent via Korvo includes a configurable unsubscribe footer (Australia Spam Act compliance)
-   **Plans**: 3 plans
+   **Plans**: 4 plans
 
 Plans:
 
 - [x] 05-01-PLAN.md — Install googleapis, GmailToken model, token encryption, deliverability library, Wave 0 tests
 - [x] 05-02-PLAN.md — Gmail OAuth routes (connect/callback/disconnect/status/send), worker implementation
 - [x] 05-03-PLAN.md — EmailDraft send button, Settings Gmail section, daily counter, visual verification
+- [ ] 05-04-PLAN.md — Gap closure: wire isPro, contactId, onStageMoved into all three EmailDraft call sites
 
 **UI hint**: yes
 
@@ -154,11 +155,11 @@ Plans:
 **Execution Order:**
 Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
-| Phase                            | Plans Complete | Status      | Completed  |
-| -------------------------------- | -------------- | ----------- | ---------- |
-| 1. Foundation                    | 8/8            | Complete    | 2026-04-01 |
-| 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
-| 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
-| 4. UI & Dashboard                | 4/4            | Complete    | 2026-04-03 |
-| 5. Gmail Send & Deliverability   | 3/3 | Complete   | 2026-04-04 |
-| 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
+| Phase                            | Plans Complete | Status         | Completed  |
+| -------------------------------- | -------------- | -------------- | ---------- |
+| 1. Foundation                    | 8/8            | Complete       | 2026-04-01 |
+| 2. Queue Infrastructure          | 3/3            | Complete       | 2026-04-03 |
+| 3. Agent Pipeline                | 8/8            | Complete       | 2026-04-03 |
+| 4. UI & Dashboard                | 4/4            | Complete       | 2026-04-03 |
+| 5. Gmail Send & Deliverability   | 3/4            | Gap closure    | -          |
+| 6. Analytics, Monitoring & Legal | 0/TBD          | Not started    | -          |
