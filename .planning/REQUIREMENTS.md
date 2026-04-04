@@ -89,13 +89,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Email Sending & Deliverability
 
-- [ ] **SEND-01**: Free tier: copy-to-clipboard + mailto link
-- [ ] **SEND-02**: Pro tier: Gmail API OAuth send directly from Korvo (separate OAuth flow from Supabase Google login, requires `gmail.send` scope)
+- [x] **SEND-01**: Free tier: copy-to-clipboard + mailto link
+- [x] **SEND-02**: Pro tier: Gmail API OAuth send directly from Korvo (separate OAuth flow from Supabase Google login, requires `gmail.send` scope)
 - [x] **SEND-03**: Gmail refresh token stored encrypted at rest, handles 100-token-per-user limit with graceful "Reconnect Gmail" prompt
 - [x] **SEND-04**: Deliverability engine: warm-up ramp (5→10→20 emails/day), enforced in Redis counters inside BullMQ jobs
 - [x] **SEND-05**: Send interval jitter (randomized delays between sends)
-- [ ] **SEND-06**: Auto pipeline tracking: contact auto-moves to "Contacted" when sent via Gmail API
-- [ ] **SEND-07**: Australia Spam Act compliance: configurable unsubscribe footer in every commercial email
+- [x] **SEND-06**: Auto pipeline tracking: contact auto-moves to "Contacted" when sent via Gmail API
+- [x] **SEND-07**: Australia Spam Act compliance: configurable unsubscribe footer in every commercial email
 
 ### Analytics & Monitoring
 
@@ -232,13 +232,13 @@ Deferred to after V2. Tracked for future planning.
 | DASH-03     | Phase 4 | Complete |
 | DASH-04     | Phase 4 | Complete |
 | DASH-05     | Phase 4 | Complete |
-| SEND-01     | Phase 5 | Pending  |
-| SEND-02     | Phase 5 | Pending  |
+| SEND-01     | Phase 5 | Complete |
+| SEND-02     | Phase 5 | Complete |
 | SEND-03     | Phase 5 | Complete |
 | SEND-04     | Phase 5 | Complete |
 | SEND-05     | Phase 5 | Complete |
-| SEND-06     | Phase 5 | Pending  |
-| SEND-07     | Phase 5 | Pending  |
+| SEND-06     | Phase 5 | Complete |
+| SEND-07     | Phase 5 | Complete |
 | MON-01      | Phase 6 | Pending  |
 | MON-02      | Phase 6 | Pending  |
 | MON-03      | Phase 6 | Pending  |
