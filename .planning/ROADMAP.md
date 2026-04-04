@@ -148,7 +148,13 @@ Plans:
 2. Any unhandled error on an API route or Railway worker triggers a Sentry alert before a user has to report it
 3. The app has a published Privacy Policy and Terms of Service accessible from the landing page
 4. Agent code contains no LinkedIn direct-access paths; the LinkedIn domain blocklist is enforced and audited
-   **Plans**: TBD
+   **Plans**: 3 plans
+
+Plans:
+
+- [ ] 06-01-PLAN.md — Install PostHog + Sentry SDKs, initialization files, Wave 0 test stubs
+- [ ] 06-02-PLAN.md — Privacy Policy, Terms of Service, LinkedIn audit, CI enforcement
+- [ ] 06-03-PLAN.md — Wire 6 PostHog events, analytics opt-out in Settings
 
 ## Progress
 
@@ -161,5 +167,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Queue Infrastructure          | 3/3            | Complete       | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete       | 2026-04-03 |
 | 4. UI & Dashboard                | 4/4            | Complete       | 2026-04-03 |
-| 5. Gmail Send & Deliverability   | 4/4 | Complete   | 2026-04-04 |
-| 6. Analytics, Monitoring & Legal | 0/TBD          | Not started    | -          |
+| 5. Gmail Send & Deliverability   | 4/4            | Complete       | 2026-04-04 |
+| 6. Analytics, Monitoring & Legal | 0/3            | Planning       | -          |
