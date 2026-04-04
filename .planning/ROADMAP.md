@@ -131,7 +131,7 @@ Plans:
 Plans:
 
 - [x] 05-01-PLAN.md — Install googleapis, GmailToken model, token encryption, deliverability library, Wave 0 tests
-- [ ] 05-02-PLAN.md — Gmail OAuth routes (connect/callback/disconnect/status/send), worker implementation
+- [x] 05-02-PLAN.md — Gmail OAuth routes (connect/callback/disconnect/status/send), worker implementation
 - [ ] 05-03-PLAN.md — EmailDraft send button, Settings Gmail section, daily counter, visual verification
 
 **UI hint**: yes
@@ -160,5 +160,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
 | 4. UI & Dashboard                | 4/4            | Complete    | 2026-04-03 |
-| 5. Gmail Send & Deliverability   | 1/3 | In Progress|  |
+| 5. Gmail Send & Deliverability   | 2/3 | In Progress|  |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
