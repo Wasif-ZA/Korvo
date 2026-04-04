@@ -37,7 +37,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       }
 
       // Pass event=signup as URL param for new users — client component reads and fires posthog event
-      const redirectUrl = new URL("/", origin);
+      const redirectUrl = new URL("/dashboard", origin);
       if (isNewUser) {
         redirectUrl.searchParams.set("event", "signup");
       }
@@ -46,5 +46,5 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   // Error or no code — redirect to landing page
-  return NextResponse.redirect(new URL("/", origin));
+  return NextResponse.redirect(new URL("/dashboard", origin));
 }
