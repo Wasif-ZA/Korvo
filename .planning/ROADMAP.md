@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Queue Infrastructure** - BullMQ + Redis workers on Railway with correct config for long-running AI jobs (completed 2026-04-03)
 - [x] **Phase 3: Agent Pipeline** - Four specialized agents, scoring engine, email templates — the core product intelligence (completed 2026-04-04)
 - [x] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product (completed 2026-04-03)
-- [ ] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking (gap closure in progress)
+- [x] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking (gap closure in progress) (completed 2026-04-04)
 - [ ] **Phase 6: Analytics, Monitoring & Legal** - PostHog events, Sentry, compliance docs — launch readiness
 
 ## Phase Details
@@ -133,7 +133,7 @@ Plans:
 - [x] 05-01-PLAN.md — Install googleapis, GmailToken model, token encryption, deliverability library, Wave 0 tests
 - [x] 05-02-PLAN.md — Gmail OAuth routes (connect/callback/disconnect/status/send), worker implementation
 - [x] 05-03-PLAN.md — EmailDraft send button, Settings Gmail section, daily counter, visual verification
-- [ ] 05-04-PLAN.md — Gap closure: wire isPro, contactId, onStageMoved into all three EmailDraft call sites
+- [x] 05-04-PLAN.md — Gap closure: wire isPro, contactId, onStageMoved into all three EmailDraft call sites
 
 **UI hint**: yes
 
@@ -161,5 +161,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Queue Infrastructure          | 3/3            | Complete       | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete       | 2026-04-03 |
 | 4. UI & Dashboard                | 4/4            | Complete       | 2026-04-03 |
-| 5. Gmail Send & Deliverability   | 3/4            | Gap closure    | -          |
+| 5. Gmail Send & Deliverability   | 4/4 | Complete   | 2026-04-04 |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started    | -          |
