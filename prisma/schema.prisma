@@ -28,6 +28,7 @@ model Profile {
   searchesUsedThisMonth Int       @default(0) @map("searches_used_this_month")
   draftsUsedThisMonth   Int       @default(0) @map("drafts_used_this_month")
   searchesResetAt       DateTime  @default(now()) @map("searches_reset_at")
+  unsubscribeFooter     String?   @map("unsubscribe_footer") // Custom unsubscribe text appended to every Gmail send (D-15)
   createdAt             DateTime  @default(now()) @map("created_at")
   updatedAt             DateTime  @updatedAt @map("updated_at")
 
