@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Search, ArrowRight, Sparkles } from "lucide-react";
 import { Badge } from "./Badge";
 import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 
 const EXAMPLES = [
   "Canva, Junior Software Engineer",
@@ -49,14 +50,15 @@ export function Hero() {
               Outreach Engine v3.0
             </span>
           </Badge>
-          
+
           <h1 className="text-[48px] md:text-[72px] font-serif font-bold leading-[1.1] tracking-tight text-text-primary max-w-4xl mb-8">
             Land interviews with <br className="hidden md:block" />
             <span className="italic-accent">personalized</span> outreach
           </h1>
-          
+
           <p className="text-lg md:text-xl text-text-body max-w-[640px] mx-auto leading-relaxed mb-16">
-            A technical outreach engine that finds the right people, researches their activity, and drafts emails worth reading.
+            A technical outreach engine that finds the right people, researches
+            their activity, and drafts emails worth reading.
           </p>
 
           {/* Precision Search Bar */}
@@ -71,14 +73,16 @@ export function Hero() {
                   readOnly
                 />
               </div>
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="w-full sm:w-auto min-w-[180px] font-mono font-bold uppercase tracking-[0.1em]"
-              >
-                EXEC_PIPELINE
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              <Link href="/signup" className="w-full sm:w-auto">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  className="w-full min-w-[180px] font-mono font-bold uppercase tracking-widest"
+                >
+                  EXEC_PIPELINE
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
             </div>
           </div>
 
