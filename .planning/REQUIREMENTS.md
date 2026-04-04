@@ -17,8 +17,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: First search is free without signup (session-scoped guest search)
-- [ ] **AUTH-02**: Google OAuth signup via Supabase Auth prompted after first search
+- [x] **AUTH-01**: First search is free without signup (session-scoped guest search)
+- [x] **AUTH-02**: Google OAuth signup via Supabase Auth prompted after first search
 - [x] **AUTH-03**: User session persists across browser refresh via Supabase SSR (`@supabase/ssr`)
 - [x] **AUTH-04**: Auth middleware on all API routes checking session validity
 - [x] **AUTH-05**: Free tier: 5 searches/month, 5 email drafts/month enforced server-side
@@ -184,8 +184,8 @@ Deferred to after V2. Tracked for future planning.
 | FOUND-03    | Phase 1 | Complete |
 | FOUND-04    | Phase 1 | Complete |
 | FOUND-05    | Phase 1 | Complete |
-| AUTH-01     | Phase 7 | Pending  |
-| AUTH-02     | Phase 7 | Pending  |
+| AUTH-01     | Phase 7 | Complete |
+| AUTH-02     | Phase 7 | Complete |
 | AUTH-03     | Phase 1 | Complete |
 | AUTH-04     | Phase 1 | Complete |
 | AUTH-05     | Phase 1 | Complete |

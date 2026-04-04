@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product (completed 2026-04-03)
 - [x] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking (gap closure in progress) (completed 2026-04-04)
 - [x] **Phase 6: Analytics, Monitoring & Legal** - PostHog events, Sentry, compliance docs — launch readiness (completed 2026-04-04)
-- [ ] **Phase 7: Search Flow & Guest Access Fix** - Fix search page API wiring, Realtime channel, guest access — milestone gap closure
+- [x] **Phase 7: Search Flow & Guest Access Fix** - Fix search page API wiring, Realtime channel, guest access — milestone gap closure (completed 2026-04-04)
 
 ## Phase Details
 
@@ -173,8 +173,8 @@ Plans:
 
 Plans:
 
-- [ ] 07-01-PLAN.md — Fix search/page.tsx: /api/search, Realtime channel key, polling endpoint, router.push, remove /api/user/usage
-- [ ] 07-02-PLAN.md — proxy.ts guest access, GuestLimitModal wiring, REQUIREMENTS.md traceability cleanup
+- [x] 07-01-PLAN.md — Fix search/page.tsx: /api/search, Realtime channel key, polling endpoint, router.push, remove /api/user/usage
+- [x] 07-02-PLAN.md — proxy.ts guest access, GuestLimitModal wiring, REQUIREMENTS.md traceability cleanup
 
 ## Progress
 
@@ -189,4 +189,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. UI & Dashboard                | 4/4            | Complete       | 2026-04-03 |
 | 5. Gmail Send & Deliverability   | 4/4            | Complete       | 2026-04-04 |
 | 6. Analytics, Monitoring & Legal | 3/3            | Complete       | 2026-04-04 |
-| 7. Search Flow & Guest Access    | 0/2            | Not started    | -          |
+| 7. Search Flow & Guest Access    | 2/2 | Complete   | 2026-04-04 |
