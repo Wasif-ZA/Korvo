@@ -47,5 +47,9 @@ The project has pivoted from a traditional page-based UI to a single-page conver
 - **Mobile PWA:** Configure manifest and service worker for "installable" feel.
 
 ### Decisions Log
+- **2026-04-04 (08-01):** Guest pipelineQueue.add uses `userId: null` — worker handles null userId for guest searches; guests now fully enqueue to BullMQ.
+- **2026-04-04 (08-01):** Stripe cancel_url is `/?view=pricing` (not `/pricing`) — pricing UI is inside chat layout via view param.
+- **2026-04-04 (08-01):** `/api/me` response wrapped in `{ success: true, data: {...} }` envelope to match sidebar's `data.success` check pattern.
+- **2026-04-04 (08-01):** OAuth callback new user detection uses 5-second delta between `created_at` and `last_sign_in_at` timestamps.
 - **2026-04-04 (08-02):** Legal pages placed at `app/privacy/` and `app/terms/` (not in route groups) so they inherit the root layout automatically.
 - **2026-04-04 (08-02):** Footer uses `pointer-events-none` container with `pointer-events-auto` on individual links to avoid obstructing chat input area.

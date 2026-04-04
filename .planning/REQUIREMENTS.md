@@ -17,10 +17,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: First search is free without signup (session-scoped guest search)
+- [x] **AUTH-01**: First search is free without signup (session-scoped guest search)
 - [x] **AUTH-02**: Google OAuth signup via Supabase Auth prompted after first search
 - [x] **AUTH-03**: User session persists across browser refresh via Supabase SSR (`@supabase/ssr`)
-- [ ] **AUTH-04**: Auth middleware on all API routes checking session validity
+- [x] **AUTH-04**: Auth middleware on all API routes checking session validity
 - [x] **AUTH-05**: Free tier: 5 searches/month, 5 email drafts/month enforced server-side
 
 ### Agent Pipeline
@@ -82,8 +82,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Payments
 
 - [x] **PAY-01**: Stripe Checkout Sessions for Pro tier ($19/month)
-- [ ] **PAY-02**: Stripe webhooks (checkout.session.completed, customer.subscription.deleted) with raw body parsing
-- [ ] **PAY-03**: Customer Portal for self-service subscription management
+- [x] **PAY-02**: Stripe webhooks (checkout.session.completed, customer.subscription.deleted) with raw body parsing
+- [x] **PAY-03**: Customer Portal for self-service subscription management
 - [x] **PAY-04**: Plan stored in profiles table, updated by server-side webhook handler (never client-side)
 - [x] **PAY-05**: Pro tier: 50 searches/month, unlimited drafts, Gmail API send, coffee chat prep (V2)
 
@@ -184,14 +184,14 @@ Deferred to after V2. Tracked for future planning.
 | FOUND-03    | Phase 1 | Complete |
 | FOUND-04    | Phase 1 | Complete |
 | FOUND-05    | Phase 1 | Complete |
-| AUTH-01     | Phase 8 | Pending  |
+| AUTH-01     | Phase 8 | Complete |
 | AUTH-02     | Phase 7 | Complete |
 | AUTH-03     | Phase 1 | Complete |
-| AUTH-04     | Phase 8 | Pending  |
+| AUTH-04     | Phase 8 | Complete |
 | AUTH-05     | Phase 1 | Complete |
 | PAY-01      | Phase 1 | Complete |
-| PAY-02      | Phase 8 | Pending  |
-| PAY-03      | Phase 8 | Pending  |
+| PAY-02      | Phase 8 | Complete |
+| PAY-03      | Phase 8 | Complete |
 | PAY-04      | Phase 1 | Complete |
 | PAY-05      | Phase 1 | Complete |
 | ORCH-01     | Phase 2 | Complete |
@@ -221,7 +221,7 @@ Deferred to after V2. Tracked for future planning.
 | UI-01       | Phase 8 | Pending  |
 | UI-02       | Phase 4 | Complete |
 | UI-03       | Phase 4 | Complete |
-| UI-04       | Phase 8 | Pending  |
+| UI-04       | Phase 8 | Complete |
 | UI-05       | Phase 4 | Complete |
 | UI-06       | Phase 4 | Complete |
 | UI-07       | Phase 4 | Complete |
