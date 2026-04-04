@@ -90,7 +90,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Email Sending & Deliverability
 
 - [x] **SEND-01**: Free tier: copy-to-clipboard + mailto link
-- [ ] **SEND-02**: Pro tier: Gmail API OAuth send directly from Korvo (separate OAuth flow from Supabase Google login, requires `gmail.send` scope)
+- [x] **SEND-02**: Pro tier: Gmail API OAuth send directly from Korvo (separate OAuth flow from Supabase Google login, requires `gmail.send` scope)
 - [x] **SEND-03**: Gmail refresh token stored encrypted at rest, handles 100-token-per-user limit with graceful "Reconnect Gmail" prompt
 - [x] **SEND-04**: Deliverability engine: warm-up ramp (5→10→20 emails/day), enforced in Redis counters inside BullMQ jobs
 - [x] **SEND-05**: Send interval jitter (randomized delays between sends)
@@ -233,7 +233,7 @@ Deferred to after V2. Tracked for future planning.
 | DASH-04     | Phase 4 | Complete |
 | DASH-05     | Phase 8 | Complete |
 | SEND-01     | Phase 5 | Complete |
-| SEND-02     | Phase 8 | Pending  |
+| SEND-02     | Phase 8 | Complete |
 | SEND-03     | Phase 5 | Complete |
 | SEND-04     | Phase 5 | Complete |
 | SEND-05     | Phase 5 | Complete |
