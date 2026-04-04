@@ -19,6 +19,7 @@ import {
   GmailConnectionSection,
   UnsubscribeFooterEditor,
 } from "./SettingsClient";
+import { AnalyticsOptOutSection } from "@/components/app/AnalyticsOptOutSection";
 
 export const metadata = {
   title: "Settings — Korvo",
@@ -180,7 +181,7 @@ export default async function SettingsPage() {
         </section>
 
         {/* Defaults Section */}
-        <section className="space-y-6 pb-20">
+        <section className="space-y-6">
           <div className="flex items-center gap-4">
             <span className="text-[12px] font-mono font-bold text-accent uppercase tracking-[0.2em]">
               {"// Pipeline_Defaults \\\\"}
@@ -190,6 +191,20 @@ export default async function SettingsPage() {
 
           <Card className="bg-surface">
             <DefaultsForm />
+          </Card>
+        </section>
+
+        {/* Privacy Controls Section */}
+        <section className="space-y-6 pb-20">
+          <div className="flex items-center gap-4">
+            <span className="text-[12px] font-mono font-bold text-accent uppercase tracking-[0.2em]">
+              {"// Privacy_Controls \\\\"}
+            </span>
+            <div className="h-px flex-1 bg-border-card" />
+          </div>
+
+          <Card className="bg-surface">
+            <AnalyticsOptOutSection />
           </Card>
         </section>
       </div>

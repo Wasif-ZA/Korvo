@@ -1,4 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import posthog from "posthog-js";
 
 // Mock posthog-js module
 vi.mock("posthog-js", () => ({
@@ -12,37 +13,105 @@ vi.mock("posthog-js", () => ({
 }));
 
 describe("PostHog Event Tracking (MON-01)", () => {
-  it("should track search_completed with company and role properties", () => {
-    expect(true).toBe(true); // Stub — implemented in Plan 03
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it("should track email_copied with contact_id property", () => {
-    expect(true).toBe(true);
+  it("track module exports a track function", async () => {
+    const mod = await import("@/lib/analytics/track");
+    expect(typeof mod.track).toBe("function");
   });
 
-  it("should track email_sent with contact_id and method properties", () => {
-    expect(true).toBe(true);
+  it("track('search_completed') calls posthog.capture with correct event name", async () => {
+    const { track } = await import("@/lib/analytics/track");
+    track("search_completed", {
+      company: "Acme",
+      role: "SWE",
+      location: "Sydney",
+      contacts_found: 3,
+    });
+    expect(posthog.capture).toHaveBeenCalledWith(
+      "search_completed",
+      expect.objectContaining({
+        company: "Acme",
+        contacts_found: 3,
+      }),
+    );
   });
 
-  it("should track signup event", () => {
-    expect(true).toBe(true);
+  it("track('email_copied') includes contact_id property", async () => {
+    const { track } = await import("@/lib/analytics/track");
+    track("email_copied", { contact_id: "c1", company: "Acme" });
+    expect(posthog.capture).toHaveBeenCalledWith(
+      "email_copied",
+      expect.objectContaining({
+        contact_id: "c1",
+      }),
+    );
   });
 
-  it("should track upgrade event with plan property", () => {
-    expect(true).toBe(true);
+  it("track('email_sent') includes method property for funnel analysis", async () => {
+    const { track } = await import("@/lib/analytics/track");
+    track("email_sent", { contact_id: "c1", company: "Acme", method: "gmail" });
+    expect(posthog.capture).toHaveBeenCalledWith(
+      "email_sent",
+      expect.objectContaining({
+        method: "gmail",
+      }),
+    );
   });
 
-  it("should track pipeline_stage_change with from/to stage properties", () => {
-    expect(true).toBe(true);
+  it("track('pipeline_stage_change') includes from/to stages", async () => {
+    const { track } = await import("@/lib/analytics/track");
+    track("pipeline_stage_change", {
+      contact_id: "c1",
+      from_stage: "identified",
+      to_stage: "contacted",
+    });
+    expect(posthog.capture).toHaveBeenCalledWith(
+      "pipeline_stage_change",
+      expect.objectContaining({
+        from_stage: "identified",
+        to_stage: "contacted",
+      }),
+    );
+  });
+
+  it("track('signup') fires with google provider", async () => {
+    const { track } = await import("@/lib/analytics/track");
+    track("signup", { provider: "google" });
+    expect(posthog.capture).toHaveBeenCalledWith(
+      "signup",
+      expect.objectContaining({ provider: "google" }),
+    );
+  });
+
+  it("track('upgrade') fires with plan and source", async () => {
+    const { track } = await import("@/lib/analytics/track");
+    track("upgrade", { plan: "pro", source: "stripe_checkout" });
+    expect(posthog.capture).toHaveBeenCalledWith(
+      "upgrade",
+      expect.objectContaining({ plan: "pro" }),
+    );
   });
 });
 
 describe("PostHog Success Metrics Properties (MON-03)", () => {
-  it("should include properties sufficient for email copy rate funnel", () => {
-    expect(true).toBe(true);
+  it("search_completed includes contacts_found for search-to-send funnel", async () => {
+    const fs = await import("fs");
+    const content = fs.readFileSync("lib/analytics/track.ts", "utf-8");
+    expect(content).toContain("contacts_found");
   });
 
-  it("should include properties sufficient for search-to-send conversion funnel", () => {
-    expect(true).toBe(true);
+  it("email_sent includes method for copy-vs-send analysis", async () => {
+    const fs = await import("fs");
+    const content = fs.readFileSync("lib/analytics/track.ts", "utf-8");
+    expect(content).toContain("method");
+  });
+
+  it("upgrade includes plan for free-to-paid conversion funnel", async () => {
+    const fs = await import("fs");
+    const content = fs.readFileSync("lib/analytics/track.ts", "utf-8");
+    expect(content).toContain("plan");
   });
 });
