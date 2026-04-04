@@ -99,9 +99,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Analytics & Monitoring
 
-- [ ] **MON-01**: PostHog events: search_completed, email_copied, email_sent, signup, upgrade, pipeline_stage_change
-- [ ] **MON-02**: Sentry error tracking on all API routes and worker processes
-- [ ] **MON-03**: Success metrics tracked: email copy rate, search-to-send conversion, 7-day retention, free-to-paid conversion
+- [x] **MON-01**: PostHog events: search_completed, email_copied, email_sent, signup, upgrade, pipeline_stage_change
+- [x] **MON-02**: Sentry error tracking on all API routes and worker processes
+- [x] **MON-03**: Success metrics tracked: email copy rate, search-to-send conversion, 7-day retention, free-to-paid conversion
 
 ### Legal & Compliance
 
@@ -239,9 +239,9 @@ Deferred to after V2. Tracked for future planning.
 | SEND-05     | Phase 5 | Complete |
 | SEND-06     | Phase 5 | Complete |
 | SEND-07     | Phase 5 | Complete |
-| MON-01      | Phase 6 | Pending  |
-| MON-02      | Phase 6 | Pending  |
-| MON-03      | Phase 6 | Pending  |
+| MON-01      | Phase 6 | Complete |
+| MON-02      | Phase 6 | Complete |
+| MON-03      | Phase 6 | Complete |
 | LEGAL-01    | Phase 6 | Pending  |
 | LEGAL-02    | Phase 6 | Pending  |
 | LEGAL-03    | Phase 6 | Pending  |

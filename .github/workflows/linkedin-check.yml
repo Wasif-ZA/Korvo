@@ -1,0 +1,29 @@
+name: LinkedIn Blocklist Audit
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  linkedin-audit:
+    name: Check for LinkedIn Direct Access
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail if agent code directly references linkedin.com
+        run: |
+          # Check worker/agents/ and worker/orchestrator/ for linkedin.com references
+          # Exclude: blocklist file (defines the blocked domain), test file, and policy comments
+          MATCHES=$(grep -rn "linkedin\.com" worker/agents/ worker/orchestrator/ \
+            --include="*.ts" \
+            | grep -v "blocklist\|AGENT-09\|Never access\|blocked.*policy\|legal policy" || true)
+
+          if [ -n "$MATCHES" ]; then
+            echo "ERROR: Agent code contains direct linkedin.com reference:"
+            echo "$MATCHES"
+            exit 1
+          fi
+
+          echo "LinkedIn blocklist audit passed — no direct access in agent code"

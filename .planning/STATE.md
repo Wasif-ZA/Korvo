@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: verifying
-stopped_at: Completed 05-04-PLAN.md — EmailDraft call site gap closure
-last_updated: "2026-04-04T07:04:23.731Z"
+status: executing
+stopped_at: Phase 6 planned — 3 plans in 2 waves, verification passed
+last_updated: "2026-04-04T07:42:26.098Z"
 last_activity: 2026-04-04
 progress:
   total_phases: 6
   completed_phases: 5
-  total_plans: 27
-  completed_plans: 27
-  percent: 90
+  total_plans: 30
+  completed_plans: 28
+  percent: 93
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-01)
 
 **Core value:** Enter a company name. Get 3 contacts with personalized cold emails ready to send. Land interviews.
-**Current focus:** Phase 05 — gmail-send-deliverability
+**Current focus:** Phase 06 — analytics-monitoring-legal
 
 ## Current Position
 
-Phase: 6
-Plan: Not started
-Status: Phase complete — ready for verification
+Phase: 06 (analytics-monitoring-legal) — EXECUTING
+Plan: 2 of 3
+Status: Ready to execute
 Last activity: 2026-04-04
 
-Progress: [█████████░] 90% (Phase 3 of 6 complete, Phase 4 nearly complete)
+Progress: [█████████░] 93% (28/30 plans complete)
 
 ## Performance Metrics
 
@@ -50,6 +50,12 @@ Progress: [█████████░] 90% (Phase 3 of 6 complete, Phase 4 n
 - **Marketing at /welcome**: Reorganized the landing page to `/welcome` for unauthenticated traffic.
 - **Full Backend Linkage**: Implemented `GET /api/contacts`, `GET /api/dashboard/stats`, `GET /api/search` (history), `PATCH /api/contacts/[id]`, and `PATCH /api/drafts/[id]`.
 
+### Decisions (Phase 6)
+
+- **PostHog instrumentation hook**: PostHog initialized via instrumentation-client.ts register() hook, not PostHogProvider — per Next.js 16 D-01 pattern.
+- **Sentry first import in worker**: @sentry/node init is first statement in worker/index.ts to ensure all imported modules are instrumented at import time.
+- **withSentryConfig outermost**: withSentryConfig wraps withBundleAnalyzer as outermost config wrapper per Sentry Next.js docs.
+
 ### Pending Todos
 
 - [ ] Final visual polish pass across all authenticated pages.
@@ -57,6 +63,6 @@ Progress: [█████████░] 90% (Phase 3 of 6 complete, Phase 4 n
 
 ## Session Continuity
 
-Last session: 2026-04-04T06:58:23.509Z
-Stopped at: Completed 05-04-PLAN.md — EmailDraft call site gap closure
-Resume file: None
+Last session: 2026-04-04T18:41:00.000Z
+Stopped at: Completed 06-01-PLAN.md — PostHog + Sentry SDK installation
+Resume file: .planning/phases/06-analytics-monitoring-legal/06-02-PLAN.md
