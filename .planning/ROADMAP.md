@@ -126,7 +126,15 @@ Plans:
 3. The deliverability engine enforces the daily send limit (warm-up ramp: 5 → 10 → 20 per day), and attempting to exceed it displays a clear rate-limit message rather than silently failing
 4. Gmail refresh tokens are stored encrypted at rest; when the token limit is reached, the user sees a "Reconnect Gmail" prompt rather than an unexplained error
 5. Every email sent via Korvo includes a configurable unsubscribe footer (Australia Spam Act compliance)
-   **Plans**: TBD
+   **Plans**: 3 plans
+
+Plans:
+
+- [ ] 05-01-PLAN.md — Install googleapis, GmailToken model, token encryption, deliverability library, Wave 0 tests
+- [ ] 05-02-PLAN.md — Gmail OAuth routes (connect/callback/disconnect/status/send), worker implementation
+- [ ] 05-03-PLAN.md — EmailDraft send button, Settings Gmail section, daily counter, visual verification
+
+**UI hint**: yes
 
 ### Phase 6: Analytics, Monitoring & Legal
 
@@ -152,5 +160,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Queue Infrastructure          | 3/3            | Complete    | 2026-04-03 |
 | 3. Agent Pipeline                | 8/8            | Complete    | 2026-04-03 |
 | 4. UI & Dashboard                | 4/4            | Complete    | 2026-04-03 |
-| 5. Gmail Send & Deliverability   | 0/TBD          | Not started | -          |
+| 5. Gmail Send & Deliverability   | 0/3            | Planning    | -          |
 | 6. Analytics, Monitoring & Legal | 0/TBD          | Not started | -          |
