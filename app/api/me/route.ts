@@ -22,6 +22,7 @@ export async function GET(_req: NextRequest) {
       fullName: true,
       avatarUrl: true,
       plan: true,
+      searchesUsedThisMonth: true,
     },
   });
 
@@ -30,8 +31,13 @@ export async function GET(_req: NextRequest) {
   }
 
   return NextResponse.json({
-    fullName: profile.fullName,
-    avatarUrl: profile.avatarUrl,
-    plan: profile.plan,
+    success: true,
+    data: {
+      fullName: profile.fullName,
+      avatarUrl: profile.avatarUrl,
+      plan: profile.plan,
+      searchesUsed: profile.searchesUsedThisMonth,
+      searchesLimit: profile.plan === "pro" ? 50 : 5,
+    },
   });
 }

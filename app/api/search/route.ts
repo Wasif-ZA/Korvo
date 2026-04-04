@@ -123,7 +123,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  // Guest search — create row but do NOT enqueue (Phase 4 will add guest queueing)
+  // Guest search — create row and enqueue to pipeline
   const search = await prisma.search.create({
     data: {
       sessionId: parsed.data.guestSessionId,
@@ -136,8 +136,51 @@ export async function POST(req: NextRequest) {
     select: { id: true },
   });
 
+  // Enqueue pipeline job for guest (userId: null — worker handles null userId)
+  const job = await pipelineQueue.add("pipeline", {
+    searchId: search.id,
+    userId: null,
+    company: parsed.data.company,
+    role: parsed.data.role,
+    location: parsed.data.location ?? null,
+  });
+
   return NextResponse.json({
     limitReached: false,
     searchId: search.id,
+    jobId: job.id,
+  });
+}
+
+export async function GET() {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const history = await prisma.search.findMany({
+    where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
+    take: 10,
+    include: {
+      _count: {
+        select: { contacts: true },
+      },
+    },
+  });
+
+  return NextResponse.json({
+    success: true,
+    data: history.map((h) => ({
+      id: h.id,
+      company: h.company,
+      role: h.role,
+      date: h.createdAt,
+      contactsCount: h._count.contacts,
+    })),
   });
 }
