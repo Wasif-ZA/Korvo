@@ -198,7 +198,7 @@ Plans:
 
 - [x] 08-01-PLAN.md — Backend route fixes: guest enqueue, Stripe redirect, /api/me usage, OAuth callback
 - [x] 08-02-PLAN.md — Restore Privacy Policy and Terms of Service pages
-- [ ] 08-03-PLAN.md — Chat UI wiring: upgrade event, guest adopt, sidebar stats, ContactCard reminders
+- [x] 08-03-PLAN.md — Chat UI wiring: upgrade event, guest adopt, sidebar stats, ContactCard reminders
 - [ ] 08-04-PLAN.md — Port Gmail send into chat EmailDraft component
 
 **UI hint**: yes
@@ -229,5 +229,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 5. Gmail Send & Deliverability   | 4/4            | Complete       | 2026-04-04 |
 | 6. Analytics, Monitoring & Legal | 3/3            | Complete       | 2026-04-04 |
 | 7. Search Flow & Guest Access    | 2/2            | Complete       | 2026-04-04 |
-| 8. Chat UI Reconnection          | 2/4 | In Progress|  |
+| 8. Chat UI Reconnection          | 3/4 | In Progress|  |
 | 9. API Response & Deploy Fixes   | 0/0            | Not Started    |            |

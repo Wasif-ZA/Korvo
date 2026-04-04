@@ -36,11 +36,11 @@ The project has pivoted from a traditional page-based UI to a single-page conver
 ### Phase 8: Chat UI Reconnection (In Progress)
 - **08-01** ✅ OAuth callback route restored at `app/auth/callback/route.ts`
 - **08-02** ✅ Legal pages restored at `/privacy` and `/terms`; footer links added to root layout (LEGAL-01..04 complete)
-- **08-03** — Pending
+- **08-03** ✅ Upgrade event bridge + guest adoption in page.tsx; sidebar real usage + stats; ContactCard reminder toggle
 - **08-04** — Pending
 
 ### Next Steps
-- **08-03/08-04:** Complete remaining chat UI reconnection tasks.
+- **08-04:** Complete remaining chat UI reconnection tasks.
 - **V2: Sonnet 4.6 Briefs:** Implement the "Get Coffee Chat Prep" UI once backend agents provide the endpoint.
 - **AI Response Detection:** Gmail read-only integration to auto-move contacts to "Responded".
 - **Empty States:** Add more personality to empty pipeline states.
@@ -53,3 +53,6 @@ The project has pivoted from a traditional page-based UI to a single-page conver
 - **2026-04-04 (08-01):** OAuth callback new user detection uses 5-second delta between `created_at` and `last_sign_in_at` timestamps.
 - **2026-04-04 (08-02):** Legal pages placed at `app/privacy/` and `app/terms/` (not in route groups) so they inherit the root layout automatically.
 - **2026-04-04 (08-02):** Footer uses `pointer-events-none` container with `pointer-events-auto` on individual links to avoid obstructing chat input area.
+- **2026-04-04 (08-03):** Guest session stored as `'browser-session'` literal in localStorage — single-device tracking sufficient for V1.
+- **2026-04-04 (08-03):** Stats grid renders conditionally on `stats.length > 0` — unauthenticated users see nothing; no loading skeleton needed.
+- **2026-04-04 (08-03):** Reminder state is local `useState` — server is authoritative on page reload; acceptable for V1.

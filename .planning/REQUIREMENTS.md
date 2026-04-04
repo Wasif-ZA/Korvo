@@ -61,7 +61,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### UI — Search & Results
 
-- [ ] **UI-01**: Landing page with search bar (company + role + location), hero section, how-it-works, pricing
+- [x] **UI-01**: Landing page with search bar (company + role + location), hero section, how-it-works, pricing
 - [x] **UI-02**: One-click seamless flow: search → all results (contacts + research cards + email drafts) load together, no extra clicks
 - [x] **UI-03**: Contact cards: name, title, email + ConfidenceBadge (green/yellow/red), score (0-100), personalization hook, source URL
 - [x] **UI-04**: Research card per contact: Background | Ask This | Mention This (structured, not paragraph)
@@ -74,10 +74,10 @@ Requirements for initial release. Each maps to roadmap phases.
 ### UI — Dashboard & Pipeline
 
 - [x] **DASH-01**: Pipeline Kanban board: Identified → Contacted → Responded → Chatted → Applied → Interviewing
-- [ ] **DASH-02**: Drag or click to move contacts between stages
-- [ ] **DASH-03**: Expand contact to see email draft, research card, score breakdown, notes
+- [x] **DASH-02**: Drag or click to move contacts between stages
+- [x] **DASH-03**: Expand contact to see email draft, research card, score breakdown, notes
 - [x] **DASH-04**: Search history sidebar with timestamps and company names
-- [ ] **DASH-05**: Basic follow-up reminder ("remind me in 7 days" per contact)
+- [x] **DASH-05**: Basic follow-up reminder ("remind me in 7 days" per contact)
 
 ### Payments
 
@@ -99,9 +99,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Analytics & Monitoring
 
-- [ ] **MON-01**: PostHog events: search_completed, email_copied, email_sent, signup, upgrade, pipeline_stage_change
+- [x] **MON-01**: PostHog events: search_completed, email_copied, email_sent, signup, upgrade, pipeline_stage_change
 - [x] **MON-02**: Sentry error tracking on all API routes and worker processes
-- [ ] **MON-03**: Success metrics tracked: email copy rate, search-to-send conversion, 7-day retention, free-to-paid conversion
+- [x] **MON-03**: Success metrics tracked: email copy rate, search-to-send conversion, 7-day retention, free-to-paid conversion
 
 ### Legal & Compliance
 
@@ -218,7 +218,7 @@ Deferred to after V2. Tracked for future planning.
 | EMAIL-03    | Phase 3 | Complete |
 | EMAIL-04    | Phase 3 | Complete |
 | EMAIL-05    | Phase 3 | Complete |
-| UI-01       | Phase 8 | Pending  |
+| UI-01       | Phase 8 | Complete |
 | UI-02       | Phase 4 | Complete |
 | UI-03       | Phase 4 | Complete |
 | UI-04       | Phase 8 | Complete |
@@ -228,10 +228,10 @@ Deferred to after V2. Tracked for future planning.
 | UI-08       | Phase 4 | Complete |
 | UI-09       | Phase 4 | Complete |
 | DASH-01     | Phase 4 | Complete |
-| DASH-02     | Phase 8 | Pending  |
-| DASH-03     | Phase 8 | Pending  |
+| DASH-02     | Phase 8 | Complete |
+| DASH-03     | Phase 8 | Complete |
 | DASH-04     | Phase 4 | Complete |
-| DASH-05     | Phase 8 | Pending  |
+| DASH-05     | Phase 8 | Complete |
 | SEND-01     | Phase 5 | Complete |
 | SEND-02     | Phase 8 | Pending  |
 | SEND-03     | Phase 5 | Complete |
@@ -239,9 +239,9 @@ Deferred to after V2. Tracked for future planning.
 | SEND-05     | Phase 5 | Complete |
 | SEND-06     | Phase 5 | Complete |
 | SEND-07     | Phase 5 | Complete |
-| MON-01      | Phase 8 | Pending  |
+| MON-01      | Phase 8 | Complete |
 | MON-02      | Phase 6 | Complete |
-| MON-03      | Phase 8 | Pending  |
+| MON-03      | Phase 8 | Complete |
 | LEGAL-01    | Phase 8 | Complete |
 | LEGAL-02    | Phase 8 | Complete |
 | LEGAL-03    | Phase 8 | Complete |
