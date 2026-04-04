@@ -144,3 +144,22 @@ model CompanyEnrichment {
   @@map("company_enrichments")
 }
 
+// ============================================
+// GMAIL TOKEN
+// Stores encrypted Gmail OAuth refresh tokens for Pro users
+// userId unique — one Gmail connection per user
+// firstSentAt drives the warm-up ramp (D-09)
+// ============================================
+model GmailToken {
+  id                    String    @id @default(uuid())
+  userId                String    @unique @map("user_id")
+  encryptedRefreshToken String    @map("encrypted_refresh_token")
+  gmailEmail            String?   @map("gmail_email")
+  gmailConnectedAt      DateTime  @map("gmail_connected_at")
+  firstSentAt           DateTime? @map("first_sent_at")
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+
+  @@map("gmail_tokens")
+}
+
