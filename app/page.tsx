@@ -33,7 +33,8 @@ export type MessageType =
 export interface Message {
   id: string;
   type: MessageType;
-  content: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  content: any;
   timestamp: Date;
 }
 
@@ -505,6 +506,15 @@ function ChatContent() {
                             draft={m.content}
                             onRegenerate={handleRegenerate}
                             isRegenerating={isRegenerating === m.content.id}
+                            isPro={profile?.plan === "pro"}
+                            contactId={m.content.contact_id}
+                            onStageMoved={(contactId, stage) => {
+                              track("pipeline_stage_change", {
+                                contact_id: contactId,
+                                from_stage: "identified",
+                                to_stage: stage,
+                              });
+                            }}
                           />
                         )}
 
