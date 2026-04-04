@@ -7,6 +7,7 @@ import { PipelineTracker } from "@/components/app/PipelineTracker";
 import { toast } from "react-hot-toast";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { track } from "@/lib/analytics/track";
+import { getOrCreateGuestSessionId } from "@/lib/guest";
 
 type StepStatus = "pending" | "running" | "complete" | "failed";
 
@@ -46,9 +47,8 @@ const INITIAL_STEPS: PipelineStep[] = [
 
 export default function SearchPage() {
   const [isSearching, setIsSearching] = useState(false);
-  const [jobId, setJobId] = useState<string | null>(null);
+  const [searchId, setSearchId] = useState<string | null>(null);
   const [steps, setSteps] = useState<PipelineStep[]>(INITIAL_STEPS);
-  const [credits, setCredits] = useState(5);
   // Store search params so we can fire search_completed when pipeline finishes
   const [searchParams, setSearchParams] = useState<{
     company: string;
@@ -57,21 +57,6 @@ export default function SearchPage() {
   } | null>(null);
   const router = useRouter();
   const supabase = createSupabaseBrowserClient();
-
-  // Load initial credits
-  useEffect(() => {
-    async function fetchCredits() {
-      const res = await fetch("/api/user/usage");
-      if (res.ok) {
-        const data = await res.json();
-        // data shape: { success: true, data: { used: number, limit: number } }
-        if (data.success) {
-          setCredits(data.data.limit - data.data.used);
-        }
-      }
-    }
-    fetchCredits();
-  }, []);
 
   const startPipeline = async (
     company: string,
@@ -89,10 +74,15 @@ export default function SearchPage() {
     );
 
     try {
-      const res = await fetch("/api/pipeline/start", {
+      const res = await fetch("/api/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ company, role, location }),
+        body: JSON.stringify({
+          company,
+          role,
+          location,
+          guestSessionId: getOrCreateGuestSessionId(),
+        }),
       });
 
       const data = await res.json();
@@ -103,7 +93,11 @@ export default function SearchPage() {
         );
       }
 
-      setJobId(data.jobId);
+      if (data.limitReached === true) {
+        throw new Error(data.message || "Search limit reached");
+      }
+
+      setSearchId(data.searchId);
     } catch (error: unknown) {
       const msg =
         error instanceof Error ? error.message : "Couldn't start the search.";
@@ -114,9 +108,9 @@ export default function SearchPage() {
 
   // Subscribe to Realtime progress
   useEffect(() => {
-    if (!jobId || !isSearching) return;
+    if (!searchId || !isSearching) return;
 
-    const channel = supabase.channel(`search:${jobId}:progress`);
+    const channel = supabase.channel(`search:${searchId}:progress`);
 
     channel
       .on("broadcast", { event: "stage" }, ({ payload }) => {
@@ -125,16 +119,16 @@ export default function SearchPage() {
         setSteps((prev) => {
           const newSteps = [...prev];
           if (stage === "contacts_found") {
-            newSteps[0].status = "complete";
-            newSteps[1].status = "running";
+            newSteps[0] = { ...newSteps[0], status: "complete" };
+            newSteps[1] = { ...newSteps[1], status: "running" };
           } else if (stage === "emails_guessed") {
-            newSteps[1].status = "complete";
-            newSteps[2].status = "running";
+            newSteps[1] = { ...newSteps[1], status: "complete" };
+            newSteps[2] = { ...newSteps[2], status: "running" };
           } else if (stage === "research_done") {
-            newSteps[2].status = "complete";
-            newSteps[3].status = "running";
+            newSteps[2] = { ...newSteps[2], status: "complete" };
+            newSteps[3] = { ...newSteps[3], status: "running" };
           } else if (stage === "drafts_ready") {
-            newSteps[3].status = "complete";
+            newSteps[3] = { ...newSteps[3], status: "complete" };
           }
           return newSteps;
         });
@@ -144,28 +138,28 @@ export default function SearchPage() {
     // Also poll for final completion status
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`/api/pipeline/status/${jobId}`);
+        const res = await fetch(`/api/search/${searchId}`);
         if (!res.ok) return;
 
         const data = await res.json();
 
-        if (data.status === "complete") {
+        if (data.data?.pipeline_status === "complete") {
           setIsSearching(false);
-          setJobId(null);
+          setSearchId(null);
           // Fire search_completed event with contacts_found count (MON-03 funnel)
           if (searchParams) {
             track("search_completed", {
               company: searchParams.company,
               role: searchParams.role,
               location: searchParams.location,
-              contacts_found: data.contactsFound ?? 0,
+              contacts_found: data.data?.contacts?.length ?? 0,
             });
           }
           toast.success("Pipeline completed successfully!");
-          router.push(`/search/${jobId}`);
-        } else if (data.status === "failed") {
+          router.push(`/search/${searchId}`);
+        } else if (data.data?.pipeline_status === "failed") {
           setIsSearching(false);
-          setJobId(null);
+          setSearchId(null);
           toast.error("The search didn't complete. Please try again.");
         }
       } catch (error) {
@@ -177,7 +171,7 @@ export default function SearchPage() {
       supabase.removeChannel(channel);
       clearInterval(interval);
     };
-  }, [jobId, isSearching, router, supabase, searchParams]);
+  }, [searchId, isSearching, router, supabase, searchParams]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
@@ -186,7 +180,7 @@ export default function SearchPage() {
           <SearchForm
             onStart={startPipeline}
             isLoading={false}
-            creditsRemaining={credits}
+            creditsRemaining={5}
           />
         </div>
       ) : (

@@ -19,6 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: UI & Dashboard** - Search interface, results display, Kanban pipeline — the user-facing product (completed 2026-04-03)
 - [x] **Phase 5: Gmail Send & Deliverability** - Pro-tier Gmail OAuth send with warm-up ramp and auto-tracking (gap closure in progress) (completed 2026-04-04)
 - [x] **Phase 6: Analytics, Monitoring & Legal** - PostHog events, Sentry, compliance docs — launch readiness (completed 2026-04-04)
+- [ ] **Phase 7: Search Flow & Guest Access Fix** - Fix search page API wiring, Realtime channel, guest access — milestone gap closure
 
 ## Phase Details
 
@@ -156,10 +157,29 @@ Plans:
 - [x] 06-02-PLAN.md — Privacy Policy, Terms of Service, LinkedIn audit, CI enforcement
 - [x] 06-03-PLAN.md — Wire 6 PostHog events, analytics opt-out in Settings
 
+### Phase 7: Search Flow & Guest Access Fix
+
+**Goal**: The search flow works end-to-end (search page calls correct API, Realtime channel matches, results display) and guest users can run their first search without signing up
+**Depends on**: Phase 6
+**Requirements**: AUTH-01, AUTH-02, UI-01, MON-01, MON-03
+**Gap Closure:** Closes gaps from v1.0 milestone audit
+**Success Criteria** (what must be TRUE):
+
+1. An authenticated user can enter a company + role on the search page, the pipeline enqueues via POST /api/search, Realtime progress updates display correctly, and results load on the search/[id] page
+2. A guest (unauthenticated) visitor can access the search page, run one search, and is prompted with GuestLimitModal after reaching the guest limit
+3. The search_completed PostHog event fires when pipeline results load
+4. REQUIREMENTS.md traceability shows SCORE-01, SCORE-03, SCORE-04 as Complete
+   **Plans**: 2 plans
+
+Plans:
+
+- [ ] 07-01-PLAN.md — Fix search/page.tsx: /api/search, Realtime channel key, polling endpoint, router.push, remove /api/user/usage
+- [ ] 07-02-PLAN.md — proxy.ts guest access, GuestLimitModal wiring, REQUIREMENTS.md traceability cleanup
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase                            | Plans Complete | Status         | Completed  |
 | -------------------------------- | -------------- | -------------- | ---------- |
@@ -168,4 +188,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Agent Pipeline                | 8/8            | Complete       | 2026-04-03 |
 | 4. UI & Dashboard                | 4/4            | Complete       | 2026-04-03 |
 | 5. Gmail Send & Deliverability   | 4/4            | Complete       | 2026-04-04 |
-| 6. Analytics, Monitoring & Legal | 3/3 | Complete   | 2026-04-04 |
+| 6. Analytics, Monitoring & Legal | 3/3            | Complete       | 2026-04-04 |
+| 7. Search Flow & Guest Access    | 0/2            | Not started    | -          |
