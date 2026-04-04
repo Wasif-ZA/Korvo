@@ -17,8 +17,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [x] **AUTH-01**: First search is free without signup (session-scoped guest search)
-- [x] **AUTH-02**: Google OAuth signup via Supabase Auth prompted after first search
+- [ ] **AUTH-01**: First search is free without signup (session-scoped guest search)
+- [ ] **AUTH-02**: Google OAuth signup via Supabase Auth prompted after first search
 - [x] **AUTH-03**: User session persists across browser refresh via Supabase SSR (`@supabase/ssr`)
 - [x] **AUTH-04**: Auth middleware on all API routes checking session validity
 - [x] **AUTH-05**: Free tier: 5 searches/month, 5 email drafts/month enforced server-side
@@ -184,8 +184,8 @@ Deferred to after V2. Tracked for future planning.
 | FOUND-03    | Phase 1 | Complete |
 | FOUND-04    | Phase 1 | Complete |
 | FOUND-05    | Phase 1 | Complete |
-| AUTH-01     | Phase 1 | Complete |
-| AUTH-02     | Phase 1 | Complete |
+| AUTH-01     | Phase 7 | Pending  |
+| AUTH-02     | Phase 7 | Pending  |
 | AUTH-03     | Phase 1 | Complete |
 | AUTH-04     | Phase 1 | Complete |
 | AUTH-05     | Phase 1 | Complete |
@@ -209,16 +209,16 @@ Deferred to after V2. Tracked for future planning.
 | AGENT-07    | Phase 3 | Complete |
 | AGENT-08    | Phase 3 | Complete |
 | AGENT-09    | Phase 3 | Complete |
-| SCORE-01    | Phase 3 | Pending  |
+| SCORE-01    | Phase 3 | Complete |
 | SCORE-02    | Phase 3 | Complete |
-| SCORE-03    | Phase 3 | Pending  |
-| SCORE-04    | Phase 3 | Pending  |
+| SCORE-03    | Phase 3 | Complete |
+| SCORE-04    | Phase 3 | Complete |
 | EMAIL-01    | Phase 3 | Complete |
 | EMAIL-02    | Phase 3 | Complete |
 | EMAIL-03    | Phase 3 | Complete |
 | EMAIL-04    | Phase 3 | Complete |
 | EMAIL-05    | Phase 3 | Complete |
-| UI-01       | Phase 4 | Pending  |
+| UI-01       | Phase 7 | Pending  |
 | UI-02       | Phase 4 | Complete |
 | UI-03       | Phase 4 | Complete |
 | UI-04       | Phase 4 | Complete |
@@ -239,9 +239,9 @@ Deferred to after V2. Tracked for future planning.
 | SEND-05     | Phase 5 | Complete |
 | SEND-06     | Phase 5 | Complete |
 | SEND-07     | Phase 5 | Complete |
-| MON-01      | Phase 6 | Complete |
+| MON-01      | Phase 7 | Pending  |
 | MON-02      | Phase 6 | Complete |
-| MON-03      | Phase 6 | Complete |
+| MON-03      | Phase 7 | Pending  |
 | LEGAL-01    | Phase 6 | Complete |
 | LEGAL-02    | Phase 6 | Complete |
 | LEGAL-03    | Phase 6 | Complete |
