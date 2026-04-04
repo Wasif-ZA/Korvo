@@ -43,10 +43,12 @@ interface Contact {
 
 interface ContactCardProps {
   contact: Contact;
+  isPro?: boolean;
   onUpdateDraft?: (id: string, subject: string, body: string) => void;
   onRegenerateDraft?: (id: string) => void;
   onViewDetails?: () => void;
   onMarkAsSent?: (contactId: string) => void;
+  onStageMoved?: (contactId: string, stage: string) => void;
 }
 
 function getScoreToneClasses(score: number): string {
@@ -57,10 +59,12 @@ function getScoreToneClasses(score: number): string {
 
 export function ContactCard({
   contact,
+  isPro = false,
   onUpdateDraft,
   onRegenerateDraft,
   onViewDetails,
   onMarkAsSent,
+  onStageMoved,
 }: ContactCardProps) {
   const [isDraftOpen, setIsDraftOpen] = useState(false);
   const [isResearchOpen, setIsResearchOpen] = useState(false);
@@ -219,9 +223,12 @@ export function ContactCard({
             <EmailDraft
               draft={contact.draft}
               email={contact.email}
+              contactId={contact.id}
+              isPro={isPro}
               onClose={() => setIsDraftOpen(false)}
               onSave={(s, b) => onUpdateDraft?.(contact.draft!.id, s, b)}
               onRegenerate={() => onRegenerateDraft?.(contact.draft!.id)}
+              onStageMoved={onStageMoved}
             />
           </div>
         )}

@@ -42,6 +42,12 @@ export default function SearchResultsPage() {
       data?.data.pipeline_status === "running" ? 3000 : 0,
   });
 
+  const { data: profileData } = useSWR<{ plan: string }>(
+    "/api/dashboard/stats",
+    fetcher,
+  );
+  const isPro = profileData?.plan === "pro";
+
   if (isLoading) {
     return (
       <div className="space-y-8">
@@ -85,6 +91,19 @@ export default function SearchResultsPage() {
   const selectedDraft = selectedContactData
     ? results.drafts.find((d) => d.contact_name === selectedContactData.name)
     : null;
+
+  const handleStageMoved = async (contactId: string, stage: string) => {
+    try {
+      await fetch(`/api/contacts/${contactId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stage }),
+      });
+      mutate();
+    } catch {
+      // Optimistic — silently fail, SWR revalidate will correct
+    }
+  };
 
   const handleMarkAsSent = async (contactId: string) => {
     try {
@@ -183,9 +202,12 @@ export default function SearchResultsPage() {
                       hook_used: selectedDraft.hook_used,
                     }}
                     email={selectedContactData.email}
+                    contactId={selectedContactData.id}
+                    isPro={isPro}
                     onClose={() => setSelectedContactId(null)}
                     onRegenerate={() => handleRegenerate(selectedDraft.id)}
                     onSave={() => mutate()}
+                    onStageMoved={handleStageMoved}
                   />
                 </div>
               </section>
@@ -287,10 +309,12 @@ export default function SearchResultsPage() {
             <ContactCard
               key={idx}
               contact={mappedContact}
+              isPro={isPro}
               onUpdateDraft={handleUpdateDraft}
               onViewDetails={() => setSelectedContactId(contactId)}
               onRegenerateDraft={(draftId) => handleRegenerate(draftId)}
               onMarkAsSent={handleMarkAsSent}
+              onStageMoved={handleStageMoved}
             />
           );
         })}
