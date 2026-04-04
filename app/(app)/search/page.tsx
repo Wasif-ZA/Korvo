@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { track } from "@/lib/analytics/track";
 import { getOrCreateGuestSessionId } from "@/lib/guest";
+import { GuestLimitModal } from "@/components/auth/GuestLimitModal";
 
 type StepStatus = "pending" | "running" | "complete" | "failed";
 
@@ -49,6 +50,7 @@ export default function SearchPage() {
   const [isSearching, setIsSearching] = useState(false);
   const [searchId, setSearchId] = useState<string | null>(null);
   const [steps, setSteps] = useState<PipelineStep[]>(INITIAL_STEPS);
+  const [showGuestModal, setShowGuestModal] = useState(false);
   // Store search params so we can fire search_completed when pipeline finishes
   const [searchParams, setSearchParams] = useState<{
     company: string;
@@ -94,7 +96,14 @@ export default function SearchPage() {
       }
 
       if (data.limitReached === true) {
-        throw new Error(data.message || "Search limit reached");
+        if (data.limitType === "guest") {
+          setShowGuestModal(true);
+          setIsSearching(false);
+          return;
+        }
+        throw new Error(
+          data.message || "Search limit reached. Please upgrade.",
+        );
       }
 
       setSearchId(data.searchId);
@@ -174,20 +183,26 @@ export default function SearchPage() {
   }, [searchId, isSearching, router, supabase, searchParams]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh]">
-      {!isSearching ? (
-        <div className="w-full max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <SearchForm
-            onStart={startPipeline}
-            isLoading={false}
-            creditsRemaining={5}
-          />
-        </div>
-      ) : (
-        <div className="w-full max-w-lg animate-in fade-in zoom-in-95 duration-500">
-          <PipelineTracker steps={steps} />
-        </div>
-      )}
-    </div>
+    <>
+      <GuestLimitModal
+        open={showGuestModal}
+        onClose={() => setShowGuestModal(false)}
+      />
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        {!isSearching ? (
+          <div className="w-full max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <SearchForm
+              onStart={startPipeline}
+              isLoading={false}
+              creditsRemaining={5}
+            />
+          </div>
+        ) : (
+          <div className="w-full max-w-lg animate-in fade-in zoom-in-95 duration-500">
+            <PipelineTracker steps={steps} />
+          </div>
+        )}
+      </div>
+    </>
   );
 }
