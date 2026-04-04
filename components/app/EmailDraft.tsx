@@ -8,6 +8,7 @@ import { GmailStatusBadge } from "@/components/app/GmailStatusBadge";
 import { toast } from "react-hot-toast";
 import { useDebounce } from "use-debounce";
 import useSWR, { mutate } from "swr";
+import { track } from "@/lib/analytics/track";
 
 interface GmailStatus {
   connected: boolean;
@@ -28,6 +29,7 @@ interface EmailDraftProps {
   };
   email: string;
   contactId: string;
+  company: string;
   isPro: boolean;
   onClose: () => void;
   onSave?: (subject: string, body: string) => void;
@@ -41,6 +43,7 @@ export function EmailDraft({
   draft,
   email,
   contactId,
+  company,
   isPro,
   onClose,
   onSave,
@@ -106,6 +109,7 @@ export function EmailDraft({
     const text = `To: ${email}\nSubject: ${subject}\n\n${body}`;
     navigator.clipboard.writeText(text);
     setIsCopied(true);
+    track("email_copied", { contact_id: contactId, company });
     toast.success("Full draft copied to clipboard");
     setTimeout(() => setIsCopied(false), 2000);
   };
@@ -176,6 +180,7 @@ export function EmailDraft({
 
       setIsSent(true);
       setIsSending(false);
+      track("email_sent", { contact_id: contactId, company, method: "gmail" });
       toast.success(`Email sent to ${email}`);
       // Invalidate gmail status to refresh counter
       mutate("/api/gmail/status");

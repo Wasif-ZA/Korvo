@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
+import { useSearchParams, useRouter } from "next/navigation";
 import { StatCard } from "@/components/app/StatCard";
 import { PipelineBoard } from "@/components/app/PipelineBoard";
 import { EmptyState } from "@/components/app/EmptyState";
@@ -13,6 +14,7 @@ import { FollowUpReminder } from "@/components/app/FollowUpReminder";
 import { Search, ChevronRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
+import { track } from "@/lib/analytics/track";
 import type { ScoringSignals } from "@/shared/types/agents";
 
 interface ContactData {
@@ -72,6 +74,8 @@ export default function DashboardPage() {
   const [selectedContactId, setSelectedContactId] = useState<string | null>(
     null,
   );
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const { data: statsData, isLoading: statsLoading } = useSWR<
     ApiResponse<StatData[]> & { plan?: string }
@@ -87,6 +91,30 @@ export default function DashboardPage() {
     "/api/search",
     fetcher,
   );
+
+  // Fire signup and upgrade events based on URL params set by server-side routes
+  // - auth callback sets ?event=signup for new users
+  // - Stripe checkout redirect sets ?session_id=... when plan is pro
+  useEffect(() => {
+    const event = searchParams.get("event");
+    const sessionId = searchParams.get("session_id");
+
+    if (event === "signup") {
+      track("signup", { provider: "google" });
+      // Clean up URL param to avoid re-firing on navigation
+      const url = new URL(window.location.href);
+      url.searchParams.delete("event");
+      router.replace(url.pathname + (url.search || ""), { scroll: false });
+    }
+
+    if (sessionId && statsData?.plan === "pro") {
+      track("upgrade", { plan: "pro", source: "stripe_checkout" });
+      const url = new URL(window.location.href);
+      url.searchParams.delete("session_id");
+      router.replace(url.pathname + (url.search || ""), { scroll: false });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, statsData?.plan]);
 
   const handleContactMove = async (id: string, newStage: string) => {
     // Optimistic update: apply immediately without revalidating
@@ -211,6 +239,7 @@ export default function DashboardPage() {
                     draft={selectedContact.draft}
                     email={selectedContact.email}
                     contactId={selectedContact.id}
+                    company={selectedContact.company}
                     isPro={isPro}
                     onClose={() => setSelectedContactId(null)}
                     onRegenerate={() =>

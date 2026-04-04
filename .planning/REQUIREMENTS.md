@@ -105,10 +105,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Legal & Compliance
 
-- [ ] **LEGAL-01**: No LinkedIn scraping — only Google-indexed public data
-- [ ] **LEGAL-02**: Privacy policy explaining data collection and usage
-- [ ] **LEGAL-03**: Terms of Service: users responsible for their own outreach
-- [ ] **LEGAL-04**: Australian Privacy Act (APPs) compliance for storing contact data
+- [x] **LEGAL-01**: No LinkedIn scraping — only Google-indexed public data
+- [x] **LEGAL-02**: Privacy policy explaining data collection and usage
+- [x] **LEGAL-03**: Terms of Service: users responsible for their own outreach
+- [x] **LEGAL-04**: Australian Privacy Act (APPs) compliance for storing contact data
 
 ## v2 Requirements
 
@@ -242,10 +242,10 @@ Deferred to after V2. Tracked for future planning.
 | MON-01      | Phase 6 | Complete |
 | MON-02      | Phase 6 | Complete |
 | MON-03      | Phase 6 | Complete |
-| LEGAL-01    | Phase 6 | Pending  |
-| LEGAL-02    | Phase 6 | Pending  |
-| LEGAL-03    | Phase 6 | Pending  |
-| LEGAL-04    | Phase 6 | Pending  |
+| LEGAL-01    | Phase 6 | Complete |
+| LEGAL-02    | Phase 6 | Complete |
+| LEGAL-03    | Phase 6 | Complete |
+| LEGAL-04    | Phase 6 | Complete |
 
 **Coverage:**
 

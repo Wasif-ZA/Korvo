@@ -224,6 +224,7 @@ export function ContactCard({
               draft={contact.draft}
               email={contact.email}
               contactId={contact.id}
+              company={contact.company}
               isPro={isPro}
               onClose={() => setIsDraftOpen(false)}
               onSave={(s, b) => onUpdateDraft?.(contact.draft!.id, s, b)}

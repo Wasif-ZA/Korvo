@@ -203,6 +203,7 @@ export default function SearchResultsPage() {
                     }}
                     email={selectedContactData.email}
                     contactId={selectedContactData.id}
+                    company={results.company}
                     isPro={isPro}
                     onClose={() => setSelectedContactId(null)}
                     onRegenerate={() => handleRegenerate(selectedDraft.id)}

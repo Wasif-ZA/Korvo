@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { SearchForm } from "@/components/app/SearchForm";
 import { PipelineTracker } from "@/components/app/PipelineTracker";
 import { toast } from "react-hot-toast";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { track } from "@/lib/analytics/track";
 
 type StepStatus = "pending" | "running" | "complete" | "failed";
 
@@ -16,10 +18,30 @@ interface PipelineStep {
 }
 
 const INITIAL_STEPS: PipelineStep[] = [
-  { id: "contacts", label: "Finding Contacts", status: "pending", detail: "Scanning Apollo & LinkedIn" },
-  { id: "emails", label: "Guessing Emails", status: "pending", detail: "Pattern matching & validation" },
-  { id: "hooks", label: "Researching Hooks", status: "pending", detail: "Firecrawl activity analysis" },
-  { id: "drafts", label: "Drafting Emails", status: "pending", detail: "Tone-calibrated generation" },
+  {
+    id: "contacts",
+    label: "Finding Contacts",
+    status: "pending",
+    detail: "Scanning company pages and public profiles",
+  },
+  {
+    id: "emails",
+    label: "Guessing Emails",
+    status: "pending",
+    detail: "Detecting email patterns from public sources",
+  },
+  {
+    id: "hooks",
+    label: "Researching Hooks",
+    status: "pending",
+    detail: "Finding personalization hooks via Firecrawl",
+  },
+  {
+    id: "drafts",
+    label: "Drafting Emails",
+    status: "pending",
+    detail: "Generating tone-calibrated cold emails",
+  },
 ];
 
 export default function SearchPage() {
@@ -27,7 +49,14 @@ export default function SearchPage() {
   const [jobId, setJobId] = useState<string | null>(null);
   const [steps, setSteps] = useState<PipelineStep[]>(INITIAL_STEPS);
   const [credits, setCredits] = useState(5);
+  // Store search params so we can fire search_completed when pipeline finishes
+  const [searchParams, setSearchParams] = useState<{
+    company: string;
+    role: string;
+    location: string;
+  } | null>(null);
   const router = useRouter();
+  const supabase = createSupabaseBrowserClient();
 
   // Load initial credits
   useEffect(() => {
@@ -35,78 +64,129 @@ export default function SearchPage() {
       const res = await fetch("/api/user/usage");
       if (res.ok) {
         const data = await res.json();
-        setCredits(data.limit - data.used);
+        // data shape: { success: true, data: { used: number, limit: number } }
+        if (data.success) {
+          setCredits(data.data.limit - data.data.used);
+        }
       }
     }
     fetchCredits();
   }, []);
 
-  const startPipeline = async (company: string, role: string) => {
+  const startPipeline = async (
+    company: string,
+    role: string,
+    location?: string,
+  ) => {
     setIsSearching(true);
-    setSteps(INITIAL_STEPS);
+    // Store params for search_completed event
+    setSearchParams({ company, role, location: location ?? "" });
+    // Start first step as running immediately
+    setSteps(
+      INITIAL_STEPS.map((s, i) =>
+        i === 0 ? { ...s, status: "running" } : { ...s, status: "pending" },
+      ),
+    );
 
     try {
       const res = await fetch("/api/pipeline/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ company, role }),
+        body: JSON.stringify({ company, role, location }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Failed to start pipeline");
+        throw new Error(
+          data.message || data.error || "Failed to start pipeline",
+        );
       }
 
-      const { jobId } = await res.json();
-      setJobId(jobId);
-    } catch (error: any) {
-      toast.error(error.message);
+      setJobId(data.jobId);
+    } catch (error: unknown) {
+      const msg =
+        error instanceof Error ? error.message : "Couldn't start the search.";
+      toast.error(msg);
       setIsSearching(false);
     }
   };
 
-  // Poll for status
+  // Subscribe to Realtime progress
   useEffect(() => {
     if (!jobId || !isSearching) return;
 
+    const channel = supabase.channel(`search:${jobId}:progress`);
+
+    channel
+      .on("broadcast", { event: "stage" }, ({ payload }) => {
+        const { stage } = payload;
+
+        setSteps((prev) => {
+          const newSteps = [...prev];
+          if (stage === "contacts_found") {
+            newSteps[0].status = "complete";
+            newSteps[1].status = "running";
+          } else if (stage === "emails_guessed") {
+            newSteps[1].status = "complete";
+            newSteps[2].status = "running";
+          } else if (stage === "research_done") {
+            newSteps[2].status = "complete";
+            newSteps[3].status = "running";
+          } else if (stage === "drafts_ready") {
+            newSteps[3].status = "complete";
+          }
+          return newSteps;
+        });
+      })
+      .subscribe();
+
+    // Also poll for final completion status
     const interval = setInterval(async () => {
       try {
         const res = await fetch(`/api/pipeline/status/${jobId}`);
         if (!res.ok) return;
 
         const data = await res.json();
-        
-        // Update steps based on data.steps
-        if (data.steps) {
-          setSteps(data.steps);
-        }
 
         if (data.status === "complete") {
           setIsSearching(false);
           setJobId(null);
+          // Fire search_completed event with contacts_found count (MON-03 funnel)
+          if (searchParams) {
+            track("search_completed", {
+              company: searchParams.company,
+              role: searchParams.role,
+              location: searchParams.location,
+              contacts_found: data.contactsFound ?? 0,
+            });
+          }
           toast.success("Pipeline completed successfully!");
           router.push(`/search/${jobId}`);
         } else if (data.status === "failed") {
           setIsSearching(false);
           setJobId(null);
-          toast.error("Pipeline execution failed.");
+          toast.error("The search didn't complete. Please try again.");
         }
       } catch (error) {
         console.error("Polling error:", error);
       }
-    }, 2000);
+    }, 3000);
 
-    return () => clearInterval(interval);
-  }, [jobId, isSearching, router]);
+    return () => {
+      supabase.removeChannel(channel);
+      clearInterval(interval);
+    };
+  }, [jobId, isSearching, router, supabase, searchParams]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
       {!isSearching ? (
         <div className="w-full max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <SearchForm 
-            onStart={startPipeline} 
-            isLoading={false} 
-            creditsRemaining={credits} 
+          <SearchForm
+            onStart={startPipeline}
+            isLoading={false}
+            creditsRemaining={credits}
           />
         </div>
       ) : (

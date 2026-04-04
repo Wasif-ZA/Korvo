@@ -18,6 +18,7 @@ import { PipelineColumn } from "./PipelineColumn";
 import { PipelineCard } from "./PipelineCard";
 import { StageSelector } from "./StageSelector";
 import { ConfidenceBadge } from "./ConfidenceBadge";
+import { track } from "@/lib/analytics/track";
 
 type Stage =
   | "identified"
@@ -67,7 +68,7 @@ export function PipelineBoard({
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
   );
 
   function handleDragStart(event: DragStartEvent) {
@@ -82,9 +83,18 @@ export function PipelineBoard({
     if (over && active.id !== over.id) {
       const newStage = over.id as Stage;
       const contactId = active.id as string;
-      
+      const dragged = active.data.current as Contact | undefined;
+
       // Check if it's a valid stage drop
-      if (STAGES.some(s => s.id === newStage)) {
+      if (STAGES.some((s) => s.id === newStage)) {
+        // Fire pipeline_stage_change event (MON-01/MON-03)
+        if (dragged) {
+          track("pipeline_stage_change", {
+            contact_id: contactId,
+            from_stage: dragged.stage,
+            to_stage: newStage,
+          });
+        }
         onContactMove(contactId, newStage);
       }
     }
@@ -119,7 +129,10 @@ export function PipelineBoard({
                     onClick={() => onContactClick(contact.id)}
                     className="flex items-center gap-3 flex-1 text-left min-w-0"
                   >
-                    <ConfidenceBadge confidence={contact.confidence} showLabel={false} />
+                    <ConfidenceBadge
+                      confidence={contact.confidence}
+                      showLabel={false}
+                    />
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-text-primary truncate">
                         {contact.name}
