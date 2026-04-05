@@ -218,7 +218,7 @@ Plans:
 
 Plans:
 
-- [ ] 09-01-PLAN.md — Apply teal accent theme, verify score API fields, update REQUIREMENTS.md traceability
+- [x] 09-01-PLAN.md — Apply teal accent theme, verify score API fields, update REQUIREMENTS.md traceability
 
 ## Progress
 
