@@ -9,7 +9,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Foundation
 
-- [ ] **FOUND-01**: Next.js 16 project with App Router, TailwindCSS 4, TypeScript
+- [x] **FOUND-01**: Next.js 16 project with App Router, TailwindCSS 4, TypeScript
 - [x] **FOUND-02**: Supabase project with PostgreSQL database and RLS enabled on all tables
 - [x] **FOUND-03**: Database schema: profiles, searches, contacts, outreach tables with all fields and constraints
 - [x] **FOUND-04**: Row Level Security policies: all tables scoped via `auth.uid() = user_id`, plan gating via profiles table (never JWT user_metadata)
@@ -38,7 +38,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Orchestration
 
 - [x] **ORCH-01**: BullMQ v5.71+ with FlowProducer for agent DAG: Contact Finder (parent) → Email Guesser + Research Agent (parallel children) → Email Drafter (grandparent)
-- [ ] **ORCH-02**: BullMQ workers run as separate Railway service (NOT Vercel serverless — Vercel kills after request completion)
+- [x] **ORCH-02**: BullMQ workers run as separate Railway service (NOT Vercel serverless — Vercel kills after request completion)
 - [x] **ORCH-03**: Redis configured with `maxmemory-policy noeviction` and `maxRetriesPerRequest: null` on worker connections
 - [x] **ORCH-04**: Per-user rate budgets enforced in Redis
 - [x] **ORCH-05**: Two separate BullMQ queues: `pipeline-queue` (2-minute AI pipeline) and `gmail-send-queue` (time-sensitive sends)
@@ -46,8 +46,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Scoring Engine
 
-- [ ] **SCORE-01**: Response probability scoring (0-100) per contact with weighted signals (title match, seniority, recency, public activity, email confidence)
-- [ ] **SCORE-02**: Explainable score breakdown panel showing each signal's contribution
+- [x] **SCORE-01**: Response probability scoring (0-100) per contact with weighted signals (title match, seniority, recency, public activity, email confidence)
+- [x] **SCORE-02**: Explainable score breakdown panel showing each signal's contribution
 - [x] **SCORE-03**: Tone mapping from score: 75-100 = direct, 45-74 = curious, 0-44 = value-driven
 - [x] **SCORE-04**: Tone drives email template selection and drafter prompt variation
 
@@ -179,7 +179,7 @@ Deferred to after V2. Tracked for future planning.
 
 | Requirement | Phase   | Status   |
 | ----------- | ------- | -------- |
-| FOUND-01    | Phase 9 | Pending  |
+| FOUND-01    | Phase 9 | Complete |
 | FOUND-02    | Phase 1 | Complete |
 | FOUND-03    | Phase 1 | Complete |
 | FOUND-04    | Phase 1 | Complete |
@@ -195,7 +195,7 @@ Deferred to after V2. Tracked for future planning.
 | PAY-04      | Phase 1 | Complete |
 | PAY-05      | Phase 1 | Complete |
 | ORCH-01     | Phase 2 | Complete |
-| ORCH-02     | Phase 9 | Pending  |
+| ORCH-02     | Phase 9 | Complete |
 | ORCH-03     | Phase 2 | Complete |
 | ORCH-04     | Phase 2 | Complete |
 | ORCH-05     | Phase 2 | Complete |
@@ -209,8 +209,8 @@ Deferred to after V2. Tracked for future planning.
 | AGENT-07    | Phase 3 | Complete |
 | AGENT-08    | Phase 3 | Complete |
 | AGENT-09    | Phase 3 | Complete |
-| SCORE-01    | Phase 9 | Pending  |
-| SCORE-02    | Phase 9 | Pending  |
+| SCORE-01    | Phase 9 | Complete |
+| SCORE-02    | Phase 9 | Complete |
 | SCORE-03    | Phase 3 | Complete |
 | SCORE-04    | Phase 3 | Complete |
 | EMAIL-01    | Phase 3 | Complete |
@@ -252,10 +252,10 @@ Deferred to after V2. Tracked for future planning.
 - v1 requirements: 67 total
 - Mapped to phases: 67
 - Unmapped: 0
-- Complete: 48
-- Pending (gap closure): 19
+- Complete: 52
+- Pending (gap closure): 15
 
 ---
 
 _Requirements defined: 2026-04-01_
-_Last updated: 2026-04-05 after v1.0 milestone audit gap closure planning_
+_Last updated: 2026-04-05 after Phase 9 completion — all gap closure requirements verified_
