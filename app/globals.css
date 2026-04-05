@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* v3 Firecrawl Aesthetic - Light Mode */
+  /* Warm Teal Aesthetic - Light Mode */
   --bg-page:          #FAFAF8;    /* warm off-white — main background */
   --bg-section-alt:   #F5F5F0;    /* slightly recessed sections */
   --bg-card:          #FFFFFF;    /* white cards sitting on off-white */
@@ -15,9 +15,9 @@
   --text-light:       #B0B0B0;    /* metadata, disabled */
 
   /* Accent */
-  --accent:           #F97316;    /* orange — CTAs, highlights, active states */
-  --accent-hover:     #EA6A10;    /* darker on hover */
-  --accent-bg:        #FFF5EE;    /* soft orange tint for backgrounds */
+  --accent:           #0D9488;    /* teal-600 — CTAs, highlights, active states */
+  --accent-hover:     #0F766E;    /* teal-700 — darker on hover */
+  --accent-bg:        #F0FDFA;    /* teal-50 — soft teal tint for backgrounds */
 
   /* Borders */
   --border:           #E8E8E3;    /* subtle warm border */
@@ -34,7 +34,7 @@
   /* Code syntax highlighting */
   --code-green:       #86EFAC;    /* strings */
   --code-blue:        #93C5FD;    /* keys, URLs */
-  --code-orange:      #F97316;    /* class names */
+  --code-orange:      #0D9488;    /* class names */
   --code-grey:        #6B7280;    /* line numbers */
   --code-white:       #E5E5E5;    /* main text */
 }

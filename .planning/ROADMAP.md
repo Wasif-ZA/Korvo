@@ -214,6 +214,11 @@ Plans:
 1. GET `/api/search/[id]` returns `score` (0-100) and `scoreBreakdown` per contact in the response JSON
 2. `railway.toml` has a correct `startCommand` that matches the actual worker entry point
 3. `globals.css` uses the warm light theme (#FAFAF8 background) per UI-SPEC, not the dark theme
+   **Plans**: 1 plan
+
+Plans:
+
+- [ ] 09-01-PLAN.md — Apply teal accent theme, verify score API fields, update REQUIREMENTS.md traceability
 
 ## Progress
 
@@ -229,5 +234,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 5. Gmail Send & Deliverability   | 4/4            | Complete       | 2026-04-04 |
 | 6. Analytics, Monitoring & Legal | 3/3            | Complete       | 2026-04-04 |
 | 7. Search Flow & Guest Access    | 2/2            | Complete       | 2026-04-04 |
-| 8. Chat UI Reconnection          | 4/4 | Complete   | 2026-04-04 |
-| 9. API Response & Deploy Fixes   | 0/0            | Not Started    |            |
+| 8. Chat UI Reconnection          | 4/4            | Complete       | 2026-04-04 |
+| 9. API Response & Deploy Fixes   | 0/1            | Not Started    |            |
