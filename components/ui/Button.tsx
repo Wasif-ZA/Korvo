@@ -5,20 +5,18 @@ export const buttonVariants = cva(
   [
     "inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-150 ease-in-out h-11 px-4 active:scale-[0.98]",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
-    "disabled:opacity-50 disabled:cursor-not-allowed pointer-events-none",
+    "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
     "font-sans text-sm",
   ],
   {
     variants: {
       variant: {
-        primary:
-          "bg-accent text-white hover:bg-accent-hover shadow-sm",
+        primary: "bg-accent text-white hover:bg-accent-hover shadow-sm",
         outline:
           "bg-transparent text-text-body border border-border hover:border-text-muted hover:bg-accent-bg",
         ghost:
           "bg-transparent text-text-muted hover:text-accent hover:bg-accent-bg",
-        destructive:
-          "bg-error text-white hover:bg-red-700 shadow-sm",
+        destructive: "bg-error text-white hover:bg-red-700 shadow-sm",
       },
       size: {
         default: "h-11 px-6",
@@ -31,11 +29,12 @@ export const buttonVariants = cva(
       variant: "primary",
       size: "default",
     },
-  }
+  },
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
 }
