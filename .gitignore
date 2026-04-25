@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
 
 # vercel
@@ -37,6 +38,49 @@ next-env.d.ts
 .gemini/
 .copilot/
 .antigravity/
+.planning/
+.adal/
+.agents/
+.augment/
+.bob/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
+.goose/
+.iflow/
+.junie/
+.kilocode/
+.kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
+
+# Windows artifacts
+nul
+
+# GitHub agent/skill configs
+.github/agents/
+.github/copilot-instructions.md
+.github/get-shit-done/
+.github/gsd-file-manifest.json
+.github/skills/
+
+# Local skills
+skills/
 
 # Generated Code
 /generated/

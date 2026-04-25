@@ -1,0 +1,38 @@
+{
+  "canva-01": {
+    "subject": "Scaling challenge at Canva — let's chat",
+    "body": "Hi Sarah,\n\nI've been following your work on Canva's web platform scaling challenges. Your talk at ReactConf really resonated with how we think about frontend performance.\n\nI'm working on a project that tackles similar concurrency issues, and I'd love to get your perspective on our approach. Would you be open to a 15-min call next week?\n\nLooking forward to connecting.\n\nBest regards,\n[Your name]"
+  },
+  "canva-02": {
+    "subject": "API infrastructure insights",
+    "body": "Hi Marcus,\n\nYour blog post on system design for real-time collaboration was incredibly helpful to our team. We're solving similar problems and would value your perspective.\n\nDo you have 20 minutes for a quick call? Happy to jump on your calendar.\n\nThanks,\n[Your name]"
+  },
+  "canva-03": {
+    "subject": "Technical mentoring approach",
+    "body": "Hi Emma,\n\nYour approach to technical mentoring and architecture reviews has caught our attention. We're building a similar culture and would love to learn from your experience.\n\nWould you be open to a brief conversation about how you scale technical leadership?\n\nCheers,\n[Your name]"
+  },
+  "atlassian-01": {
+    "subject": "Kubernetes reliability discussion",
+    "body": "Hi James,\n\nYour KubeCon talk on Kubernetes at scale was excellent. I'm particularly interested in how you handle the reliability challenges you discussed.\n\nWe're working on similar infrastructure challenges and I'd love to share our approach. Available for a quick call this week?\n\nBest,\n[Your name]"
+  },
+  "atlassian-02": {
+    "subject": "Collaboration tools at scale",
+    "body": "Hi Lisa,\n\nYour insights on building large-scale collaboration tools are directly relevant to what we're working on. The patterns you've shared in your Medium articles have become internal references for our team.\n\nWould love to chat about your experiences building Confluence at scale.\n\nThanks,\n[Your name]"
+  },
+  "atlassian-03": {
+    "subject": "Engineering culture at scale",
+    "body": "Hi David,\n\nThe way you build high-performing teams resonates with our engineering values. We're focused on similar principles and would benefit from your experience.\n\nCould we grab 20 minutes to discuss how you approach team development?\n\nLooking forward,\n[Your name]"
+  },
+  "linear-01": {
+    "subject": "Quality + velocity approach",
+    "body": "Hi Arjun,\n\nYour work on Linear's issue tracking engine and your open-source contributions show an exceptional balance between quality and velocity. This is exactly the engineering approach we admire.\n\nWould you be interested in discussing how you maintain that balance while shipping fast?\n\nThanks,\n[Your name]"
+  },
+  "linear-02": {
+    "subject": "Performance optimization expertise",
+    "body": "Hi Sofia,\n\nYour work on Linear's frontend performance is widely recognized. Your blog posts on React optimization have become references for our team.\n\nWe're tackling similar performance challenges and would value your perspective. Do you have time for a quick chat?\n\nBest,\n[Your name]"
+  },
+  "linear-03": {
+    "subject": "Database design at scale",
+    "body": "Hi Thomas,\n\nYour contributions to the DevTools ecosystem and your work on Linear's data layer show deep infrastructure expertise. We're facing similar database optimization challenges.\n\nWould you be open to a brief conversation about your approach?\n\nThanks,\n[Your name]"
+  }
+}

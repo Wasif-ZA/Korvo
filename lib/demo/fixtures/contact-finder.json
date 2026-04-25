@@ -1,0 +1,71 @@
+{
+  "canva": [
+    {
+      "name": "Sarah Chen",
+      "title": "Engineering Manager",
+      "source_url": "https://canva.com/about/team",
+      "confidence": "high",
+      "public_activity": "Speaker at ReactConf 2024 on frontend architecture"
+    },
+    {
+      "name": "Marcus Rodriguez",
+      "title": "Senior Software Engineer",
+      "source_url": "https://canva.com/careers",
+      "confidence": "high",
+      "public_activity": "Active on Canva's engineering blog"
+    },
+    {
+      "name": "Emma Williams",
+      "title": "Staff Engineer",
+      "source_url": "https://github.com/canva",
+      "confidence": "medium",
+      "public_activity": "Contributor to Canva open-source projects"
+    }
+  ],
+  "atlassian": [
+    {
+      "name": "James Park",
+      "title": "Senior Software Engineer",
+      "source_url": "https://atlassian.com/about/team",
+      "confidence": "high",
+      "public_activity": "Speaker at KubeCon on distributed systems"
+    },
+    {
+      "name": "Lisa Zhang",
+      "title": "Senior Software Engineer",
+      "source_url": "https://atlassian.com/careers",
+      "confidence": "high",
+      "public_activity": "Author of Medium articles on React patterns"
+    },
+    {
+      "name": "David Kumar",
+      "title": "Engineering Manager",
+      "source_url": "https://github.com/atlassian",
+      "confidence": "medium",
+      "public_activity": "Manager of platform reliability team"
+    }
+  ],
+  "linear": [
+    {
+      "name": "Arjun Patel",
+      "title": "Product Engineer",
+      "source_url": "https://linear.app/team",
+      "confidence": "high",
+      "public_activity": "Core Linear contributor, prolific GitHub user"
+    },
+    {
+      "name": "Sofia Bergstrom",
+      "title": "Product Engineer",
+      "source_url": "https://github.com/linear",
+      "confidence": "high",
+      "public_activity": "Performance optimization expert"
+    },
+    {
+      "name": "Thomas Mueller",
+      "title": "Senior Engineer",
+      "source_url": "https://linear.app/careers",
+      "confidence": "medium",
+      "public_activity": "Active in DevTools community"
+    }
+  ]
+}

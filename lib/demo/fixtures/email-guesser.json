@@ -1,0 +1,44 @@
+{
+  "canva": [
+    {
+      "email": "sarah.chen@canva.com",
+      "confidence": "high"
+    },
+    {
+      "email": "m.rodriguez@canva.com",
+      "confidence": "high"
+    },
+    {
+      "email": "emma.w@canva.com",
+      "confidence": "medium"
+    }
+  ],
+  "atlassian": [
+    {
+      "email": "jpark@atlassian.com",
+      "confidence": "high"
+    },
+    {
+      "email": "lzhang@atlassian.com",
+      "confidence": "high"
+    },
+    {
+      "email": "dkumar@atlassian.com",
+      "confidence": "medium"
+    }
+  ],
+  "linear": [
+    {
+      "email": "arjun@linear.app",
+      "confidence": "high"
+    },
+    {
+      "email": "sofia@linear.app",
+      "confidence": "high"
+    },
+    {
+      "email": "thomas@linear.app",
+      "confidence": "medium"
+    }
+  ]
+}

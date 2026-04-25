@@ -1,0 +1,53 @@
+{
+  "canva": [
+    {
+      "background": "Sarah leads the Web Platform team at Canva, focusing on scalability and performance. She has spoken at major engineering conferences and published articles on frontend architecture.",
+      "askThis": "How do you handle scaling challenges with millions of concurrent users?",
+      "mentionThis": "Your talk on frontend architecture at ReactConf 2024 was insightful."
+    },
+    {
+      "background": "Marcus works on the API infrastructure team and is a regular contributor to Canva's engineering blog. He has deep expertise in building scalable systems.",
+      "askThis": "What's your tech stack for handling real-time collaboration?",
+      "mentionThis": "Your blog post on system design was shared across our team."
+    },
+    {
+      "background": "Emma mentors junior engineers and leads architecture reviews across the platform team. She contributes to several open-source projects.",
+      "askThis": "How do you approach technical mentoring at scale?",
+      "mentionThis": "Your GitHub contributions show exceptional technical depth."
+    }
+  ],
+  "atlassian": [
+    {
+      "background": "James leads the Jira Cloud infrastructure team and regularly speaks at engineering conferences. He's known for his work on distributed systems reliability.",
+      "askThis": "How do you ensure reliability across distributed microservices?",
+      "mentionThis": "Saw your talk at KubeCon about Kubernetes at scale — very relevant."
+    },
+    {
+      "background": "Lisa works on the Confluence team and is active in the frontend community. She has published articles on React patterns and modern web architecture.",
+      "askThis": "What lessons have you learned building large-scale collaboration tools?",
+      "mentionThis": "Your Medium article on React patterns is highly cited."
+    },
+    {
+      "background": "David manages the platform reliability team and is known for building strong engineering cultures. He mentors engineers across the company.",
+      "askThis": "How do you build high-performing engineering teams?",
+      "mentionThis": "Your insights on engineering culture align perfectly with our values."
+    }
+  ],
+  "linear": [
+    {
+      "background": "Arjun is a core Linear team member working on the issue tracking engine. He's a prolific open-source contributor with exceptional technical skills.",
+      "askThis": "How do you balance shipping fast with maintaining code quality?",
+      "mentionThis": "Your open-source projects show exceptional quality — exactly what we look for."
+    },
+    {
+      "background": "Sofia builds Linear's TypeScript infrastructure and frontend. She's widely recognized for performance optimization expertise in the React ecosystem.",
+      "askThis": "How do you approach performance optimization in a web app?",
+      "mentionThis": "Your blog posts on React optimization are referenced in our codebase."
+    },
+    {
+      "background": "Thomas works on Linear's data layer and database optimization. He's active in the DevTools community and known for infrastructure excellence.",
+      "askThis": "What's your approach to database design at scale?",
+      "mentionThis": "Your contributions to the TypeScript ecosystem are impressive."
+    }
+  ]
+}
