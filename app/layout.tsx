@@ -18,6 +18,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${sourceSerif.variable} ${jetbrainsMono.variable} ${dmSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-text-primary">
         {/* Animated Background Grid */}

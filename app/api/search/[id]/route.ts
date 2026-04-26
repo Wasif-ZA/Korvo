@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { assemblePipelineResponse } from "@/lib/api/pipeline-response";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { isDemoMode } from "@/lib/demo/guards";
+import { buildDemoPipelineResponse } from "@/lib/demo/pipeline-response";
 
 /**
  * GET /api/search/[id]
@@ -12,6 +14,17 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
+
+  if (isDemoMode()) {
+    const response = await buildDemoPipelineResponse(id);
+    if (!response) {
+      return NextResponse.json(
+        { success: false, error: "Search not found" },
+        { status: 404 },
+      );
+    }
+    return NextResponse.json({ success: true, data: response });
+  }
 
   // Auth check — guests can access search results; future versions enforce ownership
   const supabase = await createSupabaseServerClient();

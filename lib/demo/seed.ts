@@ -11,6 +11,7 @@ export const DEMO_COMPANIES = [
     role: "Senior Software Engineer",
   },
   { name: "Linear", domain: "linear.app", role: "Product Engineer" },
+  { name: "Notion", domain: "notion.so", role: "Software Engineer" },
 ];
 
 export const DEMO_SEARCHES = [
@@ -34,6 +35,13 @@ export const DEMO_SEARCHES = [
     role: "Product Engineer",
     status: "completed",
     createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000), // 10 days ago
+  },
+  {
+    id: "search-notion-001",
+    company: "Notion",
+    role: "Software Engineer",
+    status: "completed",
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
   },
 ];
 
@@ -59,7 +67,7 @@ export const DEMO_CONTACTS = [
       "How do you handle scaling challenges with millions of concurrent users?",
     researchMentionThis:
       "Your talk on frontend architecture at ReactConf 2024 was insightful.",
-    pipelineStage: "identified",
+    pipelineStage: "interviewing",
     createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
   },
   {
@@ -82,7 +90,7 @@ export const DEMO_CONTACTS = [
       "What's your tech stack for handling real-time collaboration?",
     researchMentionThis:
       "Your blog post on system design was shared across the team.",
-    pipelineStage: "identified",
+    pipelineStage: "responded",
     createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
   },
   {
@@ -104,7 +112,7 @@ export const DEMO_CONTACTS = [
     researchAskThis: "How do you approach technical mentoring at scale?",
     researchMentionThis:
       "Your GitHub contributions to open-source projects show strong technical depth.",
-    pipelineStage: "identified",
+    pipelineStage: "contacted",
     createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
   },
   // Atlassian contacts
@@ -128,7 +136,7 @@ export const DEMO_CONTACTS = [
       "How do you ensure reliability across distributed microservices?",
     researchMentionThis:
       "Saw your talk at KubeCon about Kubernetes at scale — very relevant.",
-    pipelineStage: "identified",
+    pipelineStage: "chatted",
     createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
   },
   {
@@ -151,7 +159,7 @@ export const DEMO_CONTACTS = [
       "What lessons have you learned building large-scale collaboration tools?",
     researchMentionThis:
       "Your Medium article on React patterns is highly cited in our team.",
-    pipelineStage: "identified",
+    pipelineStage: "responded",
     createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
   },
   {
@@ -173,7 +181,7 @@ export const DEMO_CONTACTS = [
     researchAskThis: "How do you build high-performing engineering teams?",
     researchMentionThis:
       "Your insights on engineering culture align with what we value.",
-    pipelineStage: "identified",
+    pipelineStage: "contacted",
     createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
   },
   // Linear contacts
@@ -197,7 +205,7 @@ export const DEMO_CONTACTS = [
       "How do you balance shipping fast with maintaining code quality?",
     researchMentionThis:
       "Your open-source projects show exceptional technical quality — exactly what we look for.",
-    pipelineStage: "identified",
+    pipelineStage: "applied",
     createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
   },
   {
@@ -245,6 +253,76 @@ export const DEMO_CONTACTS = [
     pipelineStage: "identified",
     createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
   },
+  // Notion contacts
+  {
+    id: "contact-notion-01",
+    searchId: "search-notion-001",
+    name: "Priya Sharma",
+    title: "Software Engineer",
+    email: "priya.sharma@notion.so",
+    emailConfidence: "high",
+    score: 84,
+    scoreBreakdown: {
+      titleRelevance: 95,
+      emailConfidence: 90,
+      activitySignal: 78,
+      companyGrowth: 75,
+    },
+    researchBackground:
+      "Priya works on Notion's collaborative editing engine and has spoken at TypeScript conferences about CRDT implementation.",
+    researchAskThis:
+      "How do you handle conflict resolution at the document scale Notion operates at?",
+    researchMentionThis:
+      "Your conference talk on CRDTs and collaborative editing was the clearest explanation I've come across.",
+    pipelineStage: "identified",
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: "contact-notion-02",
+    searchId: "search-notion-001",
+    name: "Daniel Cho",
+    title: "Senior Software Engineer",
+    email: "daniel.cho@notion.so",
+    emailConfidence: "high",
+    score: 79,
+    scoreBreakdown: {
+      titleRelevance: 85,
+      emailConfidence: 90,
+      activitySignal: 75,
+      companyGrowth: 70,
+    },
+    researchBackground:
+      "Daniel leads infrastructure work on Notion's database layer and is active on Twitter discussing query optimization.",
+    researchAskThis:
+      "What's the most counterintuitive lesson you've learned scaling a database-backed product?",
+    researchMentionThis:
+      "Your thread on Notion's sharding strategy was widely shared in our team's slack.",
+    pipelineStage: "contacted",
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+  },
+  {
+    id: "contact-notion-03",
+    searchId: "search-notion-001",
+    name: "Hannah Goldstein",
+    title: "Staff Engineer",
+    email: "hannah.g@notion.so",
+    emailConfidence: "medium",
+    score: 70,
+    scoreBreakdown: {
+      titleRelevance: 75,
+      emailConfidence: 70,
+      activitySignal: 70,
+      companyGrowth: 70,
+    },
+    researchBackground:
+      "Hannah works on Notion's API platform and contributes to OSS developer tooling. Background in distributed systems at MongoDB.",
+    researchAskThis:
+      "How do you balance API ergonomics with the constraints of Notion's data model?",
+    researchMentionThis:
+      "Your blog post on building intuitive APIs over complex data models was bookmarked across the engineering team.",
+    pipelineStage: "responded",
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+  },
 ];
 
 export const DEMO_OUTREACH = [
@@ -261,8 +339,8 @@ I'm working on a project that tackles similar concurrency issues, and I'd love t
 
 [Your name]`,
     tone: "curious",
-    sentAt: null,
-    sentVia: null,
+    sentAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    sentVia: "gmail",
     createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
   },
   {
@@ -279,8 +357,8 @@ Do you have 20 minutes for a quick call? Happy to jump on your calendar.
 Best,
 [Your name]`,
     tone: "direct",
-    sentAt: null,
-    sentVia: null,
+    sentAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    sentVia: "gmail",
     createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
   },
   {
@@ -296,8 +374,8 @@ We're working on similar infrastructure challenges and I'd love to share our app
 
 [Your name]`,
     tone: "value_driven",
-    sentAt: null,
-    sentVia: null,
+    sentAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
+    sentVia: "gmail",
     createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
   },
 ];

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
 import { z } from "zod";
+import { isDemoMode } from "@/lib/demo/guards";
 
 const reminderSchema = z.object({
   reminderActive: z.boolean(),
@@ -12,6 +13,16 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
+
+  if (isDemoMode()) {
+    const body = (await req.json().catch(() => ({}))) as {
+      reminderActive?: boolean;
+    };
+    const reminderAt = body.reminderActive
+      ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+      : null;
+    return NextResponse.json({ success: true, data: { id, reminderAt } });
+  }
 
   const supabase = await createSupabaseServerClient();
   const {

@@ -9,6 +9,8 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
 import { checkAndIncrementSearchLimit, checkGuestIpLimit } from "@/lib/limits";
 import { pipelineQueue } from "@/lib/queue/pipeline";
+import { isDemoMode } from "@/lib/demo/guards";
+import { DEMO_SEARCHES } from "@/lib/demo/seed";
 
 const searchRequestSchema = z.object({
   company: z.string().min(1, "Company is required").max(200),
@@ -32,6 +34,24 @@ export async function POST(req: NextRequest) {
       { error: "Invalid request", details: parsed.error.flatten() },
       { status: 400 },
     );
+  }
+
+  // Demo mode: short-circuit to seeded search ID. If the company matches a seed
+  // return its real seed ID; otherwise encode the typed company in the
+  // search-demo-* ID so the GET fallback can preserve the user's input.
+  if (isDemoMode()) {
+    const companyLower = parsed.data.company.toLowerCase();
+    const matched = DEMO_SEARCHES.find((s) =>
+      s.company.toLowerCase().includes(companyLower),
+    );
+    const slug = encodeURIComponent(parsed.data.company)
+      .replace(/[^a-zA-Z0-9-]/g, "_")
+      .slice(0, 60);
+    return NextResponse.json({
+      limitReached: false,
+      searchId: matched?.id ?? `search-demo-${slug}-${Date.now()}`,
+      jobId: `demo-job-${Date.now()}`,
+    });
   }
 
   // Check auth independently (per D-14: API routes call supabase.auth.getUser() directly)
@@ -153,6 +173,19 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
+  if (isDemoMode()) {
+    return NextResponse.json({
+      success: true,
+      data: DEMO_SEARCHES.map((s) => ({
+        id: s.id,
+        company: s.company,
+        role: s.role,
+        date: s.createdAt,
+        contactsCount: 3,
+      })),
+    });
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
