@@ -5,8 +5,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
+import { isDemoMode } from "@/lib/demo/guards";
 
 export async function GET(_req: NextRequest) {
+  if (isDemoMode()) {
+    return NextResponse.json({
+      success: true,
+      data: {
+        fullName: "Demo User",
+        avatarUrl: null,
+        plan: "pro",
+        searchesUsed: 3,
+        searchesLimit: 50,
+      },
+    });
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },

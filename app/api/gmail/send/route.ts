@@ -15,6 +15,7 @@ import {
 } from "@/lib/gmail/send-quota";
 import { QUEUE_NAMES } from "@/shared/queues";
 import type { GmailSendJobData } from "@/shared/types/jobs";
+import { isDemoMode } from "@/lib/demo/guards";
 
 const sendSchema = z.object({
   outreachId: z.string().uuid(),
@@ -25,6 +26,10 @@ const DEFAULT_UNSUBSCRIBE_FOOTER =
   "If you'd prefer not to hear from me, just let me know.";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  if (isDemoMode()) {
+    return NextResponse.json({ queued: true, estimatedDelay: 0 });
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },

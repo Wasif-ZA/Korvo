@@ -6,8 +6,21 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
 import { gmailRedis } from "@/lib/gmail/redis-client";
 import { getDailyKey, getDailyLimit } from "@/lib/gmail/send-quota";
+import { isDemoMode } from "@/lib/demo/guards";
 
 export async function GET(_request: NextRequest): Promise<NextResponse> {
+  if (isDemoMode()) {
+    return NextResponse.json({
+      connected: true,
+      gmailEmail: "demo@korvo.local",
+      connectedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+      dailySent: 4,
+      dailyLimit: 20,
+      suspended: false,
+      reconnectRequired: false,
+    });
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },

@@ -55,24 +55,33 @@ function ChatContent() {
 
   const supabase = createSupabaseBrowserClient();
   const searchParams = useSearchParams();
+  const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-      if (user) {
-        // Fallback guest adoption (AUTH-04) — server-side adoption may have been skipped
-        const guestSession = localStorage.getItem("korvo_guest_session");
-        if (guestSession) {
-          fetch("/api/guest/adopt", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ guestSessionId: guestSession }),
-          }).then(() => {
-            localStorage.removeItem("korvo_guest_session");
-          });
+    if (isDemoMode) {
+      // Demo mode: synthesize an authenticated user so the AuthGate never appears
+      setUser({
+        id: "demo-user-001",
+        email: "demo@korvo.local",
+      } as User);
+    } else {
+      supabase.auth.getUser().then(({ data: { user } }) => {
+        setUser(user);
+        if (user) {
+          // Fallback guest adoption (AUTH-04) — server-side adoption may have been skipped
+          const guestSession = localStorage.getItem("korvo_guest_session");
+          if (guestSession) {
+            fetch("/api/guest/adopt", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ guestSessionId: guestSession }),
+            }).then(() => {
+              localStorage.removeItem("korvo_guest_session");
+            });
+          }
         }
-      }
-    });
+      });
+    }
 
     fetch("/api/me")
       .then((res) => res.json())

@@ -7,8 +7,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
 import { getOAuth2Client } from "@/lib/gmail/oauth-client";
+import { isDemoMode } from "@/lib/demo/guards";
 
-export async function GET(_request: NextRequest): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {
+  if (isDemoMode()) {
+    // Skip the real OAuth roundtrip; bounce back to settings with a flag
+    return NextResponse.redirect(
+      new URL("/?view=settings&gmail=connected", request.url),
+    );
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "demo": "node scripts/setup-demo.mjs && npm run dev",
     "build": "next build",
     "start": "next start",
     "prepare": "husky",

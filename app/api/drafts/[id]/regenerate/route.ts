@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
 import Anthropic from "@anthropic-ai/sdk";
+import { isDemoMode } from "@/lib/demo/guards";
+import { DEMO_CONTACTS, DEMO_SEARCHES, DEMO_OUTREACH } from "@/lib/demo/seed";
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -30,6 +32,37 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
+
+  if (isDemoMode()) {
+    // Locate contact via outreach (seeded) or fall back to a random demo contact
+    const seedOutreach = DEMO_OUTREACH.find((o) => o.id === id);
+    const contact = seedOutreach
+      ? DEMO_CONTACTS.find((c) => c.id === seedOutreach.contactId)
+      : DEMO_CONTACTS[0];
+    const search = contact
+      ? DEMO_SEARCHES.find((s) => s.id === contact.searchId)
+      : DEMO_SEARCHES[0];
+    const variants = [
+      `Hi ${contact?.name.split(" ")[0] ?? "there"},\n\nQuick follow-up — your work on ${contact?.researchBackground?.split(".")[0] ?? "the team"} caught my eye. ${contact?.researchAskThis ?? "Curious how you'd approach this."}\n\nAny chance for a 15-min chat this week?\n\n[Your name]`,
+      `Hi ${contact?.name.split(" ")[0] ?? "there"},\n\nReaching out because ${contact?.researchMentionThis ?? "your team's work stood out"}. I'm exploring ${search?.role ?? "similar"} roles and would love to hear how you got into the space.\n\nWould 10 minutes work later this week?\n\n[Your name]`,
+      `Hey ${contact?.name.split(" ")[0] ?? "there"},\n\nQuick note — I've been studying ${search?.company ?? "your company"}'s engineering culture and ${contact?.researchMentionThis ?? "the way your team approaches problems"} resonated.\n\n${contact?.researchAskThis ?? "Open to a brief chat?"}\n\nThanks,\n[Your name]`,
+    ];
+    const subjects = [
+      `Quick question about ${search?.company ?? "your work"}`,
+      `15 minutes on ${search?.role ?? "your career path"}?`,
+      `Following your work at ${search?.company ?? "the company"}`,
+    ];
+    const idx = Math.floor(Math.random() * 3);
+    return NextResponse.json({
+      success: true,
+      data: {
+        id,
+        subject: subjects[idx],
+        body: variants[idx],
+        hook_used: contact?.researchMentionThis ?? "",
+      },
+    });
+  }
 
   const supabase = await createSupabaseServerClient();
   const {

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { stripe } from "@/lib/stripe/client";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type Stripe from "stripe";
+import { isDemoMode } from "@/lib/demo/guards";
 
 const checkoutBodySchema = z.object({
   priceId: z.enum(["monthly", "annual"]),
@@ -10,6 +11,16 @@ const checkoutBodySchema = z.object({
 });
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (isDemoMode()) {
+    // Skip the Stripe roundtrip; bounce back to the home page with the
+    // session_id flag the success-handler in app/page.tsx looks for.
+    const successUrl = new URL(
+      "/?session_id=demo-checkout-session",
+      req.url,
+    ).toString();
+    return NextResponse.json({ url: successUrl, demo: true });
+  }
+
   // Parse and validate request body
   let body: unknown;
   try {

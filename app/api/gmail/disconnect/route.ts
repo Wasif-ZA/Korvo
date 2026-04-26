@@ -5,8 +5,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { prisma } from "@/lib/db/prisma";
 import { gmailRedis } from "@/lib/gmail/redis-client";
+import { isDemoMode } from "@/lib/demo/guards";
+
+// SettingsView calls this with POST; keep DELETE for the original contract.
+export async function POST(_request: NextRequest): Promise<NextResponse> {
+  if (isDemoMode()) {
+    return NextResponse.json({ success: true });
+  }
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}
 
 export async function DELETE(_request: NextRequest): Promise<NextResponse> {
+  if (isDemoMode()) {
+    return NextResponse.json({ success: true });
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { user },
