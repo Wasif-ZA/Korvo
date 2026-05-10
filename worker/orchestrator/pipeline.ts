@@ -5,6 +5,7 @@ import type {
   CompanyEnrichmentData,
   ScoreResult,
 } from "@/shared/types/agents";
+import type { Prisma } from "@/generated/prisma";
 import { prisma } from "../lib/prisma";
 import { broadcastProgress } from "../lib/supabase";
 import { findContacts } from "../agents/contact-finder";
@@ -96,7 +97,7 @@ export async function runPipeline(job: Job<PipelineJobData>): Promise<void> {
           email: guess?.email ?? null,
           emailConfidence: guess?.confidence ?? "low",
           score: score.total,
-          scoreBreakdown: score.breakdown,
+          scoreBreakdown: score.breakdown as unknown as Prisma.InputJsonObject,
           researchBackground: research?.background ?? null,
           researchAskThis: research?.askThis ?? null,
           researchMentionThis: research?.mentionThis ?? null,

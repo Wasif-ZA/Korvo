@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { PipelineBoard } from "@/components/app/PipelineBoard";
+import { SlideOver } from "@/components/app/SlideOver";
+import { Button } from "@/components/ui/Button";
 import { toast } from "react-hot-toast";
 import { Loader2 } from "lucide-react";
 
@@ -22,9 +24,35 @@ interface Contact {
   stage: Stage;
 }
 
+const STAGE_LABELS: Record<Stage, string> = {
+  identified: "Identified",
+  contacted: "Contacted",
+  responded: "Responded",
+  chatted: "Chatted",
+  applied: "Applied",
+  interviewing: "Interviewing",
+};
+
+function formatActionDate(value: string) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleString("en-AU", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
 export function PipelineView() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
   useEffect(() => {
     fetch("/api/pipeline")
@@ -41,8 +69,10 @@ export function PipelineView() {
   }, []);
 
   const handleContactClick = (id: string) => {
-    // Could open a detail modal in the future
-    console.log("Contact clicked:", id);
+    const contact = contacts.find((c) => c.id === id);
+    if (contact) {
+      setSelectedContact(contact);
+    }
   };
 
   const handleContactMove = async (id: string, newStage: Stage) => {
@@ -86,7 +116,7 @@ export function PipelineView() {
   }
 
   return (
-    <div>
+    <>
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-text-primary font-serif">
           Outreach Pipeline
@@ -101,6 +131,68 @@ export function PipelineView() {
         onContactClick={handleContactClick}
         onContactMove={handleContactMove}
       />
-    </div>
+
+      <SlideOver
+        isOpen={selectedContact !== null}
+        onClose={() => setSelectedContact(null)}
+        title={selectedContact?.name ?? "Contact details"}
+      >
+        {selectedContact && (
+          <div className="space-y-6">
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted">
+                Company
+              </p>
+              <p className="mt-1 text-sm font-semibold text-text-primary">
+                {selectedContact.company}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-xl border border-border-card bg-surface p-4">
+                <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted">
+                  Stage
+                </p>
+                <p className="mt-2 text-sm font-semibold text-text-primary">
+                  {STAGE_LABELS[selectedContact.stage]}
+                </p>
+              </div>
+              <div className="rounded-xl border border-border-card bg-surface p-4">
+                <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted">
+                  Confidence
+                </p>
+                <p className="mt-2 text-sm font-semibold capitalize text-text-primary">
+                  {selectedContact.confidence}
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted">
+                Last action
+              </p>
+              <p className="mt-1 text-sm text-text-body">
+                {formatActionDate(selectedContact.lastActionAt)}
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-border-card bg-surface-alt p-4">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-text-muted">
+                Next step
+              </p>
+              <p className="mt-2 text-sm text-text-body">
+                Drag this contact to another stage when the outreach status
+                changes. Drafts and research notes open from the search result
+                view.
+              </p>
+            </div>
+
+            <Button type="button" onClick={() => setSelectedContact(null)}>
+              Close
+            </Button>
+          </div>
+        )}
+      </SlideOver>
+    </>
   );
 }

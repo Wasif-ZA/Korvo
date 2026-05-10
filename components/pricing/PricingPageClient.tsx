@@ -50,7 +50,7 @@ export function PricingPageClient() {
   }
 
   function handleFreeCheckout() {
-    window.location.href = "/";
+    window.location.href = "/demo";
   }
 
   const proPrice = interval === "annually" ? "AUD $149" : "AUD $19";

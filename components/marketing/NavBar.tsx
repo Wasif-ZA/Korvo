@@ -1,52 +1,51 @@
-"use client";
-
 import Link from "next/link";
-import { cn } from "@/lib/utils/cn";
 
 export function NavBar() {
   return (
-    <header className="w-full h-16 border-b border-border bg-background/50 backdrop-blur-md sticky top-6 z-[50]">
-      <div className="max-w-[1200px] mx-auto h-full px-6 flex items-center justify-between">
-        <div className="flex items-center gap-12">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-6">
+        <Link href="/" className="flex items-center gap-3">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-sm font-bold text-white">
+            K
+          </span>
+          <span className="text-lg font-semibold tracking-tight text-text-primary">
+            Korvo
+          </span>
+        </Link>
+
+        <nav className="hidden items-center gap-7 md:flex">
           <Link
-            href="/"
-            className="text-xl font-bold font-mono tracking-tighter flex items-center gap-2 group"
+            href="/#how-it-works"
+            className="text-sm font-medium text-text-muted transition hover:text-text-primary"
           >
-            <span className="bg-accent text-white px-1.5 py-0.5 rounded-sm text-sm">
-              K
-            </span>
-            <span className="tracking-[0.2em]">KORVO</span>
+            How it works
           </Link>
+          <Link
+            href="/pricing"
+            className="text-sm font-medium text-text-muted transition hover:text-text-primary"
+          >
+            Pricing
+          </Link>
+          <Link
+            href="/demo"
+            className="text-sm font-medium text-text-muted transition hover:text-text-primary"
+          >
+            Demo
+          </Link>
+        </nav>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {[
-              { label: "Pipeline", href: "/#how-it-works" },
-              { label: "Engine", href: "/#capabilities" },
-              { label: "Pricing", href: "/pricing" },
-            ].map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted hover:text-text-primary transition-colors flex items-center gap-2"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Link
             href="/login"
-            className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted hover:text-text-primary transition-colors"
+            className="hidden text-sm font-medium text-text-muted transition hover:text-text-primary sm:inline"
           >
-            Log_In
+            Log in
           </Link>
           <Link
-            href="/signup"
-            className="inline-flex items-center justify-center px-5 py-2 rounded-sm border border-text-primary bg-text-primary text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-accent hover:border-accent transition-all active:scale-[0.98]"
+            href="/demo"
+            className="inline-flex items-center justify-center rounded-lg bg-text-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent"
           >
-            Get_Started
+            Open demo
           </Link>
         </div>
       </div>

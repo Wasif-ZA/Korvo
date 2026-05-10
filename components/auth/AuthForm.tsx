@@ -32,11 +32,13 @@ export function AuthForm({ intent, onMagicLinkSent }: AuthFormProps) {
       });
 
       if (error) throw error;
-      
+
       toast.success("Magic link sent to your email.");
       onMagicLinkSent?.();
-    } catch (error: any) {
-      toast.error(error.message || "Failed to send magic link.");
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Failed to send magic link.";
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
@@ -52,8 +54,10 @@ export function AuthForm({ intent, onMagicLinkSent }: AuthFormProps) {
         },
       });
       if (error) throw error;
-    } catch (error: any) {
-      toast.error(error.message || "Google sign-in failed.");
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Google sign-in failed.";
+      toast.error(message);
       setIsGoogleLoading(false);
     }
   };
@@ -85,7 +89,9 @@ export function AuthForm({ intent, onMagicLinkSent }: AuthFormProps) {
           isLoading={isLoading}
           disabled={isGoogleLoading}
         >
-          {intent === "login" ? "Continue with email →" : "Sign up with email →"}
+          {intent === "login"
+            ? "Continue with email →"
+            : "Sign up with email →"}
         </Button>
       </form>
 

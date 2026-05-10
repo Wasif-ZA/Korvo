@@ -8,3 +8,9 @@ export const queueConnection = new IORedis({
   maxRetriesPerRequest: 3,
   enableOfflineQueue: false,
 });
+
+if (typeof queueConnection.on === "function") {
+  queueConnection.on("error", (error) => {
+    console.warn("[redis] queue connection unavailable:", error.message);
+  });
+}

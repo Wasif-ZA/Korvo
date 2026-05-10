@@ -12,10 +12,10 @@ const checkoutBodySchema = z.object({
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   if (isDemoMode()) {
-    // Skip the Stripe roundtrip; bounce back to the home page with the
-    // session_id flag the success-handler in app/page.tsx looks for.
+    // Skip the Stripe roundtrip; bounce back to the demo page with the
+    // session_id flag the success-handler in app/demo/page.tsx looks for.
     const successUrl = new URL(
-      "/?session_id=demo-checkout-session",
+      "/demo?session_id=demo-checkout-session",
       req.url,
     ).toString();
     return NextResponse.json({ url: successUrl, demo: true });
@@ -67,8 +67,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     mode: "subscription",
     payment_method_types: ["card"],
     line_items: [{ price: resolvedPriceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/?view=pricing`,
+    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/demo?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/demo?view=pricing`,
     customer_email: user.email,
     metadata: { user_id: user.id },
     allow_promotion_codes: true,

@@ -34,10 +34,10 @@ export function FinalCTA() {
 
           <div className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto w-full mb-10">
             <Link
-              href="/signup"
+              href="/demo"
               className="flex-1 bg-white text-accent px-10 py-5 rounded-sm font-bold font-mono uppercase tracking-widest text-sm transition-all hover:bg-white/90 active:scale-[0.98] shadow-2xl text-center"
             >
-              START_PIPELINE
+              OPEN_DEMO
             </Link>
           </div>
 

@@ -10,6 +10,12 @@ export const queueConnection = new IORedis({
   enableOfflineQueue: false,
 });
 
+if (typeof queueConnection.on === "function") {
+  queueConnection.on("error", (error) => {
+    console.warn("[redis] worker queue connection unavailable:", error.message);
+  });
+}
+
 // Worker connection: MUST have maxRetriesPerRequest: null for BRPOP
 // Per ORCH-03 and Pitfall 2 in RESEARCH.md
 export const workerConnection = new IORedis({
@@ -20,3 +26,9 @@ export const workerConnection = new IORedis({
   maxRetriesPerRequest: null,
   enableReadyCheck: false,
 });
+
+if (typeof workerConnection.on === "function") {
+  workerConnection.on("error", (error) => {
+    console.warn("[redis] worker connection unavailable:", error.message);
+  });
+}

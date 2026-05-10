@@ -10,4 +10,13 @@ const redis = new Redis(process.env.REDIS_URL!, {
   enableOfflineQueue: false,
 });
 
+if (typeof redis.on === "function") {
+  redis.on("error", (error) => {
+    console.warn(
+      "[redis] gmail counter connection unavailable:",
+      error.message,
+    );
+  });
+}
+
 export { redis as gmailRedis };

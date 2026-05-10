@@ -73,13 +73,13 @@ export function Hero() {
                   readOnly
                 />
               </div>
-              <Link href="/signup" className="w-full sm:w-auto">
+              <Link href="/demo" className="w-full sm:w-auto">
                 <Button
                   variant="primary"
                   size="lg"
                   className="w-full min-w-[180px] font-mono font-bold uppercase tracking-widest"
                 >
-                  EXEC_PIPELINE
+                  OPEN_DEMO
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>

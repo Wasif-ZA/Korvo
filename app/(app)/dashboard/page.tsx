@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import useSWR from "swr";
 import { useSearchParams, useRouter } from "next/navigation";
 import { StatCard } from "@/components/app/StatCard";
@@ -70,7 +70,7 @@ const DEFAULT_STATS: StatData[] = [
   { label: "Reply Rate", value: "0%" },
 ];
 
-export default function DashboardPage() {
+function DashboardContent() {
   const [selectedContactId, setSelectedContactId] = useState<string | null>(
     null,
   );
@@ -334,5 +334,19 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Loader2 className="w-8 h-8 text-accent animate-spin" />
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
   );
 }

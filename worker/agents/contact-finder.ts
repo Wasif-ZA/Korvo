@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type Anthropic from "@anthropic-ai/sdk";
 import type { ContactResult } from "@/shared/types/agents";
 import { runAgentLoop } from "@/worker/lib/agent-loop";
 
@@ -109,9 +110,12 @@ export async function findContacts(
       systemPrompt: CONTACT_FINDER_SYSTEM_PROMPT,
       userMessage,
       // Server tool — type cast required as SDK types don't expose server tool variants
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tools: [
-        { type: "web_search_20250305" as any, name: "web_search", max_uses: 5 },
+        {
+          type: "web_search_20250305",
+          name: "web_search",
+          max_uses: 5,
+        } as unknown as Anthropic.Tool,
       ],
       executeTool: async () => "", // Server tools are handled by the Claude API, not by us
       maxSteps: 5,

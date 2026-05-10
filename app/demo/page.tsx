@@ -105,7 +105,7 @@ function ChatContent() {
         content: "Welcome back! Your pipeline is ready.",
       });
       track("signup", { provider: "google" });
-      window.history.replaceState({}, "", "/");
+      window.history.replaceState({}, "", "/demo");
     }
 
     if (searchParams.get("session_id")) {
@@ -115,7 +115,7 @@ function ChatContent() {
         content:
           "Welcome to Pro! You now have 50 searches/month and Gmail send.",
       });
-      window.history.replaceState({}, "", "/");
+      window.history.replaceState({}, "", "/demo");
       // Refresh profile to get updated plan
       fetch("/api/me")
         .then((res) => res.json())

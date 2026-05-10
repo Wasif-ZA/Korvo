@@ -1,6 +1,7 @@
 import FirecrawlApp from "@mendable/firecrawl-js";
 import { prisma } from "./prisma";
 import type { CompanyEnrichmentData } from "@/shared/types/agents";
+import type { Prisma } from "@/generated/prisma";
 import { createCircuitBreaker } from "./circuit-breaker";
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
@@ -35,11 +36,15 @@ async function scrapeCompanyRaw(
 }
 
 // Circuit breaker wrapping Firecrawl (AGENT-08)
-const firecrawlBreaker = createCircuitBreaker(scrapeCompanyRaw, "firecrawl", {
-  timeout: 30000, // 30s for crawl
-  errorThresholdPercentage: 50,
-  resetTimeout: 60000,
-});
+const firecrawlBreaker = createCircuitBreaker(
+  (...args: unknown[]) => scrapeCompanyRaw(args[0] as string),
+  "firecrawl",
+  {
+    timeout: 30000, // 30s for crawl
+    errorThresholdPercentage: 50,
+    resetTimeout: 60000,
+  },
+);
 
 export async function getCompanyEnrichment(
   domain: string,
@@ -51,7 +56,7 @@ export async function getCompanyEnrichment(
       cachedAt: { gte: new Date(Date.now() - THIRTY_DAYS_MS) },
     },
   });
-  if (cached) return cached.data as CompanyEnrichmentData;
+  if (cached) return cached.data as unknown as CompanyEnrichmentData;
 
   // 2. Scrape via Firecrawl with circuit breaker
   try {
@@ -62,8 +67,15 @@ export async function getCompanyEnrichment(
     // 3. Cache result
     await prisma.companyEnrichment.upsert({
       where: { domain },
-      create: { domain, data: enrichment as object, cachedAt: new Date() },
-      update: { data: enrichment as object, cachedAt: new Date() },
+      create: {
+        domain,
+        data: enrichment as unknown as Prisma.InputJsonObject,
+        cachedAt: new Date(),
+      },
+      update: {
+        data: enrichment as unknown as Prisma.InputJsonObject,
+        cachedAt: new Date(),
+      },
     });
 
     return enrichment;

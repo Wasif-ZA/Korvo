@@ -80,7 +80,7 @@ describe("/api/search POST", () => {
     expect(data.jobId).toBe("mock-job-id");
   });
 
-  it("creates guest search and returns searchId without jobId", async () => {
+  it("creates guest search and enqueues a pipeline job", async () => {
     mockGetUser.mockResolvedValue({ data: { user: null }, error: null });
     mockCheckGuestIpLimit.mockResolvedValue({
       allowed: true,
@@ -103,8 +103,14 @@ describe("/api/search POST", () => {
     expect(res.status).toBe(200);
     expect(data.limitReached).toBe(false);
     expect(data.searchId).toBe("search-123");
-    // Guest path does not enqueue in Phase 2
-    expect(mockPipelineAdd).not.toHaveBeenCalled();
+    expect(data.jobId).toBe("mock-job-id");
+    expect(mockPipelineAdd).toHaveBeenCalledWith("pipeline", {
+      searchId: "search-123",
+      userId: null,
+      company: "Canva",
+      role: "Product Designer",
+      location: null,
+    });
   });
 
   it("blocks concurrent search for authenticated user (D-08)", async () => {

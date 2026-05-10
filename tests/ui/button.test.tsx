@@ -10,10 +10,10 @@ describe("Button component", () => {
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
-  it("primary variant contains teal-600 class", () => {
+  it("primary variant contains semantic accent class", () => {
     render(<Button variant="primary">Primary</Button>);
     const button = screen.getByRole("button");
-    expect(button.className).toContain("bg-teal-600");
+    expect(button.className).toContain("bg-accent");
   });
 
   it("disabled state has opacity-50 class", () => {
@@ -32,12 +32,12 @@ describe("Button component", () => {
   it("secondary variant has correct background class", () => {
     render(<Button variant="secondary">Secondary</Button>);
     const button = screen.getByRole("button");
-    expect(button.className).toContain("bg-[#F4F3F0]");
+    expect(button.className).toContain("bg-surface-alt");
   });
 
-  it("destructive variant has red-600 background", () => {
+  it("destructive variant has semantic error background", () => {
     render(<Button variant="destructive">Delete</Button>);
     const button = screen.getByRole("button");
-    expect(button.className).toContain("bg-red-600");
+    expect(button.className).toContain("bg-error");
   });
 });

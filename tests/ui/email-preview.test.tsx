@@ -6,8 +6,8 @@ describe("Email preview / demo card", () => {
   it("renders pipeline output and email preview labels", () => {
     render(<DemoCard />);
 
-    expect(screen.getByText("Pipeline Output")).toBeInTheDocument();
-    expect(screen.getByText("Email Preview")).toBeInTheDocument();
-    expect(screen.getByText("Structured Response")).toBeInTheDocument();
+    expect(screen.getByText("PIPELINE_OUTPUT")).toBeInTheDocument();
+    expect(screen.getByText("PAYLOAD_STABLE")).toBeInTheDocument();
+    expect(screen.getByText("STRUCTURED_LOG")).toBeInTheDocument();
   });
 });

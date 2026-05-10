@@ -9,6 +9,71 @@ vi.mock("@/worker/lib/redis", () => ({
 // Mock dotenv/config for worker/index.ts
 vi.mock("dotenv/config", () => ({}));
 
+vi.mock("ioredis", () => {
+  function MockIORedis(this: Record<string, unknown>) {
+    this.get = vi.fn().mockResolvedValue(null);
+    this.set = vi.fn().mockResolvedValue("OK");
+    this.incr = vi.fn().mockResolvedValue(1);
+    this.expire = vi.fn().mockResolvedValue(1);
+    this.quit = vi.fn().mockResolvedValue("OK");
+    this.disconnect = vi.fn();
+  }
+
+  return {
+    default: MockIORedis,
+  };
+});
+
+vi.mock("googleapis", () => ({
+  google: {
+    gmail: vi.fn(() => ({
+      users: {
+        messages: {
+          send: vi.fn().mockResolvedValue({ data: { id: "gmail-message" } }),
+        },
+      },
+    })),
+  },
+}));
+
+vi.mock("@/lib/gmail/token-crypto", () => ({
+  decryptToken: vi.fn(() => "refresh-token"),
+}));
+
+vi.mock("@/lib/gmail/oauth-client", () => ({
+  getOAuth2Client: vi.fn(() => ({
+    setCredentials: vi.fn(),
+  })),
+}));
+
+vi.mock("@/lib/gmail/send-quota", () => ({
+  checkAndIncrementDaily: vi.fn().mockResolvedValue({
+    allowed: true,
+    used: 1,
+    limit: 5,
+  }),
+  markFirstSend: vi.fn().mockResolvedValue(undefined),
+  recordBounce: vi.fn().mockResolvedValue(undefined),
+  checkBounceRate: vi.fn().mockResolvedValue(false),
+}));
+
+vi.mock("@/lib/db/prisma", () => ({
+  prisma: {
+    gmailToken: {
+      findUnique: vi.fn().mockResolvedValue({
+        encryptedRefreshToken: "encrypted",
+      }),
+      delete: vi.fn().mockResolvedValue({}),
+    },
+    outreach: {
+      update: vi.fn().mockResolvedValue({}),
+    },
+    contact: {
+      update: vi.fn().mockResolvedValue({}),
+    },
+  },
+}));
+
 // Mock the orchestrator so workers don't need real dependencies
 vi.mock("@/worker/orchestrator/pipeline", () => ({
   runPipeline: vi.fn().mockResolvedValue(undefined),
